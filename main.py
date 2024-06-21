@@ -1,12 +1,19 @@
 from WarThunder import telemetry
 from WarThunder import mapinfo
 from pprint import pprint
+import os
 import time
 
 def find_map_info():
     print('------------------------------------------------------')
     print('Map Info:')
     print('\tName:\t\t\t\t\t{}'.format(telem.map_info.grid_info['name']))
+    print('\tGrid_size:\t\t\t\t\t{}'.format(telem.map_info.info['grid_size']))
+    print('\tGrid steps:\t\t\t\t\t{}'.format(telem.map_info.info['grid_steps']))
+    print('\tGrid zero:\t\t\t\t\t{}'.format(telem.map_info.info['grid_zero']))
+    print('\tMap max:\t\t\t\t\t{}'.format(telem.map_info.info['map_max']))
+    print('\tMap min:\t\t\t\t\t{}'.format(telem.map_info.info['map_min']))
+
     print('\tUpper Left Hand Corner Coordinate:\t[{}, {}]'.format(telem.map_info.grid_info['ULHC_lat'],
                                                                   telem.map_info.grid_info['ULHC_lon']))
     print(
@@ -86,6 +93,7 @@ def find_bomb_points(friendly=True):
     if bomb_points:
         for bomb_point in bomb_points:
             print('\tBombing Point: {}'.format(bomb_point.position_ll))
+            print('\tBombing Point: {}'.format(bomb_point.position))
     else:
         print('\tNone')
     print(' ')
@@ -162,6 +170,9 @@ def find_AAAs(friendly=True):
         print('\tNone')
     print('')
 
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 if __name__ == '__main__':
     try:
@@ -175,9 +186,13 @@ if __name__ == '__main__':
         # find_all_planes()
         # find_all_tanks()
         while telem.get_telemetry(comments=False, events=False):
+            os.system('cls' )
+            find_map_info()
             find_bomb_points(False)
             print(telem.map_info.player_lat)
+            print(telem.map_info.player_x)
             print(telem.map_info.player_lon)
+            print(telem.map_info.player_y)
             time.sleep(0.2)
             pass
         # find_all_AAAs()
@@ -188,3 +203,8 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print('Closing')
 #telem.map_info.player_found.
+#Тудер
+        #     var mapMin = map_info['map_min']
+      #var mapMax = map_info['map_max']
+        # var scX = w / (mapMax[0] - mapMin[0])
+      #var scY = h / (mapMax[1] - mapMin[1])
