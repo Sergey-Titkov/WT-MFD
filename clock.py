@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QVBoxLayout, QLabel
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QTimer, QTime, Qt
 
+import pygame
 
 class Base:
     pass
@@ -21,6 +22,13 @@ class Window(QWidget):
 
     def __init__(self):
         super().__init__()
+        self.current_base_index = 0
+        self.current_base = None
+
+        joysticks = []
+        for i in range(0, pygame.joystick.get_count()):
+            joysticks.append(pygame.joystick.Joystick(i))
+            joysticks[-1].init()
 
         self.telem = telemetry.TelemInterface()
 
@@ -165,16 +173,31 @@ class Window(QWidget):
             else:
                 pass
             stroka = ''
+            sorted_base = []
             if self.base_list:
                 sorted_base = sorted(self.base_list, key=comapre_base)
                 for base in sorted_base:
                     stroka = stroka + '\n' + '{} {:2.1f}км {:3.0f}°'.format(base.name, base.player_distance / 1000,
                                                                             base.player_course)
-
             self.label2.setText(stroka)
-
+            print('event')
+            for event in pygame.event.get():
+                print(event)
+                if event.type == pygame.JOYBUTTONUP and event.dict['joy'] == 1 and event.dict['button'] == 13 and sorted_base:
+                    self.current_base_index = self.current_base_index + 1
+                    if self.current_base_index - 1 > len(sorted_base):
+                        self.current_base_index = 0
+                    self.current_base = sorted_base.index(self.current_base_index)
+            stroka = ''
+            print('event_1')
+            if self.current_base:
+                stroka = stroka + '\n' + '{} {:2.1f}км {:3.0f}°'.format(self.current_base.name, self.current_base.player_distance / 1000,
+                                                                        self.current_base.player_course)
+            self.label1.setText(stroka)
 
 # create pyqt5 app
+pygame.init()
+
 App = QApplication(sys.argv)
 
 # create the instance of our Window
