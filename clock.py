@@ -1,4 +1,7 @@
 # importing required librarie
+from WarThunder import telemetry
+from WarThunder import mapinfo
+import math
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtWidgets import QVBoxLayout, QLabel
@@ -10,6 +13,8 @@ class Window(QWidget):
 
     def __init__(self):
         super().__init__()
+
+        self.telem = telemetry.TelemInterface()
 
         # setting geometry of main window
         self.setGeometry(100, 100, 800, 400)
@@ -67,7 +72,86 @@ class Window(QWidget):
         self.label1.setText(label_time)
         self.label2.setText(label_time)
 
+        if self.telem.get_telemetry(comments=False, events=False):
+            print('Player:\t')
+            print('\tX и Y:\t{},{}'.format(self.telem.map_info.player_x, self.telem.map_info.player_y))
+            print('\tLat и Lon:\t{},{}'.format(self.telem.map_info.player_lat, self.telem.map_info.player_lon))
+            grid_steps = self.telem.map_info.info['grid_steps']
+            size_x = self.telem.map_info.info['map_max'][0] - self.telem.map_info.info['map_min'][0]
+            size_y = self.telem.map_info.info['map_max'][1] - self.telem.map_info.info['map_min'][1]
 
+            bomb_points = [obj for obj in self.telem.map_info.bombing_points() if not obj.friendly]
+            stroka = ''
+            if bomb_points:
+                for bomb_point in bomb_points:
+                    base_x = bomb_point.position[0]
+                    base_y = bomb_point.position[1]
+                    player_x = self.telem.map_info.player_x
+                    player_y = self.telem.map_info.player_y
+                    a = abs(player_y - base_y) * size_x
+                    b = abs(player_x - base_x) * size_y
+                    player_distance = math.sqrt(a * a + b * b)
+                    quarter = 0
+                    sign = 0
+                    if player_x < base_x and player_y > base_y:
+                        quarter = 90
+                        sign = -1
+                    else:
+                        if player_x < base_x and player_y < base_y:
+                            quarter = 90
+                            sign = 1
+                        else:
+                            if player_x > base_x and player_y < base_y:
+                                quarter = 270
+                                sign = -1
+                            else:
+                                quarter = 270
+                                sign = 1
+                    if b == 0 and a == 0:
+                        quarter = 90
+                        alpha = 90
+                        sign = -1
+                    else:
+                        if b == 0 and player_y > base_y:
+                            quarter = 90
+                            alpha = 90
+                            sign = -1
+                        else:
+                            if a == 0 and player_x < base_x:
+                                quarter = 90
+                                alpha = 0
+                                sign = -1
+                            else:
+                                if b == 0 and player_y < base_y:
+                                    quarter = 90
+                                    alpha = 90
+                                    sign = 1
+                                else:
+                                    alpha = math.atan(a / b) * 180 / math.pi
+
+                    player_course = quarter + sign * alpha
+                    bomb_point.player_distance = player_distance
+                    bomb_point.player_course = player_course
+
+                    column = 1 + int(base_x * size_x / self.telem.map_info.info['grid_steps'][0])
+                    row = chr(65 + int(base_y * size_y / self.telem.map_info.info['grid_steps'][1]))
+                    name = '{}{}'.format(row, column)
+                    bomb_point.name = name
+                    print('\tBombing Point: {}, distance: {:2.1f}км, course: {:3.0f}'.format(bomb_point.name,
+                                                                                             bomb_point.player_distance / 1000,
+                                                                                             bomb_point.player_course))
+                    stroka = stroka +'\n'+'Bombing Point: {}, distance: {:2.1f}км, course: {:3.0f}'.format(bomb_point.name,
+                                                                                             bomb_point.player_distance / 1000,
+                                                                                             bomb_point.player_course)
+
+                else:
+                    print('\tNone')
+                print(' ')
+                #time.sleep(0.2)
+            else:
+                pass
+
+            self.label2.setText(stroka)
 # create pyqt5 app
 App = QApplication(sys.argv)
 
