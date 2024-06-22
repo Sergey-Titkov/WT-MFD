@@ -9,6 +9,14 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QTimer, QTime, Qt
 
 
+class Base:
+    pass
+
+
+def comapre_base(base):
+    return base.player_distance
+
+
 class Window(QWidget):
 
     def __init__(self):
@@ -68,7 +76,7 @@ class Window(QWidget):
         # showing it to the label
         grid_step_x = 13102.0
         grid_step_y = 13103.0
-        self.map_cell_size .setText('Клетка: {0:2.1f}х{1:2.1f}км'.format(grid_step_x/1000,grid_step_y/1000))
+        self.map_cell_size.setText('Клетка: {0:2.1f}х{1:2.1f}км'.format(grid_step_x / 1000, grid_step_y / 1000))
         self.label1.setText(label_time)
         self.label2.setText(label_time)
 
@@ -81,6 +89,7 @@ class Window(QWidget):
             size_y = self.telem.map_info.info['map_max'][1] - self.telem.map_info.info['map_min'][1]
 
             bomb_points = [obj for obj in self.telem.map_info.bombing_points() if not obj.friendly]
+            self.base_list = []
             stroka = ''
             if bomb_points:
                 for bomb_point in bomb_points:
@@ -137,21 +146,34 @@ class Window(QWidget):
                     row = chr(65 + int(base_y * size_y / self.telem.map_info.info['grid_steps'][1]))
                     name = '{}{}'.format(row, column)
                     bomb_point.name = name
+
+                    base = Base()
+                    base.name = name
+                    base.x = base_x
+                    base.y = base_y
+                    base.player_distance = player_distance
+                    base.player_course = player_course
+                    self.base_list.append(base)
+
                     print('\tBombing Point: {}, distance: {:2.1f}км, course: {:3.0f}'.format(bomb_point.name,
                                                                                              bomb_point.player_distance / 1000,
                                                                                              bomb_point.player_course))
-                    stroka = stroka +'\n'+'Bombing Point: {}, distance: {:2.1f}км, course: {:3.0f}'.format(bomb_point.name,
-                                                                                             bomb_point.player_distance / 1000,
-                                                                                             bomb_point.player_course)
-
                 else:
                     print('\tNone')
                 print(' ')
-                #time.sleep(0.2)
+                # time.sleep(0.2)
             else:
                 pass
+            stroka = ''
+            if self.base_list:
+                sorted_base = sorted(self.base_list, key=comapre_base)
+                for base in sorted_base:
+                    stroka = stroka + '\n' + '{} {:2.1f}км {:3.0f}°'.format(base.name, base.player_distance / 1000,
+                                                                            base.player_course)
 
             self.label2.setText(stroka)
+
+
 # create pyqt5 app
 App = QApplication(sys.argv)
 
