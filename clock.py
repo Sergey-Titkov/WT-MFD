@@ -10,6 +10,7 @@ from PyQt5.QtCore import QTimer, QTime, Qt
 
 import pygame
 
+
 class Base:
     pass
 
@@ -89,9 +90,9 @@ class Window(QWidget):
         self.label2.setText(label_time)
 
         if self.telem.get_telemetry(comments=False, events=False):
-            print('Player:\t')
-            print('\tX и Y:\t{},{}'.format(self.telem.map_info.player_x, self.telem.map_info.player_y))
-            print('\tLat и Lon:\t{},{}'.format(self.telem.map_info.player_lat, self.telem.map_info.player_lon))
+#            print('Player:\t')
+#           print('\tX и Y:\t{},{}'.format(self.telem.map_info.player_x, self.telem.map_info.player_y))
+#            print('\tLat и Lon:\t{},{}'.format(self.telem.map_info.player_lat, self.telem.map_info.player_lon))
             grid_steps = self.telem.map_info.info['grid_steps']
             size_x = self.telem.map_info.info['map_max'][0] - self.telem.map_info.info['map_min'][0]
             size_y = self.telem.map_info.info['map_max'][1] - self.telem.map_info.info['map_min'][1]
@@ -163,12 +164,12 @@ class Window(QWidget):
                     base.player_course = player_course
                     self.base_list.append(base)
 
-                    print('\tBombing Point: {}, distance: {:2.1f}км, course: {:3.0f}'.format(bomb_point.name,
-                                                                                             bomb_point.player_distance / 1000,
-                                                                                             bomb_point.player_course))
-                else:
-                    print('\tNone')
-                print(' ')
+#                    print('\tBombing Point: {}, distance: {:2.1f}км, course: {:3.0f}'.format(bomb_point.name,
+#                                                                                             bomb_point.player_distance / 1000,
+#                                                                                             bomb_point.player_course))
+#                else:
+#                    print('\tNone')
+#                print(' ')
                 # time.sleep(0.2)
             else:
                 pass
@@ -180,20 +181,35 @@ class Window(QWidget):
                     stroka = stroka + '\n' + '{} {:2.1f}км {:3.0f}°'.format(base.name, base.player_distance / 1000,
                                                                             base.player_course)
             self.label2.setText(stroka)
-            print('event')
-            for event in pygame.event.get():
-                print(event)
-                if event.type == pygame.JOYBUTTONUP and event.dict['joy'] == 1 and event.dict['button'] == 13 and sorted_base:
-                    self.current_base_index = self.current_base_index + 1
-                    if self.current_base_index - 1 > len(sorted_base):
-                        self.current_base_index = 0
-                    self.current_base = sorted_base.index(self.current_base_index)
+
+            joystick = pygame.joystick.Joystick(1)
+            if joystick:
+                if joystick.get_button(13):
+                    print("Кнопка 13")
+                    if sorted_base:
+                        self.current_base_index = self.current_base_index + 1
+                        print('self.current_base_index {}'.format(self.current_base_index))
+                        print('len(sorted_base) {}'.format(len(sorted_base)))
+                        if self.current_base_index > len(sorted_base)- 1 :
+                            self.current_base_index = 0
+                            print('self.current_base_index {}'.format(self.current_base_index))
+                        self.current_base = sorted_base[self.current_base_index]
+                        print('self.current_base',self.current_base)
+
+            if not sorted_base:
+                self.current_base = None
+
+            if sorted_base and self.current_base:
+                for base in sorted_base:
+                    if base.x == self.current_base.x and base.y == self.current_base.y:
+                        self.current_base = base
             stroka = ''
-            print('event_1')
             if self.current_base:
-                stroka = stroka + '\n' + '{} {:2.1f}км {:3.0f}°'.format(self.current_base.name, self.current_base.player_distance / 1000,
+                stroka = '{} {:2.1f}км {:3.0f}°'.format(self.current_base.name,
+                                                                        self.current_base.player_distance / 1000,
                                                                         self.current_base.player_course)
             self.label1.setText(stroka)
+
 
 # create pyqt5 app
 pygame.init()
