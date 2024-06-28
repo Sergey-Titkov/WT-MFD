@@ -45,43 +45,35 @@
 		y="10"
 		font-family="Consolas" 
 		font-size="16" 
+		font-weight="bold"
 		fill="black"
 		dominant-baseline="middle" 
 		text-anchor="middle"
       >+150</text>
+
+    <text
+       xml:space="preserve"
+       x="50%"
+       y="178"
+       id="select-target"
+	   font-family="Consolas" 
+	   font-size="20" 
+	   font-weight="bold"
+	   fill="black"
+  		dominant-baseline="middle" 
+		text-anchor="middle"
+	   >А1 65.0/18</text>
 	  
 	  
     <text
        xml:space="preserve"
        style="font-size:10px;fill:#000000;fill-opacity:1;stroke-width:2.84166"
        x="50%"
-       y="196"
-       id="angle-2"
-	   
-	   		dominant-baseline="middle" 
-		text-anchor="middle"
-
-	   
-	   ><tspan
-         id="tspan15-3-6"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10px;font-family:Consolas;-inkscape-font-specification:Consolas;text-align:center;text-anchor:middle;stroke-width:2.84166"
-         x="74.556114"
-         y="195.78448"
-         sodipodi:role="line">БАЗА</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:22px;fill:#000000;fill-opacity:1;stroke-width:3.68655"
-       x="50%"
-       y="170"
-       id="angle-2-0"
-  		dominant-baseline="middle" 
-		text-anchor="middle"
-	   ><tspan
-         id="tspan15-3-6-2"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22px;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';text-align:center;text-anchor:middle;stroke-width:3.68655"
-         x="50%"
-         y="185.89854"
-         sodipodi:role="line">А1 65.0/18</tspan></text>
+       y="190"
+       id="type"
+ 	   dominant-baseline="middle" 
+	   text-anchor="middle"
+	   >БАЗА</text>
     <circle
        style="fill:#000000;stroke-width:1.95455"
        id="path1"

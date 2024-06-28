@@ -12,9 +12,7 @@ angle = 0
 def timerEvent():
     global angle
     # set the flowval object text to a number 1-10
-    find_text(root)[0].text = 'BLDD'
-    find_text(root)[0].set('x', "30")
-    find_text(root)[0].set('style', 'font: 32px sans-serif; inline-size: 250px;direction: rtl;')
+    find_text(root)[0].text = '+{}'.format(angle)
     find_text1(root)[0].set('transform', "rotate({},75,93)".format(angle,int(svgWidget.width()/2),int(svgWidget.height()/2)))
     print("rotate({} {} {})".format(angle,int(svgWidget.width()/2),int(svgWidget.height()/2)))
     angle = angle + 10
@@ -50,7 +48,8 @@ app = QApplication(sys.argv)
 svgWidget = QtSvg.QSvgWidget()
 
 svgWidget.load(r'рисунок-11.svg')
-svgWidget.setGeometry(300, 300, 200, 300)
+# 150,200
+svgWidget.setGeometry(300, 300, 150, 200)
 
 # Setup a timer event
 timer = QtCore.QTimer()
