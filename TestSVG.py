@@ -35,7 +35,8 @@ def timerEvent():
 
 
 
-root = etree.parse(r'рисунок-11.svg')
+file_name = r'02 - QTWidget.svg'
+root = etree.parse(file_name)
 
 # create an object for the flowval
 find_text = etree.ETXPath("//{http://www.w3.org/2000/svg}text[@id='angle']")
@@ -47,7 +48,7 @@ app = QApplication(sys.argv)
 
 svgWidget = QtSvg.QSvgWidget()
 
-svgWidget.load(r'рисунок-11.svg')
+svgWidget.load(file_name)
 # 150,200
 svgWidget.setGeometry(300, 300, 150, 200)
 
