@@ -7,9 +7,14 @@ def main():
      for i in range(0, pygame.joystick.get_count()):
          joysticks.append(pygame.joystick.Joystick(i))
          joysticks[-1].init()
+         print(pygame.joystick.Joystick(i).get_name())
      while 1:
          clock.tick(60)
          for event in pygame.event.get():
+
+             if event.type == pygame.JOYBUTTONDOWN:
+                print("Кнопка ВКЛ: ", event.button)
+
              if event.type == pygame.JOYBUTTONUP and event.dict['joy'] == 1 and event.dict['button'] == 13:
 
                  print("Кнопка ВЫКЛ: ", event.button)
