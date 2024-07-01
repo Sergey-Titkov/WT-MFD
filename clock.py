@@ -236,20 +236,24 @@ class Window(QWidget):
             course_angle = 0
             course_angle_text = ''
             if self.current_base:
-                stroka = '{} {:2.1f}км'.format(self.current_base.name,
+                player_speed = int(self.telem.full_telemetry['speed'])
+                # м/с
+                if player_speed == 0:
+                    time_arrival_stroka = '-'
+                else:
+                    time_arrival = int(self.current_base.player_distance/player_speed)
+                    time_arrival_stroka = '{}'.format(time_arrival)
+                    if time_arrival > 999:
+                        time_arrival_stroka = '∞'
+                stroka = '{} {:2.1f}км {}c'.format(self.current_base.name,
                                                 self.current_base.player_distance / 1000,
+                                                   time_arrival_stroka
                                                 )
                 base_course = int(self.current_base.player_course)
-                base_course_begin = base_course_begin if base_course_begin !=360 else 0
-
-                if base_course_begin > 180:
-                    base_course_end = base_course_begin - 180
-                else:
-                    base_course_end = base_course_begin + 180
-                base_course_end = base_course_end if base_course_end !=360 else 0
+                base_course = base_course if base_course !=360 else 0
 
                 player_course_begin = int(self.telem.full_telemetry['compass'])
-                player_course_begin = player_course_begin if player_course_begin !=360 else 0
+
 
                 if player_course_begin > 180:
                     player_course_end = player_course_begin - 180
@@ -257,24 +261,36 @@ class Window(QWidget):
                     player_course_end = player_course_begin + 180
                 player_course_end = player_course_end if player_course_end !=360 else 0
 
-
-                if player_course >= base_course_begin or ( 0<= player_course and player_course <= base_course_end):
-                    # Отработка доварота в +
-                    if player_course >= base_course_begin:
-                        # Мы в одной половинке
-                        course_angle = player_course - base_course_begin
+                if player_course_begin < 180:
+                    if player_course_begin <= base_course and base_course <= player_course_end:
+                        # Отработка доварота в +
+                        course_angle = base_course - player_course_begin
+                        course_angle_text = '+{}'.format(int(course_angle))
                     else:
-                        course_angle = 360 - base_course_begin + player_course
-                    course_angle_text = '+{}'.format(int(course_angle))
+                        # Отработка доварота в -
+                        if base_course <= player_course_begin:
+                            course_angle = player_course_begin - base_course
+                        else:
+                            course_angle = 360 - base_course + player_course_begin
+                        course_angle_text = '-{}'.format(int(course_angle))
+                        course_angle = 360 - course_angle
                 else:
-                    # Отработка доварота в -
-                    if player_course < base_course_begin:
-                        course_angle = base_course_begin - player_course
+                    if base_course >= player_course_begin or ( 0< base_course and base_course <= player_course_end):
+                        # Отработка доварота в +
+                        if base_course >= player_course_begin:
+                            # Мы в одной половинке
+                            course_angle = base_course - player_course_begin
+                        else:
+                            course_angle = 360 - player_course_begin + base_course
+                        course_angle_text = '+{}'.format(int(course_angle))
                     else:
-                        course_angle = 360 - player_course + base_course_begin
-                    course_angle_text = '-{}'.format(int(course_angle))
-                    course_angle = 360 - course_angle
-                course_angle_text = '{} p:{} b:{}'.format(course_angle_text, int(player_course), int(base_course_begin))
+                        course_angle = player_course_begin - base_course
+                        course_angle_text = '-{}'.format(int(course_angle))
+                        course_angle = 360 - course_angle
+
+
+
+                course_angle_text = '{}'.format(course_angle_text, int(player_course_begin), int(base_course))
             self.svgWidget.cstTarget(self.svgWidget.cstRoot)[0].text = stroka
             self.svgWidget.cstAngle(self.svgWidget.cstRoot)[0].text = course_angle_text
             self.svgWidget.cstArrow(self.svgWidget.cstRoot)[0].set('transform', "rotate({},75,93)".format(int(course_angle)))
