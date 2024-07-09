@@ -37,7 +37,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Example"))
         self.pushButton.setText(_translate("Form", "Input"))
 
-
+#https://it.kgsu.ru/Python_Qt/pyqt5_017.html
 class BrowserHandler1(QtCore.QObject):
     running = False
     newTextAndColor = QtCore.pyqtSignal(str, object)
