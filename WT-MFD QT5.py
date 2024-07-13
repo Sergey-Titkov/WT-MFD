@@ -1,9 +1,8 @@
 import sys
-import time
 import pygame
-
-from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTextBrowser, QLabel, QWidget
+from lxml import etree
+from PyQt5 import QtCore, QtWidgets, QtSvg
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QTextBrowser, QSizePolicy, QWidget
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import QObject, QThread
 from WarThunder import telemetry
@@ -53,10 +52,6 @@ class BrowserWT(QObject):
         while True:
             QtCore.QThread.msleep(100)
             # Пока без событий и чата
-#            self.newTextAndColor.emit(
-#                '{} - thread 2 variant 2.\n'.format(str(time.strftime("%Y-%m-%d-%H.%M.%S", time.localtime()))),
-#                QColor(255, 0, 0)
-#            )
             result = None
             if self.telem.get_telemetry(comments=False, events=False):
                 result = self.telem
@@ -64,6 +59,44 @@ class BrowserWT(QObject):
 
             self.telemetrySignal.emit(result)
 
+# Окно для показа на MFD
+class MFDWindow(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(MFDWindow, self).__init__(parent)
+        self.setWindowFlags(QtCore.Qt.Window)                        # +++ Qt.Window
+        self.setWindowTitle("MFD ONE")
+        self.svgWidget = QtSvg.QSvgWidget(self)
+        fileSVG = './MFD - 01___.svg'
+        self.svgWidget.load(fileSVG)
+        self.svgRoot = etree.parse(fileSVG)
+        svg = etree.ETXPath("//{http://www.w3.org/2000/svg}svg")(self.svgRoot)
+        width = int(svg[0].get('width'))
+        height = int(svg[0].get('height'))
+        # Устанавливаем размеры
+        self.svgWidget.setGeometry(0, 0, width, height)
+        self.svgWidget.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        self.setFixedSize(width, height)
+
+    def updateMFD(self, object):
+        if object:
+            indicators = etree.ETXPath("//{http://www.w3.org/2000/svg}text[starts-with(@id,'sens_')]")(self.svgRoot);
+            for indicator in indicators:
+                name = indicator.get('id').replace('sens_', '')
+                value = object.full_telemetry[name]
+                indicator.text = '{}'.format(value)
+                if name == 'mach':
+                    if value < 0:
+                        value = 0
+                    indicator.text = '{:1.2f}'.format(value)
+                if name == 'compass':
+                    indicator.text = '{:.0f}'.format(value)
+
+        else:
+            print('None')
+            indicators = etree.ETXPath("//{http://www.w3.org/2000/svg}text[starts-with(@id,'sens_')]")(self.svgRoot);
+            for indicator in indicators:
+                indicator.text = ''
+        self.svgWidget.load(etree.tostring(self.svgRoot))
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -113,14 +146,20 @@ class MainWindow(QMainWindow):
         # Запускаем
         self.threadJoy.start()
 
+        # Создаем окно для MFD
+        self.mfdWindow = MFDWindow(self)
+        self.mfdWindow.resize(300, 300)
+        self.mfdWindow.show()
+
 
     @QtCore.pyqtSlot(object)
     def telemetryProcessor(self, object):
         self.textBrowser.setTextColor(QColor(0, 0, 0))
         if object:
-            self.textBrowser.append('Что то есть')
+            pass
         else:
             self.textBrowser.append('None')
+        self.mfdWindow.updateMFD(object)
 
     @QtCore.pyqtSlot(object)
     def joysticksProcessor(self, object):

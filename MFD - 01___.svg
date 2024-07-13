@@ -6,12 +6,14 @@
   <path id="rect1-0" style="fill:#000000;fill-opacity:0;stroke:#009d02;stroke-width:1.11793;stroke-opacity:1" d="M 295.32667,246.20821 H 475.93268 V 359.48188 H 295.32667 Z"/>
   <path id="rect1-3" style="fill-opacity: 0.178392; stroke: rgb(0, 157, 2); stroke-opacity: 1; fill: none;" d="m 340.02315,79.364106 h 78.05348 v 31.037434 h -78.05348 z"/>
   <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="25.477" y="200.446">MACH</text>
-  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="112.04" y="200.446" id="sens_MACH">9.99</text>
+  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="112.04" y="200.446" id="sens_mach"
+
+  >9.99</text>
   <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="25.477" y="178.002">TAS</text>
   <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="26.293" y="152.524">IAS</text>
-  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="106.477" y="152.524" id="sens_IAS">9999</text>
-  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="106.477" y="177.341" id="sens_TAS">9999</text>
+  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="150" y="152.524" id="sens_IAS, km/h" text-anchor="end" >9999</text>
+  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="150" y="177.341" id="sens_TAS, km/h" text-anchor="end" >9999</text>
   <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="156.863" y="178.002">km/h</text>
   <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="157.354" y="152.525">km/h</text>
-  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="363.507" y="101.29" id="sens_COMPAS">999</text>
+  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="380" y="101.29" id="sens_compass" text-anchor="middle" >999</text>
 </svg>
