@@ -25,18 +25,28 @@ if __name__ == "__main__":
     for key in templates:
         bind.keys.append([key[0], key[1], 0])
 
-    print(bind.keys)
+    print('Настройка клавиш:')
+    for key in bind.keys:
+        print('  ',key[0],' - ',key[1])
+    print('')
 
     pygame.init()
     joysticks = {}
     joysticksState = {}
 
+    print('Джойстики в системе:')
     for i in range(0, pygame.joystick.get_count()):
         joy = pygame.joystick.Joystick(i)
         joy.init()
         joysticks[joy.get_instance_id()] = joy
         joysticksState[joy.get_instance_id()] = [0] * 128
-        print(joy.get_instance_id(), ' - ', joysticks[joy.get_instance_id()].get_name())
+        print('  ',joysticks[joy.get_instance_id()].get_name())
+    print('')
+
+    with open('WriteTimeOffsetToFile.log', 'a') as f:
+        f.write('\n')
+        f.write('-----------' + '\n')
+        f.write('\n')
 
     while True:
 
