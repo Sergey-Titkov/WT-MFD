@@ -19,9 +19,9 @@
 ## Как использовать.
 Сначала надо настроить клавиши для записи метки в файл.
 Получаем список джойстиков. Открываем файл: WriteTimeOffsetToFile.cfg
-\```
+```json
 [
   ["S-TECS MODERN THROTTLE MAX STEM", 50],
   ["S-TECS MODERN THROTTLE MAX STEM", 51]
 ]
-\```
+```
