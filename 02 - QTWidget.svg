@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="150"
+   height="200"
+   viewBox="0 0 150 200.00001"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="рисунок-11.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="2.1694728"
+     inkscape:cx="-26.965077"
+     inkscape:cy="133.9035"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showgrid="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       id="angle"
+		x="75"
+		y="12"
+		font-family="Consolas" 
+		font-size="16" 
+		font-weight="bold"
+		fill="black"
+		dominant-baseline="middle" 
+		text-anchor="middle"
+      >+150</text>
+
+    <text
+       xml:space="preserve"
+       x="75"
+       y="183"
+       id="select-target"
+	   font-family="Consolas" 
+	   font-size="20" 
+	   font-weight="bold"
+	   fill="black"
+  		dominant-baseline="middle" 
+		text-anchor="middle"
+	   >А1 65.0/18</text>
+	  
+	  
+    <text
+       xml:space="preserve"
+       style="font-size:10px;fill:#000000;fill-opacity:1;stroke-width:2.84166"
+       x="75"
+       y="195"
+       id="type"
+ 	   dominant-baseline="middle" 
+	   text-anchor="middle"
+	   >БАЗА</text>
+    <circle
+       style="fill:#000000;stroke-width:1.95455"
+       id="path1"
+       cx="74.999962"
+       cy="93"
+       r="75" />
+    <ellipse
+       style="fill:#ffeeaa;stroke-width:1.87637"
+       id="path1-5"
+       cx="74.999962"
+       cy="93"
+       rx="71.999962"
+       ry="72" />
+    <g
+       id="Arrow"
+       inkscape:label="Arrow">
+      <rect
+         style="fill:#008000;stroke-width:1.61416"
+         id="rect2"
+         width="28"
+         height="100.24055"
+         x="60.999962"
+         y="62"
+         ry="0.80973613" />
+      <path
+         style="fill:#008000;stroke-width:1.00939"
+         d="M 75.798135,24 102.99996,62 H 46.999963 L 75.798135,24"
+         id="path2"
+         sodipodi:nodetypes="cccc" />
+    </g>
+  </g>
+</svg>

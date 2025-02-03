@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="24"
+   height="35"
+   viewBox="0 0 24 35"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="рисунок1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="8.6778908"
+     inkscape:cx="33.072553"
+     inkscape:cy="39.468116"
+     inkscape:window-width="1858"
+     inkscape:window-height="1057"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke-width:2.24121"
+       id="path16"
+       cx="12.094488"
+       cy="16.250759"
+       r="12.094488" />
+    <text
+       xml:space="preserve"
+       style="font-size:4.24913px;fill:#000000;fill-opacity:1;stroke-width:0.354094"
+       x="4.7909131"
+       y="30.749949"
+       id="text15"
+       transform="scale(0.95791112,1.0439382)"><tspan
+         sodipodi:role="line"
+         id="tspan15"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Consolas;-inkscape-font-specification:'Consolas Bold';stroke-width:0.354094"
+         x="4.7909131"
+         y="30.749949">A5 65.9</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:2.45275px;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.204395"
+       x="12.573647"
+       y="32.697731"
+       id="text15-7"
+       transform="scale(0.94320838,1.0602111)"><tspan
+         sodipodi:role="line"
+         id="tspan15-1"
+         style="text-align:center;text-anchor:middle;stroke-width:0.204395"
+         x="12.573647"
+         y="32.697731">БАЗА</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:4.24913px;fill:#000000;fill-opacity:1;stroke-width:0.354094"
+       x="8.3623714"
+       y="3.2342689"
+       id="angle"
+       transform="scale(0.95791112,1.0439382)"><tspan
+         sodipodi:role="line"
+         id="tspan15-3"
+         style="stroke-width:0.354094"
+         x="8.3623714"
+         y="3.2342689">+15</tspan></text>
+    <circle
+       style="fill:#f1f1f1;fill-opacity:1;stroke-width:2.20619"
+       id="path16-1"
+       cx="12.050695"
+       cy="16.272331"
+       r="11.905512" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke-width:1.47741"
+       d="M 1.0271033,19.478041 16.047196,12.453371 14.705117,9.5836955 23.029299,11.13802 18.731333,18.19252 17.389284,15.322908 2.3691882,22.34758 Z"
+       id="path15"
+       sodipodi:nodetypes="cccccccc" />
+  </g>
+</svg>
