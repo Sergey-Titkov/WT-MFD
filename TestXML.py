@@ -32,3 +32,5 @@ for element in k:
 
 
 print('{:1.2f}'.format(-0.000018))
+text_format = ':.0f'
+print(('{'+text_format+'}').format(279.71230018))

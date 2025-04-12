@@ -81,15 +81,20 @@ class MFDWindow(QtWidgets.QWidget):
         if object:
             indicators = etree.ETXPath("//{http://www.w3.org/2000/svg}text[starts-with(@id,'sens_')]")(self.svgRoot);
             for indicator in indicators:
-                name = indicator.get('id').replace('sens_', '')
-                value = object.full_telemetry[name]
-                indicator.text = '{}'.format(value)
-                if name == 'mach':
-                    if value < 0:
-                        value = 0
-                    indicator.text = '{:1.2f}'.format(value)
-                if name == 'compass':
-                    indicator.text = '{:.0f}'.format(value)
+
+                # Безопасно получаем атрибуты
+                sensor_name = indicator.get('data-sensor-name', '').strip()
+                text_format = indicator.get('data-sensor-text-format', '').strip() or None
+
+                # Проверяем обязательный атрибут
+                if not sensor_name:
+                    continue
+                if sensor_name in object.full_telemetry:
+                    value = object.full_telemetry[sensor_name]
+                    if text_format:
+                        indicator.text = ('{'+text_format+'}').format(value)
+                    else:
+                        indicator.text = '{}'.format(value)
 
         else:
             print('None')
