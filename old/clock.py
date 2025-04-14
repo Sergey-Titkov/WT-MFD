@@ -1,16 +1,21 @@
 # importing required librarie
+import time
+from datetime import datetime, timedelta
+
 from WarThunder import telemetry
 from WarThunder import mapinfo
 from lxml import etree
 import math
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QSizePolicy
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QSizePolicy, QDesktopWidget
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QTimer, QTime, Qt
 from PyQt5 import QtSvg
 
 
 import pygame
+import keyboard
+from pygame.examples.vgrade import timer
 
 
 class Base:
@@ -25,6 +30,9 @@ class Window(QWidget):
 
     def __init__(self):
         super().__init__()
+
+        #Словарь для хранения кординат и номеров баз
+        self.base_dictionary = {}
 
         # Готовим виджет со стрелкой
         #file_name = r'02 - QTWidget.svg'
@@ -41,9 +49,12 @@ class Window(QWidget):
         self.svgWidget.cstArrow = etree.ETXPath("//{http://www.w3.org/2000/svg}g[@id='Arrow']")
         self.svgWidget.cstRoot = etree.parse(file_name)
 
+        self.setStyleSheet("background-color:gray;")
 
         # Setup a timer event
 
+        #self.start_time = datetime.now()
+        self.start_time = None;
         self.current_base_index = 0
         self.current_base = None
 
@@ -67,18 +78,26 @@ class Window(QWidget):
         self.map_cell_size = QLabel()
         self.label1 = QLabel()
         self.label2 = QLabel()
+        self.current_time = QLabel()
+        self.active_timer = QLabel()
 
         # setting center alignment to the label
         self.map_cell_size.setAlignment(Qt.AlignCenter)
         self.label1.setAlignment(Qt.AlignCenter)
         self.label2.setAlignment(Qt.AlignCenter)
+        self.current_time.setAlignment(Qt.AlignRight)
+        self.active_timer.setAlignment(Qt.AlignRight)
 
         # setting font to the label
         self.map_cell_size.setFont(font)
         self.label1.setFont(font)
         self.label2.setFont(font)
+        self.current_time.setFont(font)
+        self.active_timer.setFont(font)
 
         # adding label to the layout
+        layout.addWidget(self.current_time)
+        layout.addWidget(self.active_timer)
         layout.addWidget(self.map_cell_size)
         layout.addWidget(self.label1)
         layout.addWidget(self.label2)
@@ -98,6 +117,9 @@ class Window(QWidget):
 
     # method called by timer
     def showTime(self):
+
+        #print((datetime.now() - timedelta(seconds=15*60)).strftime("%M:%S"))
+
         # getting current time
         current_time = QTime.currentTime()
 
@@ -107,9 +129,14 @@ class Window(QWidget):
         # showing it to the label
         grid_step_x = 13102.0
         grid_step_y = 13103.0
-        self.label1.setText(label_time)
-        self.label2.setText(label_time)
+        #self.label1.setText(label_time)
+        #self.label2.setText(label_time)
+        self.current_time.setText(label_time)
+        self.active_timer.setText('00:00')
 
+        # self.min_time = self.min_time + timedelta(seconds=1)
+        #
+        # print(self.min_time)
         if self.telem.get_telemetry(comments=False, events=False):
 #            print('Player:\t')
 #           print('\tX и Y:\t{},{}'.format(self.telem.map_info.player_x, self.telem.map_info.player_y))
@@ -117,6 +144,31 @@ class Window(QWidget):
             grid_steps = self.telem.map_info.info['grid_steps']
             size_x = self.telem.map_info.info['map_max'][0] - self.telem.map_info.info['map_min'][0]
             size_y = self.telem.map_info.info['map_max'][1] - self.telem.map_info.info['map_min'][1]
+
+#Сделать нормальный таймер
+
+
+
+            #print(datetime.datetime.strptime(str(delta), "%M:%S"))
+            # qq = None
+            #
+            if self.telem.map_info.player_found:
+                if self.start_time:
+                    delta = datetime.now() - self.start_time
+                    #print(datetime.strptime(str(delta), "%H:%M:%S.%f").strftime("%M:%S"))
+                    self.active_timer.setText(datetime.strptime(str(delta), "%H:%M:%S.%f").strftime("%M:%S"))
+                    if delta > timedelta(seconds=14*60):
+                        self.active_timer.setStyleSheet('color: red')
+                    if delta > timedelta(seconds=15*60):
+                        self.active_timer.setStyleSheet('color: black')
+                        self.start_time = None
+                        self.active_timer.setText('00:00')
+                else:
+                    self.start_time = datetime.now()
+            else:
+                self.start_time = None
+                self.active_timer.setText('00:00')
+                self.active_timer.setStyleSheet('color: black')
 
             self.map_cell_size.setText('Клетка: {0:2.1f}х{1:2.1f}км'.format(grid_steps[0] / 1000, grid_steps[1] / 1000))
 
@@ -186,8 +238,10 @@ class Window(QWidget):
                     base.player_distance = player_distance
                     base.player_course = player_course
                     self.base_list.append(base)
-
-#                    print('\tBombing Point: {}, distance: {:2.1f}км, course: {:3.0f}'.format(bomb_point.name,
+                    #self.base_dictionary.update({base: len(self.base_dictionary) + 1})
+                    self.base_dictionary.update({(base.x, base.y): base})
+                    #print(len(self.base_dictionary))
+            #                    print('\tBombing Point: {}, distance: {:2.1f}км, course: {:3.0f}'.format(bomb_point.name,
 #                                                                                             bomb_point.player_distance / 1000,
 #                                                                                             bomb_point.player_course))
 #                else:
@@ -201,11 +255,16 @@ class Window(QWidget):
             if self.base_list:
                 sorted_base = sorted(self.base_list, key=comapre_base)
                 for base in sorted_base:
-                    stroka = stroka + '\n' + '{} {:2.1f}км {:3.0f}°'.format(base.name, base.player_distance / 1000,
-                                                                            base.player_course)
+                    stroka = stroka + '\n' + '{} {:2.1f}км {:3.0f}° num:{:2.0f}'.format(base.name, base.player_distance / 1000,
+                                                                            base.player_course,
+                                                                            list(self.base_dictionary).index((base.x, base.y)))
             self.label2.setText(stroka)
 
-            joystick = pygame.joystick.Joystick(2)
+            joystick = pygame.joystick.Joystick(0)
+            for i in range(0, pygame.joystick.get_count()):
+                if pygame.joystick.Joystick(i).get_name() == "Saitek Pro Flight X-56 Rhino Stick":
+                    joystick = pygame.joystick.Joystick(i)
+
             if joystick:
                 if joystick.get_button(13):
                     print("Кнопка 13")
@@ -229,9 +288,13 @@ class Window(QWidget):
             stroka = ''
 
             if self.current_base:
-                stroka = '{} {:2.1f}км {:3.0f}°'.format(self.current_base.name,
+                #print(list(self.base_dictionary).index((self.current_base.x, self.current_base.y)))
+                #print(self.current_base)
+                stroka = '{} {:2.1f}км {:3.0f}° num:{:2.0f}'.format(self.current_base.name,
                                                                         self.current_base.player_distance / 1000,
-                                                                        self.current_base.player_course)
+                                                                        self.current_base.player_course,
+                                                                       list(self.base_dictionary).index((self.current_base.x, self.current_base.y)))
+
             self.label1.setText(stroka)
             course_angle = 0
             course_angle_text = ''
@@ -307,7 +370,13 @@ App = QApplication(sys.argv)
 window = Window()
 
 # showing all the widgets
-window.show()
+#window.show()
+
+display_monitor = 1
+
+monitor = QDesktopWidget().screenGeometry(display_monitor)
+window.move(monitor.left(), monitor.top())
+window.showFullScreen()
 
 # start the app
 App.exit(App.exec_())
