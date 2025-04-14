@@ -123,6 +123,15 @@
 ```
 В атрибут: ```data-sensor-name``` помещаем имя сенсора из списка ниже, в ```data-sensor-text-format``` формат в котором хотите его увидеть. В данном случае это число с фиксировнным количеством знаков после точки. 
 Если не знаете что писать просто не создавайте или не заполняйте атрибут, тогда значения будут представлены как есть.
+Если хочется шикануть, то вполне можно использовать tspan, пример показан ниже.
+```xml
+   <text x="25" y="150" font-size="30" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial">
+    <tspan text-anchor="start" style="font-weight: 550" >IAS:</tspan>
+    <tspan data-sensor-name="IAS, km/h" text-anchor="start" dx="0" style="font-weight: 700">1135.00</tspan>
+    <tspan text-anchor="start" dx="5" style="fill: rgb(38, 153, 38); font-size: 19px">км/ч</tspan>
+  </text>
+```
+![image](https://github.com/user-attachments/assets/f5d2d5b8-be3b-4bd2-876f-be3019dc07ce)
 
 
 
