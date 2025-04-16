@@ -2,12 +2,14 @@
 <svg width="1020" height="575" viewBox="0 0 1020 575" version="1.1" id="svg1" xmlns="http://www.w3.org/2000/svg">
 
 <!--
-  <image
+      <image
     href="file:///D:/20250414214536.png"
     width="100%"
     height="100%"
 />
  -->
+
+
   <text style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 50px; font-weight: 500; white-space: pre;" x="510" y="55" id="sens_text01" data-sensor-name="compass" data-sensor-text-format=".0f" text-anchor="middle" >999</text>
 
   <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="25" y="178">TAS</text>
@@ -19,6 +21,44 @@
     <tspan text-anchor="start" dx="5" style="fill: rgb(38, 153, 38); font-size: 19px">км/ч</tspan>
   </text>
 
+   <text text-anchor="end" x="957" y="450" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Consolas">some end</text>
+
+    <!--
+  visibility="hidden": Элемент не показывается, но занимает место.
+visibility="visible": Элемент видим.
+display="none": Элемент полностью скрыт и не занимает места в документе.
+display="inline" или display="block": Чтобы сделать элемент видимым.
+<g>
+</g>
+    -->
+
+   <text  x="850" y="470" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Consolas">
+    <tspan style="font-weight: 550" >МОЩ</tspan>
+    <tspan style="font-weight: 700" data-sensor-name="thrust 1, kgs" data-sensor-text-format=".0f" >9999</tspan>
+    <tspan >кгс</tspan>
+  </text>
+
+    <text   x="850" y="495" font-size="20" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Consolas">
+    <tspan style="font-weight: 550" >ОБ</tspan>
+    <tspan style="font-weight: 700" data-sensor-name="RPM 1" data-sensor-text-format=".0f" >9</tspan>
+    <tspan >кгс</tspan>
+  </text>
+
+
+   <text x="850" y="530" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Consolas">
+    <tspan text-anchor="start" style="font-weight: 550" >МОЩ</tspan>
+    <tspan data-sensor-name="thrust 2, kgs" data-sensor-text-format=".0f" text-anchor="end" dx="18" style="font-weight: 700">9</tspan>
+    <tspan text-anchor="start" dx="0" >кгс</tspan>
+  </text>
+
+    <text x="850" y="553" font-size="20" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Consolas">
+    <tspan text-anchor="start" style="font-weight: 550" >ОБ</tspan>
+    <tspan data-sensor-name="RPM 2" data-sensor-text-format=".0f" text-anchor="end" dx="30" style="font-weight: 700">99999</tspan>
+    <tspan text-anchor="start" dx="0" >   </tspan>
+  </text>
+
+    <text text-anchor="end" x="1000" y="85" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Consolas">some end</text>
+    <text text-anchor="end" x="1000" y="100" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Consolas">end</text>
 
   <!--
     <rect x="0" y="0" width="1020" height="575" style="stroke: rgb(0, 0, 0);"/>

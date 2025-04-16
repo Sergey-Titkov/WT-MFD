@@ -60,9 +60,23 @@ class MainWindow(QMainWindow):
                 continue
             # Если сенсора не нашли в телеметрии, то закидываем его в ошибочные
             if sensor_name not in telemetry:
-                self.sensor_has_error.append(sensor_name)
-                logging.warning(f'Параметр не найден: ID ={id} data-sensor-name={sensor_name}')
+                # Определяем, является ли элемент tspan
+                tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
+                print(indicator.tag)
+                if tag_local == 'tspan':
+                    # Скрываем родительский text
+                    parent = indicator.getparent()
+                    if parent is not None:
+                        parent.set('display', 'none')
+                else:
+                    # Скрываем сам элемент
+                    indicator.set('display', 'none')
                 continue
+                #self.sensor_has_error.append(sensor_name)
+                #logging.warning(f'Параметр не найден: ID ={id} data-sensor-name={sensor_name}')
+                #continue
+
+
             value = telemetry[sensor_name]
 
             try:
