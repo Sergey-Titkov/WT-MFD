@@ -6,8 +6,10 @@ from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene
 from PyQt5.QtSvg import QSvgRenderer, QGraphicsSvgItem
 from PyQt5.QtCore import Qt, QSettings, QByteArray, QObject, QThread
-import xml.etree.ElementTree as ET
+#import xml.etree.ElementTree as etree
+from lxml import etree
 from WarThunder import telemetry
+import copy
 
 version = '0.0.1'
 
@@ -44,8 +46,10 @@ class MainWindow(QMainWindow):
             if not self.svg_item.isVisible():
                 self.svg_item.setVisible(True)
 
+        # Работать будем с копией изначальной картинки, иначе задолбаешься потом находить и показывать все скрытые элементы.
+        svg_work_copy = copy.deepcopy(self.svg_root)
         # Находим все элементы с атрибутом data-sensor-name во всем дереве
-        elements = self.svg_root.findall('.//*[@data-sensor-name]', namespaces=self.namespaces)
+        elements = svg_work_copy.findall('.//*[@data-sensor-name]', namespaces=self.namespaces)
         for indicator in elements:
             # Безопасно получаем атрибуты
             id = indicator.get('id', '').strip()
@@ -58,26 +62,32 @@ class MainWindow(QMainWindow):
             # Обрабатываем только сенсоры у которых не было ошибок
             if sensor_name in self.sensor_has_error:
                 continue
-            # Если сенсора не нашли в телеметрии, то закидываем его в ошибочные
+            # Если сенсора не нашли в телеметрии, то скрываем его
             if sensor_name not in telemetry:
                 # Определяем, является ли элемент tspan
                 tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
-                print(indicator.tag)
                 if tag_local == 'tspan':
-                    # Скрываем родительский text
+                    # Получаем родительский элемент
                     parent = indicator.getparent()
                     if parent is not None:
-                        parent.set('display', 'none')
+                        # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
+                        group = parent.getparent()
+                        if group is not None and group.tag.split('}')[-1]=='g':
+                            # Скрываем всю группу
+                            group.set('display', 'none')
+                        else:
+                            # Скрываем только родительский элемент text
+                            parent.set('display', 'none')
                 else:
-                    # Скрываем сам элемент
-                    indicator.set('display', 'none')
+                    # Проверяем входит ли элемент в группу
+                    group = indicator.getparent()
+                    if group is not None and group.tag.split('}')[-1] == 'g':
+                        # Скрываем всю группу
+                        group.set('display', 'none')
+                    else:
+                        # Скрываем сам элемент
+                        indicator.set('display', 'none')
                 continue
-                #self.sensor_has_error.append(sensor_name)
-                #logging.warning(f'Параметр не найден: ID ={id} data-sensor-name={sensor_name}')
-                #continue
-
-
-            value = telemetry[sensor_name]
 
             try:
                 indicator.text = f'{telemetry[sensor_name]:{text_format}}'
@@ -88,7 +98,7 @@ class MainWindow(QMainWindow):
                 continue
 
         # Обновляем картинку данными сенсоров
-        self.renderer.load(ET.tostring(self.svg_root))
+        self.renderer.load(etree.tostring(svg_work_copy))
         svg_size = self.renderer.defaultSize()
         self.scene.setSceneRect(0, 0, svg_size.width(), svg_size.height())
         self.svg_item.update()
@@ -112,7 +122,7 @@ class MainWindow(QMainWindow):
             raise ValueError("Ошибка загрузки SVG-файла")
 
         # Парсим SVG как XML
-        self.svg_tree = ET.parse(self.file_path)
+        self.svg_tree = etree.parse(self.file_path)
         self.svg_root = self.svg_tree.getroot()
 
         self.svg_item = QGraphicsSvgItem()
