@@ -21,8 +21,36 @@
     <tspan text-anchor="start" dx="5" style="fill: rgb(38, 153, 38); font-size: 19px">км/ч</tspan>
   </text>
 
+   <text x="25" y="250" font-size="30" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial">
+    <tspan text-anchor="start" style="font-weight: 550" >КС:</tspan>
+    <tspan data-sensor-name="VNE %" text-anchor="start" dx="0" style="font-weight: 700"
+           data-baund-value='
+                                [
+                                    {"baund": 70, "style": "fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial"},
+                                    {"baund": 90, "style": "fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial"},
+                                    {"baund": 120, "style": "fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial"}
+                                ]
+                            '
+    >12</tspan>
+    <tspan text-anchor="start" dx="5" style="fill: rgb(38, 153, 38); font-size: 19px">%</tspan>
+  </text>
+
+
+<!--
+data-baund-value='
+[
+{"baund": 70, "style": "fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial"},
+{"baund": 90, "style": "fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial"},
+{"baund": 120, "style": "fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial"}
+]
+'
+-->
+
 
     <!--
+    ["baund": 70, style: "fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial"],
+    [70, fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial],
+    [1000, fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial]
   visibility="hidden": Элемент не показывается, но занимает место.
 visibility="visible": Элемент видим.
 display="none": Элемент полностью скрыт и не занимает места в документе.

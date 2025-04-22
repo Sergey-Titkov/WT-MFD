@@ -1,6 +1,9 @@
 import sys
 import logging
+import typing
 from datetime import datetime
+from sys import exception
+
 from PyQt5 import QtCore
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene
@@ -10,6 +13,7 @@ from PyQt5.QtCore import Qt, QSettings, QByteArray, QObject, QThread
 from lxml import etree
 from WarThunder import telemetry
 import copy
+import json
 
 version = '0.0.2'
 
@@ -37,7 +41,7 @@ class MainWindow(QMainWindow):
     namespaces = {'svg': 'http://www.w3.org/2000/svg'}
     file_path = "main.svg"
 
-    def updateMFD(self,telemetry):
+    def update_mfd(self, telemetry):
 
         if not telemetry:
             self.svg_item.setVisible(False)
@@ -106,10 +110,21 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+
+        self.fm_data = {}
+
+        try:
+            # Загружаем данные полученные из флайт модели
+            with open('wtmfd_data.json', 'r',  encoding="utf-8") as file:
+                self.fm_data.update(json.load(file))
+        except Exception as e:
+            logging.warning(f'При загрузке данных из флайт модели возникла ошибка: {e} ')
+
         # Инициализируем общие переменные
         self.sensor_has_error = []
 
         self.setWindowTitle(f'WT MDF {version}')
+
 
         # Инициализация графических элементов
         self.scene = QGraphicsScene()
@@ -143,7 +158,7 @@ class MainWindow(QMainWindow):
         # Загрузка настроек
         self.load_window_settings()
 
-        self.updateMFD({})
+        self.update_mfd({})
 
         # Обрабатываем телеметрию
         # Создаем нить
@@ -153,7 +168,7 @@ class MainWindow(QMainWindow):
         # Перемещаем обработчик в нить
         self.browserWT.moveToThread(self.threadWT)
         # Связываем обработчики сигналов
-        self.browserWT.telemetrySignal.connect(self.telemetryProcessor)
+        self.browserWT.telemetrySignal.connect(self.telemetry_processor)
         # Указываем нити какой метод из обработчика запустить
         self.threadWT.started.connect(self.browserWT.run)
         # Запускаем
@@ -193,8 +208,29 @@ class MainWindow(QMainWindow):
 
     # Приемник сообщений из нитки отвечающий за чтение данных из WT
     @QtCore.pyqtSlot(object)
-    def telemetryProcessor(self, object):
-        self.updateMFD(object)
+    def telemetry_processor(self, object):
+        # Обогащаем данные телеметрии данными из флайт модели и данными полученными на основании расчетов
+        telem = object.copy()
+        try:
+            if object is not None and 'type' in telem:
+                plane_id = telem['type']
+                if plane_id in self.fm_data:
+                    # print(telem)
+                    # print(self.fm_data[plane_id])
+                    telem['VNE'] = self.fm_data[plane_id]['VNE']
+                    telem['MNE'] = self.fm_data[plane_id]['MNE']
+                    #object.uppend(self.fm_data[plane_id])
+
+            if telem is not None and 'VNE' in telem and 'MNE' in telem:
+                vne_percent = telem['IAS, km/h']/ telem['VNE'][0][1]
+                mne_percent = telem['M'] / telem['MNE'][0][1]
+                result_percent = mne_percent
+                if vne_percent > mne_percent:
+                    result_percent = vne_percent
+                telem['VNE %'] = f'{float(result_percent*100):.0f}'
+        except Exception as e:
+            logging.warning(f'{e} ')
+        self.update_mfd(telem)
 
 
 if __name__ == "__main__":
@@ -202,3 +238,4 @@ if __name__ == "__main__":
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
+
