@@ -12,7 +12,7 @@
   <text style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 50px; font-weight: 500; white-space: pre;" x="510" y="55" id="sens_text01" data-sensor-name="compass" data-sensor-text-format=".0f" text-anchor="middle" >999</text>
 
   <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="25" y="178">TAS</text>
-  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="70" y="178" id="sens_stext09" data-sensor-name="TAS, km/h" data-sensor-text-format="1.2f">9.99</text>
+  <text style="fill: rgb(0, 157, 2); font-family: Arial, sans-serif; font-size: 20px; font-weight: 700; white-space: pre;" x="70" y="178" id="sens_stext09" data-sensor-name="TAS, km/h" data-sensor-text-format="1.2f">🛆9.99</text>
 
    <text x="25" y="150" font-size="30" style="fill: rgb(0, 157, 2); font-size: 20px; font-family: Arial">
     <tspan text-anchor="start" style="font-weight: 550" >IAS:</tspan>
@@ -22,22 +22,31 @@
 
 <rect x="249" y="189" width="530" height="130" stroke="rgb(0, 133, 0)" fill="transparent" stroke-width="5"/>
 
-<!-- Критическая скорость в процентах
- -->
+<!-- Универсальная высота -->
 <g style="fill: rgb(67, 230, 103); font-size: 55px; font-family: Consolas">
-       <text x="260" y="303" style="font-weight: 550">КС</text>
-       <text x="707" y="303" text-anchor="end"
-           data-sensor-name="VNE %"
-           data-baund-value='
+    <text x="260" y="242" style="font-weight: 550">ВЫСОТА</text>
+    <text x="707" y="242" text-anchor="end"
+          data-sensor-name="altitude_u"
+          data-sensor-text-format=".0f">
+        🛆99999
+    </text>
+</g>
+<!-- Критическая скорость в процентах -->
+<g style="fill: rgb(67, 230, 103); font-size: 55px; font-family: Consolas">
+    <text x="260" y="303" style="font-weight: 550">КС</text>
+    <text x="707" y="303" text-anchor="end"
+          data-sensor-name="VNE %"
+          data-baund-value='
                                 [
                                     {"baund": 80, "style": "fill: rgb(67, 230, 103)"},
                                     {"baund": 90, "style": "fill: rgb(255, 232, 0)"},
                                     {"baund": 95, "style": "fill: rgb(255, 0, 0)"},
                                     {"baund": 120, "style": "fill: rgb(148, 4, 4)"}
                                 ]
-                            '>120
-       </text>
-      <text x="735" y="303" style="fill: rgb(0, 157, 2)">%</text>
+                            '>
+        120
+    </text>
+    <text x="735" y="303" style="fill: rgb(0, 157, 2)">%</text>
 </g>
 
 

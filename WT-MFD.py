@@ -67,6 +67,34 @@ class MainWindow(QMainWindow):
             # Обрабатываем только сенсоры у которых не было ошибок
             if sensor_name in self.sensor_has_error:
                 continue
+            # Обрабатываем индикаторы
+            if sensor_name in ['altitude_u']:
+
+                if sensor_name == 'altitude_u':
+                    try:
+                        value = float(telemetry['altitude_hour'])
+                        indicator.text = f'🛆{value:{text_format}}'
+                        if 'radio_altitude_m' in telemetry:
+                            value = float(telemetry['radio_altitude_m'])
+                            indicator.text =  f'{value:{text_format}}'
+                    except Exception as e:
+                        self.sensor_has_error.append(sensor_name)
+                        logging.warning(
+                            f'Ошибка в параметре форматирования: {e}. ID ={id} data-sensor-name={sensor_name} data-sensor-text-format={text_format}')
+
+                    # Применяем условное форматирование
+                    try:
+                        if data_baund_value != '':
+                            baund_list = json.loads(data_baund_value)
+                            for item in baund_list:
+                                if value < float(item["baund"]):
+                                    indicator.set('style', item["style"])
+                                    break
+                    except Exception as e:
+                        self.sensor_has_error.append(sensor_name)
+                        logging.warning(f'Ошибка в условном форматировании форматирования: {e}. ID ={id} data-sensor-name={sensor_name} data-sensor-text-format={text_format}  data_baund_value={text_format} sensor_value={telemetry[sensor_name]} ')
+                    continue
+
             # Если сенсора не нашли в телеметрии, то скрываем его
             if sensor_name not in telemetry:
                 # Определяем, является ли элемент tspan
@@ -229,12 +257,15 @@ class MainWindow(QMainWindow):
         telem = None
         if object is not None:
             telem = object.copy()
+            if 'radio_altitude' in telem:
+                # Вычислям радио высоту в метрах
+                telem['radio_altitude_m'] = float(telem['radio_altitude']) * 0.3048
 
-        if object is not None and 'type' in telem:
-            plane_id = telem['type']
-            if plane_id in self.fm_data:
-                telem['VNE'] = self.fm_data[plane_id]['VNE']
-                telem['MNE'] = self.fm_data[plane_id]['MNE']
+            if 'type' in telem:
+                plane_id = telem['type']
+                if plane_id in self.fm_data:
+                    telem['VNE'] = self.fm_data[plane_id]['VNE']
+                    telem['MNE'] = self.fm_data[plane_id]['MNE']
 
         self.add_vne_persent(telem)
         self.update_mfd(telem)
