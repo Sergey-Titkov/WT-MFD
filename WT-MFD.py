@@ -59,6 +59,7 @@ class MainWindow(QMainWindow):
             id = indicator.get('id', '').strip()
             sensor_name = indicator.get('data-sensor-name', '').strip()
             text_format = indicator.get('data-sensor-text-format', '').strip()
+            data_baund_value = indicator.get('data-baund-value', '').strip()
 
             # Имя сенсора должно быть задано
             if not sensor_name:
@@ -92,13 +93,28 @@ class MainWindow(QMainWindow):
                         # Скрываем сам элемент
                         indicator.set('display', 'none')
                 continue
-
+            # Устанавливаем значение сенсора
             try:
                 indicator.text = f'{telemetry[sensor_name]:{text_format}}'
             except Exception as e:
                 self.sensor_has_error.append(sensor_name)
                 logging.warning(
                     f'Ошибка в параметре форматирования: {e}. ID ={id} data-sensor-name={sensor_name} data-sensor-text-format={text_format}')
+                continue
+
+            # Применяем условное форматирование
+            try:
+                if data_baund_value != '':
+                    value = float(telemetry[sensor_name])
+                    baund_list = json.loads(data_baund_value)
+                    for item in baund_list:
+                        if value < float(item["baund"]):
+                            indicator.set('style', item["style"])
+                            break
+            except Exception as e:
+                self.sensor_has_error.append(sensor_name)
+                logging.warning(
+                    f'Ошибка в условном форматировании форматирования: {e}. ID ={id} data-sensor-name={sensor_name} data-sensor-text-format={text_format}  data_baund_value={text_format} sensor_value={telemetry[sensor_name]} ')
                 continue
 
         # Обновляем картинку данными сенсоров
@@ -211,26 +227,34 @@ class MainWindow(QMainWindow):
     def telemetry_processor(self, object):
         # Обогащаем данные телеметрии данными из флайт модели и данными полученными на основании расчетов
         telem = object.copy()
-        try:
-            if object is not None and 'type' in telem:
-                plane_id = telem['type']
-                if plane_id in self.fm_data:
-                    # print(telem)
-                    # print(self.fm_data[plane_id])
-                    telem['VNE'] = self.fm_data[plane_id]['VNE']
-                    telem['MNE'] = self.fm_data[plane_id]['MNE']
-                    #object.uppend(self.fm_data[plane_id])
+        if object is not None and 'type' in telem:
+            plane_id = telem['type']
+            if plane_id in self.fm_data:
+                telem['VNE'] = self.fm_data[plane_id]['VNE']
+                telem['MNE'] = self.fm_data[plane_id]['MNE']
 
+        self.add_vne_persent(telem)
+        self.update_mfd(telem)
+
+    def add_vne_persent(self, telem):
+        """ Добавляем в телеметрию параметр VNE % - процент от критической скорости
+        Алгоритм расчета, считаем:
+          - IAS, km/h / VNE
+          - M / MNE
+        Какое значение больше то и добавляем в телеметрию
+        :param telem: Словарь с данными телемерии
+        :return:
+        """
+        try:
             if telem is not None and 'VNE' in telem and 'MNE' in telem:
-                vne_percent = telem['IAS, km/h']/ telem['VNE'][0][1]
+                vne_percent = telem['IAS, km/h'] / telem['VNE'][0][1]
                 mne_percent = telem['M'] / telem['MNE'][0][1]
                 result_percent = mne_percent
                 if vne_percent > mne_percent:
                     result_percent = vne_percent
-                telem['VNE %'] = f'{float(result_percent*100):.0f}'
+                telem['VNE %'] = f'{float(result_percent * 100):.0f}'
         except Exception as e:
             logging.warning(f'{e} ')
-        self.update_mfd(telem)
 
 
 if __name__ == "__main__":
