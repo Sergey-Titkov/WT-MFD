@@ -226,7 +226,10 @@ class MainWindow(QMainWindow):
     @QtCore.pyqtSlot(object)
     def telemetry_processor(self, object):
         # Обогащаем данные телеметрии данными из флайт модели и данными полученными на основании расчетов
-        telem = object.copy()
+        telem = None
+        if object is not None:
+            telem = object.copy()
+
         if object is not None and 'type' in telem:
             plane_id = telem['type']
             if plane_id in self.fm_data:
