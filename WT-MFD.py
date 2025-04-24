@@ -45,6 +45,90 @@ class MainWindow(QMainWindow):
     namespaces = {'svg': 'http://www.w3.org/2000/svg'}
     file_path = "main.svg"
 
+    def sensor_vfe_combat(self, indicator, telemetry):
+        print(telemetry['VFE'])
+        if 'Combat' in telemetry['Flaps position']:
+            #  # Расчет наклона Только надо найти диапазон!
+        #k = (y2 - y1) / (x2 - x1)
+        # Вычисление Y для заданного X
+        #Y = k * (X - x1) + y1
+            pass
+        else:
+            # Надо скрыть индикатор
+            # Определяем, является ли элемент tspan
+            tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
+            if tag_local == 'tspan':
+                # Получаем родительский элемент
+                parent = indicator.getparent()
+                if parent is not None:
+                    # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
+                    group = parent.getparent()
+                    if group is not None and group.tag.split('}')[-1] == 'g':
+                        # Скрываем всю группу
+                        group.set('display', 'none')
+                    else:
+                        # Скрываем только родительский элемент text
+                        parent.set('display', 'none')
+            else:
+                # Проверяем входит ли элемент в группу
+                group = indicator.getparent()
+                if group is not None and group.tag.split('}')[-1] == 'g':
+                    # Скрываем всю группу
+                    group.set('display', 'none')
+                else:
+                    # Скрываем сам элемент
+                    indicator.set('display', 'none')
+
+        pass
+
+    def sensor_vlo(self, indicator, telemetry):
+        """
+        Возвращает критическую скорость выпуска шасси если шасси не выпущены.
+        В случае если выпущены возрващает проценты до отлома шасси на земпле
+
+        :param indicator: Куда будем помещать значение
+        :param telemetry: Словарь с телеметрией от WT
+        """
+
+        gear_percent = int(telemetry['gear, %'])
+        crit_gear_speed = telemetry['VLO']
+        tas = telemetry['TAS, km/h']
+        ias = telemetry['IAS, km/h']
+
+        # Закрылки убраны
+        value = (ias / crit_gear_speed) * 100
+        text_node = int(crit_gear_speed)
+        key_name = 'gear_up'
+
+        # Шасси полностью выпущены, считаем что мы на земле
+        if gear_percent==100:
+            # У некоторых самолетов критическая скорость ВЫПУСКА шасси большая, например 700
+            # А скорость когда шасси сломаются на земле, намного меньше, пока поставил 450
+            if crit_gear_speed > 450:
+                crit_gear_speed = 450
+            value = (tas/crit_gear_speed)*100
+            text_node = int(value)
+            key_name = 'gear_down'
+        else:
+            # То ли убираем, то ли выпускаем
+            if 0 <gear_percent<100:
+                value = (ias / crit_gear_speed) * 100
+                text_node = int(value)
+                key_name = 'gear_down'
+
+        indicator.text = f'{text_node}'
+        # Применяем условное форматирование
+        data_boundary_value = indicator.get('data-boundary-value', '').strip()
+        if data_boundary_value != '':
+            boundary_list = json.loads(data_boundary_value)
+            if key_name in boundary_list:
+                boundaries = boundary_list[key_name]
+                for item in boundaries:
+                    if 'boundary' in item and "style" in item:
+                        if value< item['boundary']:
+                            indicator.set('style', item['style'])
+                            break
+
     def sensor_flaps_indicator(self, indicator, telemetry):
         """
         Возвращает тектовое представление того, где находятся закрылки :) и промежуточных состояний.
@@ -193,7 +277,7 @@ class MainWindow(QMainWindow):
                 continue
             # Обрабатываем индикаторы
             try:
-                if sensor_name in ['altitude_u', 'gear_indicator', 'flaps_indicator']:
+                if sensor_name in ['altitude_u', 'gear_indicator', 'flaps_indicator', 'VLO', 'VFE_Combat']:
                     match sensor_name:
                         case 'altitude_u':
                             self.sensor_altitude_u(indicator, telemetry)
@@ -201,6 +285,10 @@ class MainWindow(QMainWindow):
                             self.sensor_gear_indicator(indicator, telemetry)
                         case 'flaps_indicator':
                             self.sensor_flaps_indicator(indicator, telemetry)
+                        case 'VLO':
+                            self.sensor_vlo(indicator, telemetry)
+                        case 'VFE_Combat':
+                            self.sensor_vfe_combat(indicator, telemetry)
                         case _:
                             pass
                     continue
