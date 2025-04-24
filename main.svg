@@ -7,6 +7,7 @@
     width="100%"
     height="100%"
 />
+
 -->
 <rect x="0" y="0" width="1020" height="575" stroke="rgb(0, 157, 2)" fill="transparent" stroke-width="2"/>
 
@@ -75,15 +76,30 @@
     <text x="970" y="553" style="font-weight: 700" text-anchor="end" data-sensor-name="RPM 2" data-sensor-text-format=".0f">9</text>
 </g>
 
-<!-- Шасси -->
-<rect x="412" y="505" width="178" height="50" stroke="rgb(0, 157, 2)" fill="transparent" stroke-width="5"/>
-<text x="418" y="550" style="fill: rgb(0, 157, 2); font-size: 60px; font-family: Consolas; font-weight: 550"
-      text-anchor="start"
-      data-sensor-name="gear_indicator"
-      data-boundary-value='{
-                            "down":   {"style": "fill: rgb(255, 86, 48); font-size: 60px; font-family: Consolas; font-weight: 550"},
-                            "process":{"style": "fill: rgb(0, 157, 2)  ; font-size: 60px; font-family: Consolas; font-weight: 550"},
-                            "up":     {"style": "visibility: hidden"}
-                        }'
-      >ШАССИ</text>
+    <!-- Шасси -->
+    <rect x="412" y="505" width="178" height="50" stroke="rgb(0, 157, 2)" fill="transparent" stroke-width="5"/>
+    <text x="418" y="550" style="fill: rgb(0, 157, 2); font-size: 60px; font-family: Consolas; font-weight: 550"
+        text-anchor="start"
+        data-sensor-name="gear_indicator"
+        data-boundary-value='{
+                                "down":   {"style": "fill: rgb(255, 86, 48); font-size: 60px; font-family: Consolas; font-weight: 550"},
+                                "process":{"style": "fill: rgb(0, 157, 2)  ; font-size: 60px; font-family: Consolas; font-weight: 550"},
+                                "up":     {"style": "visibility: hidden"}
+                            }'
+        >ШАССИ</text>
+
+    <!-- Закрылки -->
+    <rect x="0" y="498" width="250" height="66" stroke="rgb(0, 133, 0)" fill="transparent" stroke-width="5"/>
+    <text x="125" y="550" style="fill: #36B37E; font-size: 60px; font-family: Consolas; font-weight: 550"
+        text-anchor="middle"
+        data-sensor-name="flaps_indicator"
+        data-boundary-value='{
+                                "up":      {"style": "visibility: hidden"},
+                                "process": {"style": "fill: #FFAB00; font-size: 60px; font-family: Consolas; font-weight: 550"},
+                                "combat":  {"style": "fill: #36B37E; font-size: 60px; font-family: Consolas; font-weight: 550"},
+                                "takeoff": {"style": "fill: #36B37E; font-size: 60px; font-family: Consolas; font-weight: 550"},
+                                "landing": {"style": "fill: #36B37E; font-size: 60px; font-family: Consolas; font-weight: 550"}
+                            }'
+        >ПОСАДКА</text>
+
 </svg>

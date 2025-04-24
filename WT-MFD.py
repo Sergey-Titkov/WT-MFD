@@ -15,6 +15,7 @@ from WarThunder import telemetry
 import copy
 import json
 
+
 version = '0.0.2'
 
 
@@ -43,6 +44,68 @@ class BrowserWT(QObject):
 class MainWindow(QMainWindow):
     namespaces = {'svg': 'http://www.w3.org/2000/svg'}
     file_path = "main.svg"
+
+    def sensor_flaps_indicator(self, indicator, telemetry):
+        """
+        Возвращает тектовое представление того, где находятся закрылки :) и промежуточных состояний.
+        Позиция: БОЙ, ВЗЛЁТ, ПОСАДКА
+        В процессе смены возвращается строка вида: <Начальная позиция><---><Конечная позиция>
+
+        :param indicator: Куда будем помещать значение
+        :param telemetry: Словарь с телеметрией от WT
+        """
+        exact_value = []
+        range_value = []
+        prev_value = 1
+        prev_marker = "0"
+        value = int(telemetry['flaps, %'])
+
+        exact_value.append([0, "",'up'])
+
+        if 'Flaps position' in telemetry and 'Combat' in  telemetry['Flaps position']:
+            exact_value.append([int(telemetry['Flaps position']['Combat']), "БОЙ", 'combat'])
+            range_value.append([prev_value,int(telemetry['Flaps position']['Combat']),prev_marker,"Б"])
+            prev_value = int(telemetry['Flaps position']['Combat'])+ 1
+            prev_marker = "Б"
+
+        if 'Flaps position' in telemetry and 'Takeoff' in  telemetry['Flaps position']:
+            exact_value.append([int(telemetry['Flaps position']['Takeoff']), "ВЗЛЁТ",'takeoff'])
+            range_value.append([prev_value,int(telemetry['Flaps position']['Takeoff']),prev_marker,"В"])
+            prev_value = int(telemetry['Flaps position']['Takeoff']) + 1
+            prev_marker = "В"
+
+        exact_value.append([100, "ПОСАДКА",'landing'])
+        range_value.append([prev_value,100,prev_marker,"П"])
+        # Проверям, что попали точно в значение
+        text_node = ''
+        key_name = ''
+        for item in exact_value:
+            if value == item[0]:
+                text_node = item[1]
+                key_name = item[2]
+
+        # Мы в процессе, то ли убираем, то ли выпускаем шасси
+        if text_node == '':
+            key_name = "process"
+            # Ищем в каком мы диапазоне
+            for item in range_value:
+                if item[0] <= value < item[1]:
+                    percent = 100 * (value - item[0]) / ((item[1] - item[0]))
+                    if percent < 33:
+                        text_node = fr'{item[2]}<|-->{item[3]}'
+                    else:
+                        if percent < 66:
+                            text_node = fr'{item[2]}<-|->{item[3]}'
+                        else:
+                            text_node = fr'{item[2]}<--|>{item[3]}'
+
+        indicator.text = text_node
+        # Применяем условное форматирование
+        data_boundary_value = indicator.get('data-boundary-value', '').strip()
+        if data_boundary_value != '':
+            boundary_list = json.loads(data_boundary_value)
+            if key_name in boundary_list:
+                indicator.set('style', boundary_list[key_name]["style"])
 
     def sensor_gear_indicator(self, indicator, telemetry):
         """
@@ -74,7 +137,6 @@ class MainWindow(QMainWindow):
         data_boundary_value = indicator.get('data-boundary-value', '').strip()
         if data_boundary_value != '':
             boundary_list = json.loads(data_boundary_value)
-            print(key)
             if key in boundary_list:
                 indicator.set('style', boundary_list[key]["style"])
 
@@ -131,12 +193,16 @@ class MainWindow(QMainWindow):
                 continue
             # Обрабатываем индикаторы
             try:
-                if sensor_name in ['altitude_u', 'gear_indicator']:
-                    if sensor_name == 'altitude_u':
-                        self.sensor_altitude_u(indicator, telemetry)
-
-                    if sensor_name == 'gear_indicator':
-                        self.sensor_gear_indicator(indicator, telemetry)
+                if sensor_name in ['altitude_u', 'gear_indicator', 'flaps_indicator']:
+                    match sensor_name:
+                        case 'altitude_u':
+                            self.sensor_altitude_u(indicator, telemetry)
+                        case 'gear_indicator':
+                            self.sensor_gear_indicator(indicator, telemetry)
+                        case 'flaps_indicator':
+                            self.sensor_flaps_indicator(indicator, telemetry)
+                        case _:
+                            pass
                     continue
 
             except Exception as e:
