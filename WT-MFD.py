@@ -1,8 +1,6 @@
 import sys
 import logging
-import typing
 from datetime import datetime
-from sys import exception
 
 from PyQt5 import QtCore
 from PyQt5.QtGui import QPainter
@@ -15,16 +13,22 @@ from WarThunder import telemetry
 import copy
 import json
 
-version = '0.0.2'
+version = '1.0.0'
 
 
-# Класс для получения телеметрии из WT
 class BrowserWT(QObject):
-    # Класс читающий телеметрию из WT
+    """
+    Класс для получения телеметрии из WT.
+    Работает в нитке.
+    """
     TelemInterface = telemetry.TelemInterface()
     telemetrySignal = QtCore.pyqtSignal(object)
 
     def run(self):
+        """
+        Тут и получаем все из WT
+        :return:
+        """
         while True:
             QtCore.QThread.msleep(100)
             full_telemetry = None
@@ -33,62 +37,86 @@ class BrowserWT(QObject):
             if self.TelemInterface.get_telemetry(comments=False, events=False):
                 full_telemetry = self.TelemInterface.full_telemetry
                 current_time = datetime.now()
+                # Вот зачем так я не помню вообще
                 full_telemetry['clock_hour'] = current_time.hour
                 full_telemetry['clock_min'] = current_time.minute
                 full_telemetry['clock_sec'] = current_time.second
                 full_telemetry['clock_microsecond'] = current_time.microsecond
+            # Посылаю сигнал, что готово
             self.telemetrySignal.emit(full_telemetry)
 
 
 class MainWindow(QMainWindow):
+    """
+    Окно куда выводится svg с телеметрией
+    """
     namespaces = {'svg': 'http://www.w3.org/2000/svg'}
+    """ Нам нужно специальное пространство имен для svg"""
     file_path = "main.svg"
 
     def sensor_vfe_landing(self, indicator, telemetry):
+        """
+        Возвращает значение для сенсора: VFE_Landing
+        Если закрылки стали в положение посадки то возвращает процент от критической сокрости, если закрылки убраны то критическую скорость выпуска закрылок
+        :param indicator: Куда будем помещать значение
+        :param telemetry: Словарь с телеметрией от WT
+        """
         if len(telemetry['VFE']) > 0:
             flaps_percent = telemetry['flaps, %']
             ias = telemetry['IAS, km/h']
             # Тут начинается цирк с конями, в датамайнах значения то есть, но они не совсем про точно попасть в закрылки, так что начиаем апроксимировать
             # Получаем критическую скорость для закрылок в положении БОЙ
             vfe_values = telemetry['VFE']
-            x = 100
-            for i in range(0, len(vfe_values)):
-                x1 = int(vfe_values[i][0] * 100)
-                y1 = vfe_values[i][1]
-                x2 = int(vfe_values[i + 1][0] * 100)
-                y2 = vfe_values[i + 1][1]
-                if x1 <= x <= x2:
-                    y = ((y2 - y1) / (x2 - x1)) * (x - x1) + y1
-                    break
+            flaps_landing_percent = 100
+            flaps_landing_critical_speed = self.approximation(vfe_values, flaps_landing_percent)
             # Закрылки убраны - показываем критическую скорость
-            value = int(100 * ias / y)
-            text_node = f'{int(y)}'
+            value = int(100 * ias / flaps_landing_critical_speed)
+            text_node = f'{int(flaps_landing_critical_speed)}'
             key_name = 'flaps_up'
-            prev_value = 0
-            prev_value = int(telemetry['Flaps position'].get('Combat',prev_value))
-            prev_value = int(telemetry['Flaps position'].get('Takeoff',prev_value))
 
-            if prev_value < flaps_percent <= flaps_percent:
+            prev_value = int(telemetry['Flaps position'].get('Takeoff',telemetry['Flaps position'].get('Combat',0)))
+            if prev_value < flaps_percent <= flaps_landing_percent:
                 text_node = f'{int(value)}'
                 key_name = 'flaps_down'
 
             indicator.text = f'{text_node}'
             # Применяем условное форматирование
-            data_boundary_value = indicator.get('data-boundary-value', '').strip()
-            if data_boundary_value != '':
-                boundary_list = json.loads(data_boundary_value)
-                if key_name in boundary_list:
-                    boundaries = boundary_list[key_name]
-                    for item in boundaries:
-                        if 'boundary' in item and "style" in item:
-                            if value < item['boundary']:
-                                indicator.set('style', item['style'])
-                                break
+            self.set_condition_formating_for_vfe(indicator, key_name, value)
 
         else:
             self.hide_element(indicator)
 
+    def approximation(self, vfe_values, x):
+        """
+        Есть график зависимости критической скорости для закрылок от величина на сколько они выпущены
+        Граифик имеет вид: [0.3, 814.0], [0.5, 555.0], [1.0, 416.4] где первое число это позиция закрылок, второе скорость.
+        и вот по этой ломаной, по известному x определеям y
+        Если x за пределами кривой то возращаем первое или последнее значение y
+        :param vfe_values: массив с данными по кривой
+        :param x: значение x в процентах
+        :return: значние y
+        """
+        if x < vfe_values[0][0]:
+            y = vfe_values[0][1]
+            if x > vfe_values[-1][0]:
+                y = vfe_values[-1][1]
+            else:
+                for i in range(0, len(vfe_values)):
+                    x1 = int(vfe_values[i][0] * 100)
+                    y1 = vfe_values[i][1]
+                    x2 = int(vfe_values[i + 1][0] * 100)
+                    y2 = vfe_values[i + 1][1]
+                    if x1 <= x <= x2:
+                        y = ((y2 - y1) / (x2 - x1)) * (x - x1) + y1
+                        break
+        return y
+
     def hide_element(self, indicator):
+        """
+        Метод скрывает указнный объект svg картинки.
+        Если объект tspan, то будет скрыт весь элемент text, если объект вложен в группу то будет скрыта вся группа.
+        :param indicator: объек svg который нужно скрыть
+        """
         # Надо скрыть индикатор
         # Определяем, является ли элемент tspan
         tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
@@ -122,14 +150,7 @@ class MainWindow(QMainWindow):
             # Получаем критическую скорость для закрылок в положении БОЙ
             vfe_values = telemetry['VFE']
             x = int(telemetry['Flaps position']['Takeoff'])
-            for i in range(0, len(vfe_values)):
-                x1 = int(vfe_values[i][0] * 100)
-                y1 = vfe_values[i][1]
-                x2 = int(vfe_values[i + 1][0] * 100)
-                y2 = vfe_values[i + 1][1]
-                if x1 <= x <= x2:
-                    y = ((y2 - y1) / (x2 - x1)) * (x - x1) + y1
-                    break
+            y = self.approximation(vfe_values, x)
             # Закрылки убраны - показываем критическую скорость
             value = int(100 * ias / y)
             text_node = f'{int(y)}'
@@ -143,16 +164,7 @@ class MainWindow(QMainWindow):
 
             indicator.text = f'{text_node}'
             # Применяем условное форматирование
-            data_boundary_value = indicator.get('data-boundary-value', '').strip()
-            if data_boundary_value != '':
-                boundary_list = json.loads(data_boundary_value)
-                if key_name in boundary_list:
-                    boundaries = boundary_list[key_name]
-                    for item in boundaries:
-                        if 'boundary' in item and "style" in item:
-                            if value < item['boundary']:
-                                indicator.set('style', item['style'])
-                                break
+            self.set_condition_formating_for_vfe(indicator, key_name, value)
 
         else:
             self.hide_element(indicator)
@@ -166,14 +178,7 @@ class MainWindow(QMainWindow):
             vfe_values = telemetry['VFE']
             x = int(telemetry['Flaps position']['Combat'])
             if x > int(vfe_values[0][0] * 100):
-                for i in range(0, len(vfe_values)):
-                    x1 = int(vfe_values[i][0] * 100)
-                    y1 = vfe_values[i][1]
-                    x2 = int(vfe_values[i + 1][0] * 100)
-                    y2 = vfe_values[i + 1][1]
-                    if x1 <= x <= x2:
-                        y = ((y2 - y1) / (x2 - x1)) * (x - x1) + y1
-                        break
+                y = self.approximation(vfe_values, x)
             else:
               y = vfe_values[0][1]
             # Закрылки убраны - показываем критическую скорость
@@ -186,21 +191,24 @@ class MainWindow(QMainWindow):
 
             indicator.text = f'{text_node}'
             # Применяем условное форматирование
-            data_boundary_value = indicator.get('data-boundary-value', '').strip()
-            if data_boundary_value != '':
-                boundary_list = json.loads(data_boundary_value)
-                if key_name in boundary_list:
-                    boundaries = boundary_list[key_name]
-                    for item in boundaries:
-                        if 'boundary' in item and "style" in item:
-                            if value < item['boundary']:
-                                indicator.set('style', item['style'])
-                                break
+            self.set_condition_formating_for_vfe(indicator, key_name, value)
 
         else:
             self.hide_element(indicator)
 
         pass
+
+    def set_condition_formating_for_vfe(self, indicator, key_name, value):
+        data_boundary_value = indicator.get('data-boundary-value', '').strip()
+        if data_boundary_value != '':
+            boundary_list = json.loads(data_boundary_value)
+            if key_name in boundary_list:
+                boundaries = boundary_list[key_name]
+                for item in boundaries:
+                    if 'boundary' in item and "style" in item:
+                        if value < item['boundary']:
+                            indicator.set('style', item['style'])
+                            break
 
     def sensor_vlo(self, indicator, telemetry):
         """
@@ -239,16 +247,7 @@ class MainWindow(QMainWindow):
 
         indicator.text = f'{text_node}'
         # Применяем условное форматирование
-        data_boundary_value = indicator.get('data-boundary-value', '').strip()
-        if data_boundary_value != '':
-            boundary_list = json.loads(data_boundary_value)
-            if key_name in boundary_list:
-                boundaries = boundary_list[key_name]
-                for item in boundaries:
-                    if 'boundary' in item and "style" in item:
-                        if value < item['boundary']:
-                            indicator.set('style', item['style'])
-                            break
+        self.set_condition_formating_for_vfe(indicator, key_name, value)
 
     def sensor_flaps_indicator(self, indicator, telemetry):
         """
