@@ -65,12 +65,8 @@ class MainWindow(QMainWindow):
             text_node = f'{int(y)}'
             key_name = 'flaps_up'
             prev_value = 0
-
-            if 'Combat' in telemetry['Flaps position']:
-                prev_value = int(telemetry['Flaps position']['Combat'])
-
-            if 'Takeoff' in telemetry['Flaps position']:
-                prev_value = int(telemetry['Flaps position']['Takeoff'])
+            prev_value = int(telemetry['Flaps position'].get('Combat',prev_value))
+            prev_value = int(telemetry['Flaps position'].get('Takeoff',prev_value))
 
             if prev_value < flaps_percent <= flaps_percent:
                 text_node = f'{int(value)}'
@@ -90,30 +86,33 @@ class MainWindow(QMainWindow):
                                 break
 
         else:
-            # Надо скрыть индикатор
-            # Определяем, является ли элемент tspan
-            tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
-            if tag_local == 'tspan':
-                # Получаем родительский элемент
-                parent = indicator.getparent()
-                if parent is not None:
-                    # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
-                    group = parent.getparent()
-                    if group is not None and group.tag.split('}')[-1] == 'g':
-                        # Скрываем всю группу
-                        group.set('display', 'none')
-                    else:
-                        # Скрываем только родительский элемент text
-                        parent.set('display', 'none')
-            else:
-                # Проверяем входит ли элемент в группу
-                group = indicator.getparent()
+            self.hide_element(indicator)
+
+    def hide_element(self, indicator):
+        # Надо скрыть индикатор
+        # Определяем, является ли элемент tspan
+        tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
+        if tag_local == 'tspan':
+            # Получаем родительский элемент
+            parent = indicator.getparent()
+            if parent is not None:
+                # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
+                group = parent.getparent()
                 if group is not None and group.tag.split('}')[-1] == 'g':
                     # Скрываем всю группу
                     group.set('display', 'none')
                 else:
-                    # Скрываем сам элемент
-                    indicator.set('display', 'none')
+                    # Скрываем только родительский элемент text
+                    parent.set('display', 'none')
+        else:
+            # Проверяем входит ли элемент в группу
+            group = indicator.getparent()
+            if group is not None and group.tag.split('}')[-1] == 'g':
+                # Скрываем всю группу
+                group.set('display', 'none')
+            else:
+                # Скрываем сам элемент
+                indicator.set('display', 'none')
 
     def sensor_vfe_takeoff(self, indicator, telemetry):
         if 'Takeoff' in telemetry['Flaps position']:
@@ -156,30 +155,7 @@ class MainWindow(QMainWindow):
                                 break
 
         else:
-            # Надо скрыть индикатор
-            # Определяем, является ли элемент tspan
-            tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
-            if tag_local == 'tspan':
-                # Получаем родительский элемент
-                parent = indicator.getparent()
-                if parent is not None:
-                    # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
-                    group = parent.getparent()
-                    if group is not None and group.tag.split('}')[-1] == 'g':
-                        # Скрываем всю группу
-                        group.set('display', 'none')
-                    else:
-                        # Скрываем только родительский элемент text
-                        parent.set('display', 'none')
-            else:
-                # Проверяем входит ли элемент в группу
-                group = indicator.getparent()
-                if group is not None and group.tag.split('}')[-1] == 'g':
-                    # Скрываем всю группу
-                    group.set('display', 'none')
-                else:
-                    # Скрываем сам элемент
-                    indicator.set('display', 'none')
+            self.hide_element(indicator)
 
     def sensor_vfe_combat(self, indicator, telemetry):
         if 'Combat' in telemetry['Flaps position']:
@@ -222,30 +198,7 @@ class MainWindow(QMainWindow):
                                 break
 
         else:
-            # Надо скрыть индикатор
-            # Определяем, является ли элемент tspan
-            tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
-            if tag_local == 'tspan':
-                # Получаем родительский элемент
-                parent = indicator.getparent()
-                if parent is not None:
-                    # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
-                    group = parent.getparent()
-                    if group is not None and group.tag.split('}')[-1] == 'g':
-                        # Скрываем всю группу
-                        group.set('display', 'none')
-                    else:
-                        # Скрываем только родительский элемент text
-                        parent.set('display', 'none')
-            else:
-                # Проверяем входит ли элемент в группу
-                group = indicator.getparent()
-                if group is not None and group.tag.split('}')[-1] == 'g':
-                    # Скрываем всю группу
-                    group.set('display', 'none')
-                else:
-                    # Скрываем сам элемент
-                    indicator.set('display', 'none')
+            self.hide_element(indicator)
 
         pass
 
@@ -472,29 +425,7 @@ class MainWindow(QMainWindow):
 
             # Если сенсора не нашли в телеметрии, то скрываем его
             if sensor_name not in telemetry:
-                # Определяем, является ли элемент tspan
-                tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
-                if tag_local == 'tspan':
-                    # Получаем родительский элемент
-                    parent = indicator.getparent()
-                    if parent is not None:
-                        # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
-                        group = parent.getparent()
-                        if group is not None and group.tag.split('}')[-1] == 'g':
-                            # Скрываем всю группу
-                            group.set('display', 'none')
-                        else:
-                            # Скрываем только родительский элемент text
-                            parent.set('display', 'none')
-                else:
-                    # Проверяем входит ли элемент в группу
-                    group = indicator.getparent()
-                    if group is not None and group.tag.split('}')[-1] == 'g':
-                        # Скрываем всю группу
-                        group.set('display', 'none')
-                    else:
-                        # Скрываем сам элемент
-                        indicator.set('display', 'none')
+                self.hide_element(indicator)
                 continue
             # Устанавливаем значение сенсора
             try:
