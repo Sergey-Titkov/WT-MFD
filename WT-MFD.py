@@ -15,7 +15,6 @@ from WarThunder import telemetry
 import copy
 import json
 
-
 version = '0.0.2'
 
 
@@ -45,14 +44,183 @@ class MainWindow(QMainWindow):
     namespaces = {'svg': 'http://www.w3.org/2000/svg'}
     file_path = "main.svg"
 
+    def sensor_vfe_landing(self, indicator, telemetry):
+        if len(telemetry['VFE']) > 0:
+            flaps_percent = telemetry['flaps, %']
+            ias = telemetry['IAS, km/h']
+            # Тут начинается цирк с конями, в датамайнах значения то есть, но они не совсем про точно попасть в закрылки, так что начиаем апроксимировать
+            # Получаем критическую скорость для закрылок в положении БОЙ
+            vfe_values = telemetry['VFE']
+            x = 100
+            for i in range(0, len(vfe_values)):
+                x1 = int(vfe_values[i][0] * 100)
+                y1 = vfe_values[i][1]
+                x2 = int(vfe_values[i + 1][0] * 100)
+                y2 = vfe_values[i + 1][1]
+                if x1 <= x <= x2:
+                    y = ((y2 - y1) / (x2 - x1)) * (x - x1) + y1
+                    break
+            # Закрылки убраны - показываем критическую скорость
+            value = int(100 * ias / y)
+            text_node = f'{int(y)}'
+            key_name = 'flaps_up'
+            prev_value = 0
+
+            if 'Combat' in telemetry['Flaps position']:
+                prev_value = int(telemetry['Flaps position']['Combat'])
+
+            if 'Takeoff' in telemetry['Flaps position']:
+                prev_value = int(telemetry['Flaps position']['Takeoff'])
+
+            if prev_value < flaps_percent <= flaps_percent:
+                text_node = f'{int(value)}'
+                key_name = 'flaps_down'
+
+            indicator.text = f'{text_node}'
+            # Применяем условное форматирование
+            data_boundary_value = indicator.get('data-boundary-value', '').strip()
+            if data_boundary_value != '':
+                boundary_list = json.loads(data_boundary_value)
+                if key_name in boundary_list:
+                    boundaries = boundary_list[key_name]
+                    for item in boundaries:
+                        if 'boundary' in item and "style" in item:
+                            if value < item['boundary']:
+                                indicator.set('style', item['style'])
+                                break
+
+        else:
+            # Надо скрыть индикатор
+            # Определяем, является ли элемент tspan
+            tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
+            if tag_local == 'tspan':
+                # Получаем родительский элемент
+                parent = indicator.getparent()
+                if parent is not None:
+                    # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
+                    group = parent.getparent()
+                    if group is not None and group.tag.split('}')[-1] == 'g':
+                        # Скрываем всю группу
+                        group.set('display', 'none')
+                    else:
+                        # Скрываем только родительский элемент text
+                        parent.set('display', 'none')
+            else:
+                # Проверяем входит ли элемент в группу
+                group = indicator.getparent()
+                if group is not None and group.tag.split('}')[-1] == 'g':
+                    # Скрываем всю группу
+                    group.set('display', 'none')
+                else:
+                    # Скрываем сам элемент
+                    indicator.set('display', 'none')
+
+    def sensor_vfe_takeoff(self, indicator, telemetry):
+        if 'Takeoff' in telemetry['Flaps position']:
+            flaps_percent = telemetry['flaps, %']
+            ias = telemetry['IAS, km/h']
+            # Тут начинается цирк с конями, в датамайнах значения то есть, но они не совсем про точно попасть в закрылки, так что начиаем апроксимировать
+            # Получаем критическую скорость для закрылок в положении БОЙ
+            vfe_values = telemetry['VFE']
+            x = int(telemetry['Flaps position']['Takeoff'])
+            for i in range(0, len(vfe_values)):
+                x1 = int(vfe_values[i][0] * 100)
+                y1 = vfe_values[i][1]
+                x2 = int(vfe_values[i + 1][0] * 100)
+                y2 = vfe_values[i + 1][1]
+                if x1 <= x <= x2:
+                    y = ((y2 - y1) / (x2 - x1)) * (x - x1) + y1
+                    break
+            # Закрылки убраны - показываем критическую скорость
+            value = int(100 * ias / y)
+            text_node = f'{int(y)}'
+            key_name = 'flaps_up'
+            prev_value = 0
+            if 'Combat' in telemetry['Flaps position']:
+                prev_value = int(telemetry['Flaps position']['Combat'])
+            if prev_value < flaps_percent <= flaps_percent:
+                text_node = f'{int(value)}'
+                key_name = 'flaps_down'
+
+            indicator.text = f'{text_node}'
+            # Применяем условное форматирование
+            data_boundary_value = indicator.get('data-boundary-value', '').strip()
+            if data_boundary_value != '':
+                boundary_list = json.loads(data_boundary_value)
+                if key_name in boundary_list:
+                    boundaries = boundary_list[key_name]
+                    for item in boundaries:
+                        if 'boundary' in item and "style" in item:
+                            if value < item['boundary']:
+                                indicator.set('style', item['style'])
+                                break
+
+        else:
+            # Надо скрыть индикатор
+            # Определяем, является ли элемент tspan
+            tag_local = indicator.tag.split('}')[-1]  # Локальное имя тега без namespace
+            if tag_local == 'tspan':
+                # Получаем родительский элемент
+                parent = indicator.getparent()
+                if parent is not None:
+                    # Проверяем не входит ли родительский элемент в группу, если да, то скрываем всю группу
+                    group = parent.getparent()
+                    if group is not None and group.tag.split('}')[-1] == 'g':
+                        # Скрываем всю группу
+                        group.set('display', 'none')
+                    else:
+                        # Скрываем только родительский элемент text
+                        parent.set('display', 'none')
+            else:
+                # Проверяем входит ли элемент в группу
+                group = indicator.getparent()
+                if group is not None and group.tag.split('}')[-1] == 'g':
+                    # Скрываем всю группу
+                    group.set('display', 'none')
+                else:
+                    # Скрываем сам элемент
+                    indicator.set('display', 'none')
+
     def sensor_vfe_combat(self, indicator, telemetry):
-        print(telemetry['VFE'])
         if 'Combat' in telemetry['Flaps position']:
-            #  # Расчет наклона Только надо найти диапазон!
-        #k = (y2 - y1) / (x2 - x1)
-        # Вычисление Y для заданного X
-        #Y = k * (X - x1) + y1
-            pass
+            flaps_percent = telemetry['flaps, %']
+            ias = telemetry['IAS, km/h']
+            # Тут начинается цирк с конями, в датамайнах значения то есть, но они не совсем про точно попасть в закрылки, так что начиаем апроксимировать
+            # Получаем критическую скорость для закрылок в положении БОЙ
+            vfe_values = telemetry['VFE']
+            x = int(telemetry['Flaps position']['Combat'])
+            if x > int(vfe_values[0][0] * 100):
+                for i in range(0, len(vfe_values)):
+                    x1 = int(vfe_values[i][0] * 100)
+                    y1 = vfe_values[i][1]
+                    x2 = int(vfe_values[i + 1][0] * 100)
+                    y2 = vfe_values[i + 1][1]
+                    if x1 <= x <= x2:
+                        y = ((y2 - y1) / (x2 - x1)) * (x - x1) + y1
+                        break
+            else:
+              y = vfe_values[0][1]
+            # Закрылки убраны - показываем критическую скорость
+            value = int(100 * ias / y)
+            text_node = f'{int(y)}'
+            key_name = 'flaps_up'
+            if 0 < flaps_percent <= flaps_percent:
+                text_node = f'{int(value)}'
+                key_name = 'flaps_down'
+
+            indicator.text = f'{text_node}'
+            # Применяем условное форматирование
+            data_boundary_value = indicator.get('data-boundary-value', '').strip()
+            if data_boundary_value != '':
+                boundary_list = json.loads(data_boundary_value)
+                if key_name in boundary_list:
+                    boundaries = boundary_list[key_name]
+                    for item in boundaries:
+                        if 'boundary' in item and "style" in item:
+                            if value < item['boundary']:
+                                indicator.set('style', item['style'])
+                                break
+
         else:
             # Надо скрыть индикатор
             # Определяем, является ли элемент tspan
@@ -101,17 +269,17 @@ class MainWindow(QMainWindow):
         key_name = 'gear_up'
 
         # Шасси полностью выпущены, считаем что мы на земле
-        if gear_percent==100:
+        if gear_percent == 100:
             # У некоторых самолетов критическая скорость ВЫПУСКА шасси большая, например 700
             # А скорость когда шасси сломаются на земле, намного меньше, пока поставил 450
             if crit_gear_speed > 450:
                 crit_gear_speed = 450
-            value = (tas/crit_gear_speed)*100
+            value = (tas / crit_gear_speed) * 100
             text_node = int(value)
             key_name = 'gear_down'
         else:
             # То ли убираем, то ли выпускаем
-            if 0 <gear_percent<100:
+            if 0 < gear_percent < 100:
                 value = (ias / crit_gear_speed) * 100
                 text_node = int(value)
                 key_name = 'gear_down'
@@ -125,7 +293,7 @@ class MainWindow(QMainWindow):
                 boundaries = boundary_list[key_name]
                 for item in boundaries:
                     if 'boundary' in item and "style" in item:
-                        if value< item['boundary']:
+                        if value < item['boundary']:
                             indicator.set('style', item['style'])
                             break
 
@@ -144,22 +312,22 @@ class MainWindow(QMainWindow):
         prev_marker = "0"
         value = int(telemetry['flaps, %'])
 
-        exact_value.append([0, "",'up'])
+        exact_value.append([0, "", 'up'])
 
-        if 'Flaps position' in telemetry and 'Combat' in  telemetry['Flaps position']:
+        if 'Flaps position' in telemetry and 'Combat' in telemetry['Flaps position']:
             exact_value.append([int(telemetry['Flaps position']['Combat']), "БОЙ", 'combat'])
-            range_value.append([prev_value,int(telemetry['Flaps position']['Combat']),prev_marker,"Б"])
-            prev_value = int(telemetry['Flaps position']['Combat'])+ 1
+            range_value.append([prev_value, int(telemetry['Flaps position']['Combat']), prev_marker, "Б"])
+            prev_value = int(telemetry['Flaps position']['Combat']) + 1
             prev_marker = "Б"
 
-        if 'Flaps position' in telemetry and 'Takeoff' in  telemetry['Flaps position']:
-            exact_value.append([int(telemetry['Flaps position']['Takeoff']), "ВЗЛЁТ",'takeoff'])
-            range_value.append([prev_value,int(telemetry['Flaps position']['Takeoff']),prev_marker,"В"])
+        if 'Flaps position' in telemetry and 'Takeoff' in telemetry['Flaps position']:
+            exact_value.append([int(telemetry['Flaps position']['Takeoff']), "ВЗЛЁТ", 'takeoff'])
+            range_value.append([prev_value, int(telemetry['Flaps position']['Takeoff']), prev_marker, "В"])
             prev_value = int(telemetry['Flaps position']['Takeoff']) + 1
             prev_marker = "В"
 
-        exact_value.append([100, "ПОСАДКА",'landing'])
-        range_value.append([prev_value,100,prev_marker,"П"])
+        exact_value.append([100, "ПОСАДКА", 'landing'])
+        range_value.append([prev_value, 100, prev_marker, "П"])
         # Проверям, что попали точно в значение
         text_node = ''
         key_name = ''
@@ -214,7 +382,7 @@ class MainWindow(QMainWindow):
         if 0 < value < 100:
             key = 'process'
         else:
-            if value ==0:
+            if value == 0:
                 key = 'up'
 
         # Применяем условное форматирование
@@ -277,7 +445,7 @@ class MainWindow(QMainWindow):
                 continue
             # Обрабатываем индикаторы
             try:
-                if sensor_name in ['altitude_u', 'gear_indicator', 'flaps_indicator', 'VLO', 'VFE_Combat']:
+                if sensor_name in ['altitude_u', 'gear_indicator', 'flaps_indicator', 'VLO', 'VFE_Combat', 'VFE_Takeoff', 'VFE_Landing']:
                     match sensor_name:
                         case 'altitude_u':
                             self.sensor_altitude_u(indicator, telemetry)
@@ -289,6 +457,10 @@ class MainWindow(QMainWindow):
                             self.sensor_vlo(indicator, telemetry)
                         case 'VFE_Combat':
                             self.sensor_vfe_combat(indicator, telemetry)
+                        case 'VFE_Takeoff':
+                            self.sensor_vfe_takeoff(indicator, telemetry)
+                        case 'VFE_Landing':
+                            self.sensor_vfe_landing(indicator, telemetry)
                         case _:
                             pass
                     continue
