@@ -370,6 +370,10 @@ class MainWindow(QMainWindow):
                     break
 
     def update_mfd(self, telemetry):
+        """
+        Обновляет форму как только пришла новая телеметрия от WT
+        :param telemetry: Словарь с телеметрией от WT
+        """
 
         if not telemetry:
             self.svg_item.setVisible(False)
@@ -457,10 +461,13 @@ class MainWindow(QMainWindow):
         self.svg_item.update()
 
     def __init__(self):
+        """
+        Конструктор нашей формы.
+        """
         super().__init__()
 
+        # Если не удалось загрузить данные по флайт модели, то дальше будем работать с пустым словарём
         self.fm_data = {}
-
         try:
             # Загружаем данные полученные из флайт модели
             with open('wtmfd_data.json', 'r', encoding="utf-8") as file:
@@ -521,11 +528,20 @@ class MainWindow(QMainWindow):
         self.threadWT.start()
 
     def closeEvent(self, event):
+        """
+        Ловим момент когда нажали крестик на форме
+        :param event: событие закрытия
+        :return:
+        """
         # Сохранение настроек перед закрытием
         self.save_window_settings()
         super().closeEvent(event)
 
     def load_window_settings(self):
+        """
+        Загружаем настройки для нашей формы.
+        Положение и размер
+        """
         settings = QSettings("settings.ini", QSettings.IniFormat)
         geometry = settings.value("geometry", QByteArray())
         window_state = settings.value("window_state", Qt.WindowNoState)
@@ -539,20 +555,29 @@ class MainWindow(QMainWindow):
         self.setWindowState(Qt.WindowState(int(window_state)))
 
     def save_window_settings(self):
+        """
+        Сохраняем настойки формы. Положение и размер.
+        """
         settings = QSettings("settings.ini", QSettings.IniFormat)
         settings.setValue("geometry", self.saveGeometry())
         settings.setValue("window_state", int(self.windowState()))
 
     def center_window(self):
+        """
+        Если настройк не заданы, то центрируем форму по центру монитора по умолчанию
+        """
         # Центрирование окна на экране
         frame = self.frameGeometry()
         screen_center = QApplication.primaryScreen().availableGeometry().center()
         frame.moveCenter(screen_center)
         self.move(frame.topLeft())
 
-    # Приемник сообщений из нитки отвечающий за чтение данных из WT
     @QtCore.pyqtSlot(object)
     def telemetry_processor(self, object):
+        """
+        Приемник сообщений из нитки отвечающий за чтение данных из WT
+        :param object: Массив с телеметрией из WT
+        """
         # Обогащаем данные телеметрии данными из флайт модели и данными полученными на основании расчетов
         telem = None
         if object is not None:
