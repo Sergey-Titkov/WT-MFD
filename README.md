@@ -364,3 +364,6 @@ C:\Users\user>
  - weapon2":0.0,
  - WingSpan":[      [         0,         14.7      ]   ],   "WingArea":[      [         0,         61.98      ]   ],
  - Wx, deg/s":1,
+
+# Контакты
+[Дискорд](https://discord.gg/ktstFYtyUR)
