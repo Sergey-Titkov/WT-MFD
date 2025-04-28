@@ -96,9 +96,11 @@ class MainWindow(QMainWindow):
         :param x: значение x в процентах
         :return: значние y
         """
-        if x < vfe_values[0][0]:
+        y = 0
+        if x < vfe_values[0][0]*100:
             y = vfe_values[0][1]
-            if x > vfe_values[-1][0]:
+        else:
+            if x > vfe_values[-1][0]*100:
                 y = vfe_values[-1][1]
             else:
                 for i in range(0, len(vfe_values)):
@@ -423,7 +425,7 @@ class MainWindow(QMainWindow):
 
             except Exception as e:
                 self.sensor_has_error.append(sensor_name)
-                logging.error(f'Возникла ошибка: {e}. ID ={id} data-sensor-name={sensor_name} sensor_value={telemetry[sensor_name]}')
+                logging.error(f'Возникла ошибка: {e}. ID ={id} data-sensor-name={sensor_name}')
                 continue
 
             # Если сенсора не нашли в телеметрии, то скрываем его
@@ -461,71 +463,75 @@ class MainWindow(QMainWindow):
         self.svg_item.update()
 
     def __init__(self):
-        """
-        Конструктор нашей формы.
-        """
-        super().__init__()
-
-        # Если не удалось загрузить данные по флайт модели, то дальше будем работать с пустым словарём
-        self.fm_data = {}
         try:
-            # Загружаем данные полученные из флайт модели
-            with open('wtmfd_data.json', 'r', encoding="utf-8") as file:
-                self.fm_data.update(json.load(file))
+            """
+            Конструктор нашей формы.
+            """
+            super().__init__()
+
+            # Если не удалось загрузить данные по флайт модели, то дальше будем работать с пустым словарём
+            self.fm_data = {}
+            try:
+                # Загружаем данные полученные из флайт модели
+                with open('wtmfd_data.json', 'r', encoding="utf-8") as file:
+                    self.fm_data.update(json.load(file))
+            except Exception as e:
+                logging.warning(f'При загрузке данных из флайт модели возникла ошибка: {e} ')
+
+            # Инициализируем общие переменные
+            self.sensor_has_error = []
+
+            self.setWindowTitle(f'WT MDF {version}')
+
+            # Инициализация графических элементов
+            self.scene = QGraphicsScene()
+            self.view = QGraphicsView(self.scene)
+            self.setCentralWidget(self.view)
+
+            # Загрузка SVG-изображения
+            self.renderer = QSvgRenderer(self.file_path)
+            if not self.renderer.isValid():
+                raise ValueError("Ошибка загрузки SVG-файла")
+
+            # Парсим SVG как XML
+            self.svg_tree = etree.parse(self.file_path)
+            self.svg_root = self.svg_tree.getroot()
+
+            self.svg_item = QGraphicsSvgItem()
+            self.svg_item.setSharedRenderer(self.renderer)
+            self.scene.addItem(self.svg_item)
+
+            # Установка размеров сцены
+            svg_size = self.renderer.defaultSize()
+            self.scene.setSceneRect(0, 0, svg_size.width(), svg_size.height())
+            self.scene.setBackgroundBrush(Qt.black)
+            # Настройка отображения
+            self.view.setRenderHint(QPainter.Antialiasing)
+            self.view.setAlignment(Qt.AlignCenter)
+            self.view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+            self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+
+            # Загрузка настроек
+            self.load_window_settings()
+
+            self.update_mfd({})
+
+            # Обрабатываем телеметрию
+            # Создаем нить
+            self.threadWT = QThread()
+            # Создаем обработчик
+            self.browserWT = BrowserWT()
+            # Перемещаем обработчик в нить
+            self.browserWT.moveToThread(self.threadWT)
+            # Связываем обработчики сигналов
+            self.browserWT.telemetrySignal.connect(self.telemetry_processor)
+            # Указываем нити какой метод из обработчика запустить
+            self.threadWT.started.connect(self.browserWT.run)
+            # Запускаем
+            self.threadWT.start()
+
         except Exception as e:
-            logging.warning(f'При загрузке данных из флайт модели возникла ошибка: {e} ')
-
-        # Инициализируем общие переменные
-        self.sensor_has_error = []
-
-        self.setWindowTitle(f'WT MDF {version}')
-
-        # Инициализация графических элементов
-        self.scene = QGraphicsScene()
-        self.view = QGraphicsView(self.scene)
-        self.setCentralWidget(self.view)
-
-        # Загрузка SVG-изображения
-        self.renderer = QSvgRenderer(self.file_path)
-        if not self.renderer.isValid():
-            raise ValueError("Ошибка загрузки SVG-файла")
-
-        # Парсим SVG как XML
-        self.svg_tree = etree.parse(self.file_path)
-        self.svg_root = self.svg_tree.getroot()
-
-        self.svg_item = QGraphicsSvgItem()
-        self.svg_item.setSharedRenderer(self.renderer)
-        self.scene.addItem(self.svg_item)
-
-        # Установка размеров сцены
-        svg_size = self.renderer.defaultSize()
-        self.scene.setSceneRect(0, 0, svg_size.width(), svg_size.height())
-        self.scene.setBackgroundBrush(Qt.black)
-        # Настройка отображения
-        self.view.setRenderHint(QPainter.Antialiasing)
-        self.view.setAlignment(Qt.AlignCenter)
-        self.view.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self.view.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-
-        # Загрузка настроек
-        self.load_window_settings()
-
-        self.update_mfd({})
-
-        # Обрабатываем телеметрию
-        # Создаем нить
-        self.threadWT = QThread()
-        # Создаем обработчик
-        self.browserWT = BrowserWT()
-        # Перемещаем обработчик в нить
-        self.browserWT.moveToThread(self.threadWT)
-        # Связываем обработчики сигналов
-        self.browserWT.telemetrySignal.connect(self.telemetry_processor)
-        # Указываем нити какой метод из обработчика запустить
-        self.threadWT.started.connect(self.browserWT.run)
-        # Запускаем
-        self.threadWT.start()
+            logging.warning(f'Ошибка при инициализации формы: {e}')
 
     def closeEvent(self, event):
         """
