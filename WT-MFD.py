@@ -145,6 +145,12 @@ class MainWindow(QMainWindow):
                 indicator.set('display', 'none')
 
     def sensor_vfe_takeoff(self, indicator, telemetry):
+        """
+        Возвращает значение для сенсора: VFE_Takeoff
+        Если закрылки стали в положение взлета то возвращает процент от критической сокрости, если закрылки убраны то критическую скорость выпуска закрылок
+        :param indicator: Куда будем помещать значение
+        :param telemetry: Словарь с телеметрией от WT
+        """
         if 'Takeoff' in telemetry['Flaps position']:
             flaps_percent = telemetry['flaps, %']
             ias = telemetry['IAS, km/h']
@@ -172,6 +178,12 @@ class MainWindow(QMainWindow):
             self.hide_element(indicator)
 
     def sensor_vfe_combat(self, indicator, telemetry):
+        """
+        Возвращает значение для сенсора: VFE_Combat
+        Если закрылки стали в положение БОЙ то возвращает процент от критической сокрости, если закрылки убраны то критическую скорость выпуска закрылок
+        :param indicator: Куда будем помещать значение
+        :param telemetry: Словарь с телеметрией от WT
+        """
         if 'Combat' in telemetry['Flaps position']:
             flaps_percent = telemetry['flaps, %']
             ias = telemetry['IAS, km/h']
