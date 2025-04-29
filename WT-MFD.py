@@ -12,8 +12,10 @@ from lxml import etree
 from WarThunder import telemetry
 import copy
 import json
+import requests
+from packaging import version
 
-version = '1.0.1'
+version_application = '1.0.1'
 
 
 class BrowserWT(QObject):
@@ -493,7 +495,7 @@ class MainWindow(QMainWindow):
             # Инициализируем общие переменные
             self.sensor_has_error = []
 
-            self.setWindowTitle(f'WT MDF {version}')
+            self.setWindowTitle(f'WT MDF {version_application}')
 
             # Инициализация графических элементов
             self.scene = QGraphicsScene()
@@ -685,8 +687,52 @@ class MainWindow(QMainWindow):
             except Exception as e:
                 logging.error(f"Произошла ошибка при копировании: {e}")
 
+def download_file_from_github():
+    """
+    Процедура обновляет файлы данных о самолетах если выложена новая версия
+    """
+    url_version = "https://raw.githubusercontent.com/Sergey-Titkov/WT-MFD/main/wtmfd_data_verion.json"
+    url_data = "https://raw.githubusercontent.com/Sergey-Titkov/WT-MFD/main/wtmfd_data.json"
+    try:
+        # Скачиваем файл
+        response = requests.get(url_version)
+        response.raise_for_status()  # Проверяем на ошибки HTTP
+
+        # Загружаем и парсим JSON
+        remote_version = version.parse(json.loads(response.text)["Version"])
+
+        # Читаем локальную версию
+        with open('wtmfd_data_verion.json', 'r', encoding="utf-8") as file:
+            local_version = version.parse(json.load(file)["Version"])
+
+        # У нас новые данные по флайт модели, обновляемся
+        if remote_version > local_version:
+            shutil.copy2('wtmfd_data.json', 'wtmfd_data_old.json')
+            shutil.copy2('wtmfd_data_verion.json', 'wtmfd_data_verion_old.json')
+
+            response = requests.get(url_data, stream=True)
+            response.raise_for_status()  # Проверяем на ошибки HTTP
+            with open('wtmfd_data.json', 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+
+            response = requests.get(url_version, stream=True)
+            response.raise_for_status()  # Проверяем на ошибки HTTP
+            with open('wtmfd_data_verion', 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+            logging.info(f'Файлы данных обновлены до версии: {remote_version}')
+
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Ошибка при загрузке файла: {e}")
+    except json.JSONDecodeError as e:
+        logging.error(f"Ошибка парсинга JSON: {e}")
+    except Exception as e:
+        logging.error(f"Ошибка: {e}")
+    return
 
 if __name__ == "__main__":
+    download_file_from_github()
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()

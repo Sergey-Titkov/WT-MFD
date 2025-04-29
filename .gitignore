@@ -166,3 +166,6 @@ cython_debug/
 /settings.ini
 /test.py
 /wtmfd_data_verion_tmp.json
+/wtmfd_data_verion_old.json
+/wtmfd_data_old.json
+/wtmfd_data_verion
