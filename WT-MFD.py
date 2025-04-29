@@ -1,7 +1,8 @@
 import sys
 import logging
 from datetime import datetime
-
+import os
+import shutil
 from PyQt5 import QtCore
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene
@@ -487,7 +488,7 @@ class MainWindow(QMainWindow):
                 with open('wtmfd_data.json', 'r', encoding="utf-8") as file:
                     self.fm_data.update(json.load(file))
             except Exception as e:
-                logging.warning(f'При загрузке данных из флайт модели возникла ошибка: {e} ')
+                logging.error(f'При загрузке данных из флайт модели возникла ошибка: {e} ')
 
             # Инициализируем общие переменные
             self.sensor_has_error = []
@@ -500,6 +501,7 @@ class MainWindow(QMainWindow):
             self.setCentralWidget(self.view)
 
             # Загрузка SVG-изображения
+            self.check_and_copy_svg()
             self.renderer = QSvgRenderer(self.file_path)
             if not self.renderer.isValid():
                 raise ValueError("Ошибка загрузки SVG-файла")
@@ -667,6 +669,21 @@ class MainWindow(QMainWindow):
                 telem['VNE %'] = f'{float(result_percent * 100):.0f}'
         except Exception as e:
             logging.error(e)
+
+    def check_and_copy_svg(self):
+        """
+        Что бы случайно не испортить людям их файл main.svg, теперь в дистрибутиве будет _main.svg который будет копироваться main.svg в случае если его нет
+        """
+        # Проверяем существование файла main.svg
+        if not os.path.exists('main.svg'):
+            try:
+                # Копируем _main.svg в main.svg
+                shutil.copy2('_main.svg', 'main.svg')
+                logging.warning("Файл _main.svg успешно скопирован в main.svg")
+            except FileNotFoundError:
+                logging.error("Ошибка: файл _main.svg не найден")
+            except Exception as e:
+                logging.error(f"Произошла ошибка при копировании: {e}")
 
 
 if __name__ == "__main__":
