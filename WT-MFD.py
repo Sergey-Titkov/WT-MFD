@@ -691,7 +691,7 @@ def download_file_from_github():
     """
     Процедура обновляет файлы данных о самолетах если выложена новая версия
     """
-    url_version = "https://raw.githubusercontent.com/Sergey-Titkov/WT-MFD/main/wtmfd_data_verion.json"
+    url_version = "https://raw.githubusercontent.com/Sergey-Titkov/WT-MFD/main/wtmfd_data_version.json"
     url_data = "https://raw.githubusercontent.com/Sergey-Titkov/WT-MFD/main/wtmfd_data.json"
     try:
         # Скачиваем файл
@@ -702,13 +702,13 @@ def download_file_from_github():
         remote_version = version.parse(json.loads(response.text)["Version"])
 
         # Читаем локальную версию
-        with open('wtmfd_data_verion.json', 'r', encoding="utf-8") as file:
+        with open('wtmfd_data_version.json', 'r', encoding="utf-8") as file:
             local_version = version.parse(json.load(file)["Version"])
 
         # У нас новые данные по флайт модели, обновляемся
         if remote_version > local_version:
             shutil.copy2('wtmfd_data.json', 'wtmfd_data_old.json')
-            shutil.copy2('wtmfd_data_verion.json', 'wtmfd_data_verion_old.json')
+            shutil.copy2('wtmfd_data_version.json', 'wtmfd_data_version_old.json')
 
             response = requests.get(url_data, stream=True)
             response.raise_for_status()  # Проверяем на ошибки HTTP
@@ -718,7 +718,7 @@ def download_file_from_github():
 
             response = requests.get(url_version, stream=True)
             response.raise_for_status()  # Проверяем на ошибки HTTP
-            with open('wtmfd_data_verion', 'wb') as f:
+            with open('wtmfd_data_version', 'wb') as f:
                 for chunk in response.iter_content(chunk_size=8192):
                     f.write(chunk)
             logging.info(f'Файлы данных обновлены до версии: {remote_version}')
