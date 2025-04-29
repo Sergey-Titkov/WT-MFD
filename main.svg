@@ -3,6 +3,12 @@
 
 <rect x="0" y="0" width="1020" height="575" stroke="rgb(0, 157, 2)" fill="transparent" stroke-width="2"/>
 
+<!--
+<text style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 20px; font-weight: 500; white-space: pre;" x="40" y="55" data-sensor-name="MNE" data-sensor-text-format=".2f" text-anchor="middle" >999</text>
+<text style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 20px; font-weight: 500; white-space: pre;" x="40" y="75" data-sensor-name="VNE, km/h" data-sensor-text-format=".0f" text-anchor="middle" >999</text>
+-->
+
+
 <text style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 50px; font-weight: 500; white-space: pre;" x="510" y="55" id="sens_text01" data-sensor-name="compass" data-sensor-text-format=".0f" text-anchor="middle" >999</text>
 
 <rect x="249" y="189" width="530" height="130" stroke="rgb(0, 133, 0)" fill="transparent" stroke-width="5"/>
