@@ -1,19 +1,19 @@
 import sys
 import logging
 from datetime import datetime
-
+import os
+import shutil
 from PyQt5 import QtCore
 from PyQt5.QtGui import QPainter
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGraphicsView, QGraphicsScene
 from PyQt5.QtSvg import QSvgRenderer, QGraphicsSvgItem
 from PyQt5.QtCore import Qt, QSettings, QByteArray, QObject, QThread
-# import xml.etree.ElementTree as etree
 from lxml import etree
 from WarThunder import telemetry
 import copy
 import json
 
-version = '1.0.0'
+version = '1.0.1'
 
 
 class BrowserWT(QObject):
@@ -86,28 +86,28 @@ class MainWindow(QMainWindow):
         else:
             self.hide_element(indicator)
 
-    def approximation(self, vfe_values, x):
+    def approximation(self, arrays_values, x):
         """
-        Есть график зависимости критической скорости для закрылок от величина на сколько они выпущены
+        Есть график зависимости чего то от чего то. Например: критической скорости закрылок от величина на сколько они выпущены
         Граифик имеет вид: [0.3, 814.0], [0.5, 555.0], [1.0, 416.4] где первое число это позиция закрылок, второе скорость.
-        и вот по этой ломаной, по известному x определеям y
+        Вот по этой ломаной, по известному x определеям y
         Если x за пределами кривой то возращаем первое или последнее значение y
-        :param vfe_values: массив с данными по кривой
+        :param arrays_values: массив с данными по кривой
         :param x: значение x в процентах
         :return: значние y
         """
         y = 0
-        if x < vfe_values[0][0]*100:
-            y = vfe_values[0][1]
+        if x < arrays_values[0][0]*100:
+            y = arrays_values[0][1]
         else:
-            if x > vfe_values[-1][0]*100:
-                y = vfe_values[-1][1]
+            if x > arrays_values[-1][0]*100:
+                y = arrays_values[-1][1]
             else:
-                for i in range(0, len(vfe_values)):
-                    x1 = int(vfe_values[i][0] * 100)
-                    y1 = vfe_values[i][1]
-                    x2 = int(vfe_values[i + 1][0] * 100)
-                    y2 = vfe_values[i + 1][1]
+                for i in range(0, len(arrays_values)):
+                    x1 = int(arrays_values[i][0] * 100)
+                    y1 = arrays_values[i][1]
+                    x2 = int(arrays_values[i + 1][0] * 100)
+                    y2 = arrays_values[i + 1][1]
                     if x1 <= x <= x2:
                         y = ((y2 - y1) / (x2 - x1)) * (x - x1) + y1
                         break
@@ -488,7 +488,7 @@ class MainWindow(QMainWindow):
                 with open('wtmfd_data.json', 'r', encoding="utf-8") as file:
                     self.fm_data.update(json.load(file))
             except Exception as e:
-                logging.warning(f'При загрузке данных из флайт модели возникла ошибка: {e} ')
+                logging.error(f'При загрузке данных из флайт модели возникла ошибка: {e} ')
 
             # Инициализируем общие переменные
             self.sensor_has_error = []
@@ -501,6 +501,7 @@ class MainWindow(QMainWindow):
             self.setCentralWidget(self.view)
 
             # Загрузка SVG-изображения
+            self.check_and_copy_svg()
             self.renderer = QSvgRenderer(self.file_path)
             if not self.renderer.isValid():
                 raise ValueError("Ошибка загрузки SVG-файла")
@@ -597,38 +598,58 @@ class MainWindow(QMainWindow):
         :param object: Массив с телеметрией из WT
         """
         # Обогащаем данные телеметрии данными из флайт модели и данными полученными на основании расчетов
-        telem = None
-        if object is not None:
-            telem = object.copy()
-            if 'radio_altitude' in telem:
-                # Вычислям радио высоту в метрах
-                telem['radio_altitude_m'] = float(telem['radio_altitude']) * 0.3048
+        try:
+            telem = None
+            if object is not None:
+                telem = object.copy()
+                if 'radio_altitude' in telem:
+                    # Вычислям радио высоту в метрах
+                    telem['radio_altitude_m'] = float(telem['radio_altitude']) * 0.3048
 
-            if 'type' in telem:
-                plane_id = telem['type']
-                if plane_id in self.fm_data:
-                    telem['VNE'] = self.fm_data[plane_id]['VNE']
-                    telem['MNE'] = self.fm_data[plane_id]['MNE']
-                    telem['Name'] = self.fm_data[plane_id]['Name']['English']
-                    telem['Length'] = self.fm_data[plane_id]['Length']
-                    telem['WingSpan'] = self.fm_data[plane_id]['WingSpan']
-                    telem['WingArea'] = self.fm_data[plane_id]['WingArea']
-                    telem['EmptyMass'] = self.fm_data[plane_id]['EmptyMass']
-                    telem['MaxFuelMass'] = self.fm_data[plane_id]['MaxFuelMass']
-                    telem['VLO'] = self.fm_data[plane_id]['VLO']
-                    telem['Flaps position'] = self.fm_data[plane_id]['Flaps']
-                    telem['VFE'] = self.fm_data[plane_id]['VFE']
-                    telem['CritWingOverload'] = self.fm_data[plane_id]['CritWingOverload']
-                    telem['NumEngines'] = self.fm_data[plane_id]['NumEngines']
-                    telem['RPMMin'] = self.fm_data[plane_id]['RPM']['RPMMin']
-                    telem['RPMMax'] = self.fm_data[plane_id]['RPM']['RPMMax']
-                    telem['RPMMaxAllowed'] = self.fm_data[plane_id]['RPM']['RPMMaxAllowed']
-                    telem['MaxNitro'] = self.fm_data[plane_id]['MaxNitro']
-                    telem['NitroConsum'] = self.fm_data[plane_id]['NitroConsum']
-                    telem['CritAoA'] = self.fm_data[plane_id]['CritAoA']
+                if 'type' in telem:
+                    plane_id = telem['type']
+                    if plane_id in self.fm_data:
+                        telem['Name'] = self.fm_data[plane_id]['Name']['English']
+                        telem['Length'] = self.fm_data[plane_id]['Length']
+                        telem['WingSpan'] = self.fm_data[plane_id]['WingSpan']
+                        telem['WingArea'] = self.fm_data[plane_id]['WingArea']
+                        telem['EmptyMass'] = self.fm_data[plane_id]['EmptyMass']
+                        telem['MaxFuelMass'] = self.fm_data[plane_id]['MaxFuelMass']
+                        telem['VLO'] = self.fm_data[plane_id]['VLO']
+                        telem['Flaps position'] = self.fm_data[plane_id]['Flaps']
+                        telem['VFE'] = self.fm_data[plane_id]['VFE']
+                        telem['CritWingOverload'] = self.fm_data[plane_id]['CritWingOverload']
+                        telem['NumEngines'] = self.fm_data[plane_id]['NumEngines']
+                        telem['RPMMin'] = self.fm_data[plane_id]['RPM']['RPMMin']
+                        telem['RPMMax'] = self.fm_data[plane_id]['RPM']['RPMMax']
+                        telem['RPMMaxAllowed'] = self.fm_data[plane_id]['RPM']['RPMMaxAllowed']
+                        telem['MaxNitro'] = self.fm_data[plane_id]['MaxNitro']
+                        telem['NitroConsum'] = self.fm_data[plane_id]['NitroConsum']
+                        telem['CritAoA'] = self.fm_data[plane_id]['CritAoA']
 
-        self.add_vne_persent(telem)
-        self.update_mfd(telem)
+                        self.add_critical_speed('MNE', array_value=self.fm_data[plane_id]['MNE'], telem=telem)
+                        self.add_critical_speed('VNE, km/h', array_value=self.fm_data[plane_id]['VNE'], telem=telem)
+                        self.add_vne_persent(telem)
+
+                        self.update_mfd(telem)
+        except Exception as e:
+            logging.error(e)
+
+    def add_critical_speed(self,name,array_value,telem):
+        """ Добавляем в телеметрию параметр критической скорости указанный в name
+        Для самолетов с изменяемой стреловидностью крыла, критическая скорость возвращается с учетом стреловидности
+        :name: Имя параметра для добавления в телеметрию
+        :array_value: График зависимости критической скорости от стреловидности
+        :param telem: Словарь с данными телемерии
+        """
+        if len(array_value) > 0:
+            # Стреловидности у нас нет
+            if len(array_value) == 1:
+                telem[name] = array_value[0][1]
+            else:
+                # Отрабатываем по индикатору
+                if 'wing_sweep_indicator' in telem:
+                    telem[name] = self.approximation(array_value,telem['wing_sweep_indicator']*100)
 
     def add_vne_persent(self, telem):
         """ Добавляем в телеметрию параметр VNE % - процент от критической скорости
@@ -637,18 +658,32 @@ class MainWindow(QMainWindow):
           - M / MNE
         Какое значение больше то и добавляем в телеметрию
         :param telem: Словарь с данными телемерии
-        :return:
         """
         try:
-            if telem is not None and 'VNE' in telem and 'MNE' in telem:
-                vne_percent = telem['IAS, km/h'] / telem['VNE'][0][1]
-                mne_percent = telem['M'] / telem['MNE'][0][1]
+            if telem is not None and 'VNE, km/h' in telem and 'MNE' in telem:
+                vne_percent = telem['IAS, km/h'] / telem['VNE, km/h']
+                mne_percent = telem['M'] / telem['MNE']
                 result_percent = mne_percent
                 if vne_percent > mne_percent:
                     result_percent = vne_percent
                 telem['VNE %'] = f'{float(result_percent * 100):.0f}'
         except Exception as e:
-            logging.warning(f'{e} ')
+            logging.error(e)
+
+    def check_and_copy_svg(self):
+        """
+        Что бы случайно не испортить людям их файл main.svg, теперь в дистрибутиве будет _main.svg который будет копироваться main.svg в случае если его нет
+        """
+        # Проверяем существование файла main.svg
+        if not os.path.exists('main.svg'):
+            try:
+                # Копируем _main.svg в main.svg
+                shutil.copy2('_main.svg', 'main.svg')
+                logging.warning("Файл _main.svg успешно скопирован в main.svg")
+            except FileNotFoundError:
+                logging.error("Ошибка: файл _main.svg не найден")
+            except Exception as e:
+                logging.error(f"Произошла ошибка при копировании: {e}")
 
 
 if __name__ == "__main__":
