@@ -130,6 +130,8 @@
                             }'
             >0000</text>
         </g>
+
+    <!-- Критическая скорость для шасси -->
         <g>
             <text x="6" y="276">КСЗП</text>
             <text x="217" y="276" text-anchor="end"
@@ -167,7 +169,10 @@
         >000000</text>
     </g>
 
-
-    <!-- Критическая скорость для шасси -->
-
+    <!-- Часы -->
+    <text x="935" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  data-sensor-name="clock_hour" data-sensor-text-format="02.0f" text-anchor="start" >99</text>
+    <text x="955" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  >:</text>
+    <text x="965" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  data-sensor-name="clock_min" data-sensor-text-format="02.0f" text-anchor="start" >99</text>
+    <text x="985" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  text-anchor="start" >:</text>
+    <text x="995" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  data-sensor-name="clock_sec" data-sensor-text-format="02.0f" text-anchor="start">99</text>
 </svg>

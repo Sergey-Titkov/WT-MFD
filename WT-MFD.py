@@ -14,9 +14,10 @@ import copy
 import json
 import requests
 from packaging import version
+from WarThunder.telemetry import EVENTS_CHUNK
 
-version_application = '1.0.1'
-
+version_application = '1.0.2'
+LOG_PATH = r'./log/'
 
 class BrowserWT(QObject):
     """
@@ -24,7 +25,7 @@ class BrowserWT(QObject):
     Работает в нитке.
     """
     TelemInterface = telemetry.TelemInterface()
-    telemetrySignal = QtCore.pyqtSignal(object)
+    telemetrySignal = QtCore.pyqtSignal(object, object)
 
     def run(self):
         """
@@ -32,21 +33,24 @@ class BrowserWT(QObject):
         :return:
         """
         while True:
-            QtCore.QThread.msleep(100)
-            full_telemetry = None
-
-            # Пока без событий и чата
-            if self.TelemInterface.get_telemetry(comments=False, events=False):
-                full_telemetry = self.TelemInterface.full_telemetry
-                current_time = datetime.now()
-                # Вот зачем так я не помню вообще
-                full_telemetry['clock_hour'] = current_time.hour
-                full_telemetry['clock_min'] = current_time.minute
-                full_telemetry['clock_sec'] = current_time.second
-                full_telemetry['clock_microsecond'] = current_time.microsecond
-            # Посылаю сигнал, что готово
-            self.telemetrySignal.emit(full_telemetry)
-
+            try:
+                QtCore.QThread.msleep(100)
+                full_telemetry = None
+                battle_log_array = None
+                # Пока без событий и чата
+                if self.TelemInterface.get_telemetry(comments=False, events=True, events_mode=EVENTS_CHUNK):
+                    full_telemetry = self.TelemInterface.full_telemetry
+                    current_time = datetime.now()
+                    # Вот зачем так я не помню вообще
+                    full_telemetry['clock_hour'] = current_time.hour
+                    full_telemetry['clock_min'] = current_time.minute
+                    full_telemetry['clock_sec'] = current_time.second
+                    full_telemetry['clock_microsecond'] = current_time.microsecond
+                    battle_log_array = self.TelemInterface.events['damage']
+                # Посылаю сигнал, что готово
+                self.telemetrySignal.emit(full_telemetry, battle_log_array)
+            except Exception as e:
+                logging.error(f"Ошибка: {e}")
 
 class MainWindow(QMainWindow):
     """
@@ -76,7 +80,7 @@ class MainWindow(QMainWindow):
             text_node = f'{int(flaps_landing_critical_speed)}'
             key_name = 'flaps_up'
 
-            prev_value = int(telemetry['Flaps position'].get('Takeoff',telemetry['Flaps position'].get('Combat',0)))
+            prev_value = int(telemetry['Flaps position'].get('Takeoff', telemetry['Flaps position'].get('Combat', 0)))
             if prev_value < flaps_percent <= flaps_landing_percent:
                 text_node = f'{int(value)}'
                 key_name = 'flaps_down'
@@ -99,10 +103,10 @@ class MainWindow(QMainWindow):
         :return: значние y
         """
         y = 0
-        if x < arrays_values[0][0]*100:
+        if x < arrays_values[0][0] * 100:
             y = arrays_values[0][1]
         else:
-            if x > arrays_values[-1][0]*100:
+            if x > arrays_values[-1][0] * 100:
                 y = arrays_values[-1][1]
             else:
                 for i in range(0, len(arrays_values)):
@@ -196,7 +200,7 @@ class MainWindow(QMainWindow):
             if x > int(vfe_values[0][0] * 100):
                 y = self.approximation(vfe_values, x)
             else:
-              y = vfe_values[0][1]
+                y = vfe_values[0][1]
             # Закрылки убраны - показываем критическую скорость
             value = int(100 * ias / y)
             text_node = f'{int(y)}'
@@ -483,6 +487,11 @@ class MainWindow(QMainWindow):
             """
             super().__init__()
 
+            self.is_match_begin = False
+            self.enable_battle_log = False
+            self.battle_log_name = ''
+            self.battle_log_last_time = -1
+
             # Если не удалось загрузить данные по флайт модели, то дальше будем работать с пустым словарём
             self.fm_data = {}
             try:
@@ -566,7 +575,7 @@ class MainWindow(QMainWindow):
         settings = QSettings("settings.ini", QSettings.IniFormat)
         geometry = settings.value("geometry", QByteArray())
         window_state = settings.value("window_state", Qt.WindowNoState)
-
+        self.enable_battle_log = settings.value("battle_log", False, type=bool)
         if geometry.isEmpty():
             self.resize(400, 300)
             self.center_window()
@@ -593,22 +602,56 @@ class MainWindow(QMainWindow):
         frame.moveCenter(screen_center)
         self.move(frame.topLeft())
 
-    @QtCore.pyqtSlot(object)
-    def telemetry_processor(self, object):
+    def sec_to_time(self, seconds_in)-> str:
+        hours = seconds_in // 3600
+        remaining_seconds = seconds_in % 3600
+        minutes = remaining_seconds // 60
+        seconds = remaining_seconds % 60
+        if hours == 0:
+            result = f"{minutes}:{seconds}"
+        else:
+            result = f"{hours}:{minutes}:{seconds}"
+        return result
+
+
+
+    @QtCore.pyqtSlot(object, object)
+    def telemetry_processor(self, object, battle_log_array):
         """
         Приемник сообщений из нитки отвечающий за чтение данных из WT
         :param object: Массив с телеметрией из WT
+        :param battle_log_array: Массив с сообщениями из батл лога.
         """
         # Обогащаем данные телеметрии данными из флайт модели и данными полученными на основании расчетов
         try:
             telem = None
             if object is not None:
+                # Матч начался
+                if not self.is_match_begin:
+                    self.is_match_begin = True
+
                 telem = object.copy()
                 if 'radio_altitude' in telem:
                     # Вычислям радио высоту в метрах
                     telem['radio_altitude_m'] = float(telem['radio_altitude']) * 0.3048
 
                 if 'type' in telem:
+                    # Если самолет есть, значит матч явно идёт :)
+
+                    if self.enable_battle_log and battle_log_array is not None and len(battle_log_array)>0:
+                        if self.battle_log_name == '':
+                            self.battle_log_name = fr'{LOG_PATH}\battle log {datetime.now().strftime('%Y.%m.%d %H-%M-%S')}.log'
+
+                        for item in battle_log_array:
+                            # Значит точно началась новая битва
+                            if self.battle_log_last_time > item['time']:
+                                self.battle_log_name = fr'{LOG_PATH}\battle log {datetime.now().strftime('%Y.%m.%d %H-%M-%S')}.log'
+
+                            with open(self.battle_log_name, 'a', encoding="utf-8") as file:
+                                file.write(f'{item['current_time']}\t{self.sec_to_time(item['time'])}\t{item['msg']}\n')
+
+                            self.battle_log_last_time = item['time']
+
                     plane_id = telem['type']
                     if plane_id in self.fm_data:
                         telem['Name'] = self.fm_data[plane_id]['Name']['English']
@@ -633,11 +676,14 @@ class MainWindow(QMainWindow):
                         self.add_critical_speed('VNE, km/h', array_value=self.fm_data[plane_id]['VNE'], telem=telem)
                         self.add_vne_persent(telem)
 
-                        self.update_mfd(telem)
+
+            else:
+                self.is_match_begin = False
+            self.update_mfd(telem)
         except Exception as e:
             logging.error(e)
 
-    def add_critical_speed(self,name,array_value,telem):
+    def add_critical_speed(self, name, array_value, telem):
         """ Добавляем в телеметрию параметр критической скорости указанный в name
         Для самолетов с изменяемой стреловидностью крыла, критическая скорость возвращается с учетом стреловидности
         :name: Имя параметра для добавления в телеметрию
@@ -651,7 +697,7 @@ class MainWindow(QMainWindow):
             else:
                 # Отрабатываем по индикатору
                 if 'wing_sweep_indicator' in telem:
-                    telem[name] = self.approximation(array_value,telem['wing_sweep_indicator']*100)
+                    telem[name] = self.approximation(array_value, telem['wing_sweep_indicator'] * 100)
 
     def add_vne_persent(self, telem):
         """ Добавляем в телеметрию параметр VNE % - процент от критической скорости
@@ -686,6 +732,7 @@ class MainWindow(QMainWindow):
                 logging.error("Ошибка: файл _main.svg не найден")
             except Exception as e:
                 logging.error(f"Произошла ошибка при копировании: {e}")
+
 
 def download_file_from_github():
     """
@@ -731,7 +778,9 @@ def download_file_from_github():
         logging.error(f"Ошибка: {e}")
     return
 
+
 if __name__ == "__main__":
+    os.makedirs(LOG_PATH, exist_ok=True)
     download_file_from_github()
     app = QApplication(sys.argv)
     window = MainWindow()
