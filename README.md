@@ -193,11 +193,32 @@ C:\Users\user>
  - blister4":0.0,
  - blister5":0.0,
  - blister6":0.0,
- - clock_hour":22,
+## clock_hour
+Текущее время, часы.
+Рекомендованный формат:  data-sensor-text-format="02.0f"
  - clock_microsecond":264759,
- - clock_min":18,
- - clock_sec":11,
- - compass":264.01004,
+## clock_min
+Текущее время, минуты.
+Рекомендованный формат:  data-sensor-text-format="02.0f"
+
+## clock_sec
+Текущее время, секунды
+Рекомендованный формат:  data-sensor-text-format="02.0f"
+Если хочется часы:
+```xml
+    <!-- Часы -->
+    <text x="935" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  data-sensor-name="clock_hour" data-sensor-text-format="02.0f" text-anchor="start" >99</text>
+    <text x="955" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  >:</text>
+    <text x="965" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  data-sensor-name="clock_min" data-sensor-text-format="02.0f" text-anchor="start" >99</text>
+    <text x="985" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  text-anchor="start" >:</text>
+    <text x="995" y="20" style="fill: rgb(67, 230, 103); font-family: Consolas, sans-serif; font-size: 18px; font-weight: 500; white-space: pre;"  data-sensor-name="clock_sec" data-sensor-text-format="02.0f" text-anchor="start">99</text>
+```
+
+## compass
+Компас, угол от 0 до 360.
+На французах не показывается.
+Рекомендованный формат: data-sensor-text-format=".0f", от десятых толку нет.
+
  - compass1":264.01004,
  - CritAoA":[      [         0,         32.0,         -20.0,         30.0,         -22.0      ]   ],
  - CritWingOverload":[      [         0,         -530000.0,         1600000.0      ]   ],
