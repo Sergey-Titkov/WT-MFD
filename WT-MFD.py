@@ -16,7 +16,9 @@ import requests
 from packaging import version
 from WarThunder.telemetry import EVENTS_CHUNK
 
-version_application = '1.0.2'
+from PyQt5.QtCore import QUrl
+
+version_application = '1.0.3'
 LOG_PATH = r'./log/'
 
 class BrowserWT(QObject):
@@ -143,7 +145,7 @@ class MainWindow(QMainWindow):
         else:
             # Проверяем входит ли элемент в группу
             group = indicator.getparent()
-            if group is not None and group.tag.split('}')[-1] == 'g':
+            if group is not None and group.tag.split('}')[-1] == 'g' and group.id:
                 # Скрываем всю группу
                 group.set('display', 'none')
             else:
@@ -513,7 +515,10 @@ class MainWindow(QMainWindow):
 
             # Загрузка SVG-изображения
             self.check_and_copy_svg()
+
             self.renderer = QSvgRenderer(self.file_path)
+
+
             if not self.renderer.isValid():
                 raise ValueError("Ошибка загрузки SVG-файла")
 
@@ -607,10 +612,7 @@ class MainWindow(QMainWindow):
         remaining_seconds = seconds_in % 3600
         minutes = remaining_seconds // 60
         seconds = remaining_seconds % 60
-        if hours == 0:
-            result = f"{minutes}:{seconds}"
-        else:
-            result = f"{hours}:{minutes}:{seconds}"
+        result = f"{hours:02.0f}:{minutes:02.0f}:{seconds:02.0f}"
         return result
 
 
@@ -648,7 +650,7 @@ class MainWindow(QMainWindow):
                                 self.battle_log_name = fr'{LOG_PATH}\battle log {datetime.now().strftime('%Y.%m.%d %H-%M-%S')}.log'
 
                             with open(self.battle_log_name, 'a', encoding="utf-8") as file:
-                                file.write(f'{item['current_time']}\t{self.sec_to_time(item['time'])}\t{item['msg']}\n')
+                                file.write(f'{item['current_time']}\t{item['time']}\t{self.sec_to_time(item['time'])}\t{item['msg']}\n')
 
                             self.battle_log_last_time = item['time']
 
