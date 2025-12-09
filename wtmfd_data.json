@@ -21879,7 +21879,7 @@
     "su_30mkm": {
         "PlaneID": "su_30mkm",
         "Name": {
-            "English": "Su-30MKM"
+            "English": "▄Su-30MKM"
         },
         "fmFile": "fm/su_30mkm.blkx",
         "Type": "fighter",
@@ -21897,7 +21897,7 @@
                 61.98
             ]
         ],
-        "EmptyMass": 18830,
+        "EmptyMass": 18450,
         "MaxFuelMass": 9400.0,
         "VNE": [
             [
@@ -32641,7 +32641,7 @@
             [
                 0,
                 -230000.0,
-                610000.0
+                630000.0
             ]
         ],
         "NumEngines": 1,
@@ -71834,6 +71834,80 @@
                 -23.0,
                 26.0,
                 -21.0
+            ]
+        ]
+    },
+    "su_30mkk": {
+        "PlaneID": "su_30mkk",
+        "Name": {
+            "English": "␗Su-30MKM"
+        },
+        "fmFile": "fm/su_30mkk.blkx",
+        "Type": "fighter",
+        "FmID": "su_30mkk",
+        "Length": 21.93,
+        "WingSpan": [
+            [
+                0,
+                14.7
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                61.98
+            ]
+        ],
+        "EmptyMass": 17520,
+        "MaxFuelMass": 9400.0,
+        "VNE": [
+            [
+                0,
+                1540
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.35
+            ]
+        ],
+        "VLO": 700.0,
+        "Flaps": {
+            "Takeoff": 90.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                600.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -550000.0,
+                1450000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 8250,
+            "RPMMax": 13300,
+            "RPMMaxAllowed": 14300
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                30.0,
+                -20.0,
+                29.0,
+                -22.0
             ]
         ]
     },
