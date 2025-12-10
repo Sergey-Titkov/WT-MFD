@@ -25296,6 +25296,84 @@
             ]
         ]
     },
+    "mb_326b": {
+        "PlaneID": "mb_326b",
+        "Name": {
+            "English": "MB-326B"
+        },
+        "fmFile": "fm/mb_326b.blkx",
+        "Type": "assault",
+        "FmID": "mb_326b",
+        "Length": 10.67,
+        "WingSpan": [
+            [
+                0,
+                10.85
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                20.4
+            ]
+        ],
+        "EmptyMass": 3628,
+        "MaxFuelMass": 1827.0,
+        "VNE": [
+            [
+                0,
+                952
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.85
+            ]
+        ],
+        "VLO": 331.0,
+        "Flaps": {
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.1,
+                570.0
+            ],
+            [
+                0.33,
+                331.0
+            ],
+            [
+                1.0,
+                273.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -81000.0,
+                239000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 5500,
+            "RPMMax": 13760,
+            "RPMMaxAllowed": 14500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                17.1,
+                -14.0,
+                15.5,
+                -17.0
+            ]
+        ]
+    },
     "spitfire_fr_mk14e_belgium": {
         "PlaneID": "spitfire_fr_mk14e_belgium",
         "Name": {
@@ -83442,17 +83520,17 @@
             ]
         ],
         "EmptyMass": 18850,
-        "MaxFuelMass": 14900.0,
+        "MaxFuelMass": 19200.0,
         "VNE": [
             [
                 0,
-                1210
+                1320
             ]
         ],
         "MNE": [
             [
                 0,
-                3.0
+                3.04225
             ]
         ],
         "VLO": 700.0,
@@ -83472,8 +83550,8 @@
         "CritWingOverload": [
             [
                 0,
-                -500000.0,
-                1250000.0
+                -400000.0,
+                1100000.0
             ]
         ],
         "NumEngines": 2,
@@ -96047,6 +96125,80 @@
                 -15.4,
                 14.8,
                 -14.2
+            ]
+        ]
+    },
+    "su_30sm2": {
+        "PlaneID": "su_30sm2",
+        "Name": {
+            "English": "Su-30SM2"
+        },
+        "fmFile": "fm/su_30sm2.blkx",
+        "Type": "fighter",
+        "FmID": "su_30sm2",
+        "Length": 21.93,
+        "WingSpan": [
+            [
+                0,
+                14.7
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                61.98
+            ]
+        ],
+        "EmptyMass": 18830,
+        "MaxFuelMass": 9400.0,
+        "VNE": [
+            [
+                0,
+                1540
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.1
+            ]
+        ],
+        "VLO": 700.0,
+        "Flaps": {
+            "Takeoff": 90.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                600.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -530000.0,
+                1600000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 8250,
+            "RPMMax": 13300,
+            "RPMMaxAllowed": 15300
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                32.0,
+                -20.0,
+                30.0,
+                -22.0
             ]
         ]
     },
