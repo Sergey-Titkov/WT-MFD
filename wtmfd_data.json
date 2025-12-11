@@ -25304,11 +25304,11 @@
         "fmFile": "fm/mb_326b.blkx",
         "Type": "assault",
         "FmID": "mb_326b",
-        "Length": 10.67,
+        "Length": 10.65,
         "WingSpan": [
             [
                 0,
-                10.85
+                10.56
             ]
         ],
         "WingArea": [
@@ -25317,18 +25317,18 @@
                 20.4
             ]
         ],
-        "EmptyMass": 3628,
-        "MaxFuelMass": 1827.0,
+        "EmptyMass": 2260,
+        "MaxFuelMass": 1360.0,
         "VNE": [
             [
                 0,
-                952
+                865
             ]
         ],
         "MNE": [
             [
                 0,
-                0.85
+                0.84
             ]
         ],
         "VLO": 331.0,
@@ -25353,13 +25353,13 @@
             [
                 0,
                 -81000.0,
-                239000.0
+                123480.0
             ]
         ],
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 5500,
-            "RPMMax": 13760,
+            "RPMMax": 13800,
             "RPMMaxAllowed": 14500
         },
         "MaxNitro": 0.0,
@@ -49425,7 +49425,7 @@
     "h-75m_china": {
         "PlaneID": "h-75m_china",
         "Name": {
-            "English": "H-75M (H-75A-8)"
+            "English": "␗H-75M (H-75A-8)"
         },
         "fmFile": "fm/h_75m_china.blkx",
         "Type": "fighter",
@@ -62677,7 +62677,7 @@
                 45.6
             ]
         ],
-        "EmptyMass": 9300,
+        "EmptyMass": 9800,
         "MaxFuelMass": 9560.0,
         "VNE": [
             [
@@ -113769,6 +113769,80 @@
                 -17.7,
                 16.0,
                 -15.0
+            ]
+        ]
+    },
+    "mig_29n": {
+        "PlaneID": "mig_29n",
+        "Name": {
+            "English": "▄MiG-29 (9-12СД)"
+        },
+        "fmFile": "fm/mig_29_9_12g.blkx",
+        "Type": "fighter",
+        "FmID": "mig_29_9_12g",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                11.36
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                37.98
+            ]
+        ],
+        "EmptyMass": 10950,
+        "MaxFuelMass": 4478.0,
+        "VNE": [
+            [
+                0,
+                1575
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.35
+            ]
+        ],
+        "VLO": 700.0,
+        "Flaps": {
+            "Takeoff": 90.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1218.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -390000.0,
+                910000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 5500,
+            "RPMMax": 8350,
+            "RPMMaxAllowed": 8950
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                30.0,
+                -20.0,
+                29.0,
+                -22.0
             ]
         ]
     },
