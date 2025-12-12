@@ -17367,9 +17367,9 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
-            "RPMMaxAllowed": 15300
+            "RPMMaxAllowed": 14300
         },
         "MaxNitro": 0.0,
         "NitroConsum": 0.0,
@@ -21934,9 +21934,9 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
-            "RPMMaxAllowed": 15300
+            "RPMMaxAllowed": 14300
         },
         "MaxNitro": 0.0,
         "NitroConsum": 0.0,
@@ -22890,7 +22890,7 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
             "RPMMaxAllowed": 14300
         },
@@ -25317,7 +25317,7 @@
                 20.4
             ]
         ],
-        "EmptyMass": 2260,
+        "EmptyMass": 2200,
         "MaxFuelMass": 1360.0,
         "VNE": [
             [
@@ -25353,7 +25353,7 @@
             [
                 0,
                 -81000.0,
-                123480.0
+                143480.0
             ]
         ],
         "NumEngines": 1,
@@ -32724,7 +32724,7 @@
         ],
         "NumEngines": 1,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13700,
             "RPMMaxAllowed": 14700
         },
@@ -39567,7 +39567,7 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
             "RPMMaxAllowed": 14300
         },
@@ -39780,7 +39780,7 @@
         ],
         "NumEngines": 1,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
             "RPMMaxAllowed": 14300
         },
@@ -45110,7 +45110,7 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
             "RPMMaxAllowed": 14300
         },
@@ -52761,7 +52761,7 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
             "RPMMaxAllowed": 14300
         },
@@ -55557,7 +55557,7 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
             "RPMMaxAllowed": 14300
         },
@@ -61043,6 +61043,69 @@
                 -13.0,
                 14.0,
                 -12.0
+            ]
+        ]
+    },
+    "saab_jas39e": {
+        "PlaneID": "saab_jas39e",
+        "Name": {
+            "English": "JAS39E Gripen"
+        },
+        "fmFile": "fm/saab_jas39e.blkx",
+        "Type": "fighter",
+        "FmID": "saab_jas39e",
+        "Length": 14.1,
+        "WingSpan": [
+            [
+                0,
+                8.4
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                30.0
+            ]
+        ],
+        "EmptyMass": 6750,
+        "MaxFuelMass": 5013.0,
+        "VNE": [
+            [
+                0,
+                1543
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.0
+            ]
+        ],
+        "VLO": 620.0,
+        "Flaps": {},
+        "VFE": [],
+        "CritWingOverload": [
+            [
+                0,
+                -250000.0,
+                450000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13350,
+            "RPMMaxAllowed": 15000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                37.0,
+                -32.0,
+                36.0,
+                -31.0
             ]
         ]
     },
@@ -71973,7 +72036,7 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
             "RPMMaxAllowed": 14300
         },
@@ -90158,7 +90221,7 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
             "RPMMaxAllowed": 14300
         },
@@ -93852,9 +93915,9 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
+            "RPMMin": 9400,
             "RPMMax": 13300,
-            "RPMMaxAllowed": 15300
+            "RPMMaxAllowed": 14300
         },
         "MaxNitro": 0.0,
         "NitroConsum": 0.0,
@@ -96149,7 +96212,7 @@
                 61.98
             ]
         ],
-        "EmptyMass": 18830,
+        "EmptyMass": 18800,
         "MaxFuelMass": 9400.0,
         "VNE": [
             [
@@ -96186,8 +96249,8 @@
         ],
         "NumEngines": 2,
         "RPM": {
-            "RPMMin": 8250,
-            "RPMMax": 13300,
+            "RPMMin": 8550,
+            "RPMMax": 13800,
             "RPMMaxAllowed": 15300
         },
         "MaxNitro": 0.0,
