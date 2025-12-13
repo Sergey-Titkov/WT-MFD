@@ -26041,8 +26041,8 @@
                 37.98
             ]
         ],
-        "EmptyMass": 11340,
-        "MaxFuelMass": 7462.0,
+        "EmptyMass": 11710,
+        "MaxFuelMass": 7162.0,
         "VNE": [
             [
                 0,
@@ -61067,8 +61067,8 @@
                 30.0
             ]
         ],
-        "EmptyMass": 6750,
-        "MaxFuelMass": 5013.0,
+        "EmptyMass": 7120,
+        "MaxFuelMass": 6073.0,
         "VNE": [
             [
                 0,
@@ -61087,15 +61087,15 @@
         "CritWingOverload": [
             [
                 0,
-                -250000.0,
-                450000.0
+                -270000.0,
+                480000.0
             ]
         ],
         "NumEngines": 1,
         "RPM": {
-            "RPMMin": 8500,
-            "RPMMax": 13350,
-            "RPMMaxAllowed": 15000
+            "RPMMin": 10350,
+            "RPMMax": 17045,
+            "RPMMaxAllowed": 18045
         },
         "MaxNitro": 0.0,
         "NitroConsum": 0.0,
@@ -71981,7 +71981,7 @@
     "su_30mkk": {
         "PlaneID": "su_30mkk",
         "Name": {
-            "English": "␗Su-30MKM"
+            "English": "␗Su-30MKK"
         },
         "fmFile": "fm/su_30mkk.blkx",
         "Type": "fighter",
