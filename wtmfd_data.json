@@ -30115,7 +30115,7 @@
                 2.5
             ]
         ],
-        "VLO": 426.0,
+        "VLO": 500.0,
         "Flaps": {},
         "VFE": [],
         "CritWingOverload": [
@@ -35635,8 +35635,8 @@
                 19.8
             ]
         ],
-        "EmptyMass": 2963,
-        "MaxFuelMass": 402.48,
+        "EmptyMass": 3117,
+        "MaxFuelMass": 300.0,
         "VNE": [
             [
                 0,
@@ -49443,18 +49443,18 @@
                 21.930000000000003
             ]
         ],
-        "EmptyMass": 2119,
+        "EmptyMass": 1878,
         "MaxFuelMass": 379.7,
         "VNE": [
             [
                 0,
-                770
+                710
             ]
         ],
         "MNE": [
             [
                 0,
-                0.78
+                0.68
             ]
         ],
         "VLO": 290.0,
@@ -49482,8 +49482,8 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 600,
-            "RPMMax": 2500,
-            "RPMMaxAllowed": 3100
+            "RPMMax": 2200,
+            "RPMMaxAllowed": 2850
         },
         "MaxNitro": 0.0,
         "NitroConsum": 0.0,
@@ -62542,7 +62542,7 @@
                 2.5
             ]
         ],
-        "VLO": 426.0,
+        "VLO": 500.0,
         "Flaps": {},
         "VFE": [],
         "CritWingOverload": [
@@ -69983,18 +69983,18 @@
                 21.930000000000003
             ]
         ],
-        "EmptyMass": 2119,
+        "EmptyMass": 1878,
         "MaxFuelMass": 379.7,
         "VNE": [
             [
                 0,
-                770
+                710
             ]
         ],
         "MNE": [
             [
                 0,
-                0.78
+                0.68
             ]
         ],
         "VLO": 290.0,
@@ -70022,8 +70022,8 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 600,
-            "RPMMax": 2500,
-            "RPMMaxAllowed": 3100
+            "RPMMax": 2200,
+            "RPMMaxAllowed": 2850
         },
         "MaxNitro": 0.0,
         "NitroConsum": 0.0,
@@ -76790,7 +76790,7 @@
                 2.5
             ]
         ],
-        "VLO": 426.0,
+        "VLO": 500.0,
         "Flaps": {},
         "VFE": [],
         "CritWingOverload": [
@@ -92112,7 +92112,7 @@
                 2.5
             ]
         ],
-        "VLO": 426.0,
+        "VLO": 500.0,
         "Flaps": {},
         "VFE": [],
         "CritWingOverload": [
