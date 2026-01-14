@@ -13898,7 +13898,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 450,
-            "RPMMax": 2650,
+            "RPMMax": 2750,
             "RPMMaxAllowed": 3100
         },
         "MaxNitro": 0.0,
@@ -33756,7 +33756,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 450,
-            "RPMMax": 2650,
+            "RPMMax": 2750,
             "RPMMaxAllowed": 3100
         },
         "MaxNitro": 0.0,
@@ -37170,7 +37170,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 450,
-            "RPMMax": 2650,
+            "RPMMax": 2750,
             "RPMMaxAllowed": 3100
         },
         "MaxNitro": 0.0,
@@ -48621,7 +48621,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 450,
-            "RPMMax": 2650,
+            "RPMMax": 2750,
             "RPMMaxAllowed": 3100
         },
         "MaxNitro": 0.0,
@@ -59084,7 +59084,7 @@
         "VNE": [
             [
                 0,
-                600
+                560
             ]
         ],
         "MNE": [
@@ -69649,7 +69649,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 450,
-            "RPMMax": 2650,
+            "RPMMax": 2750,
             "RPMMaxAllowed": 3100
         },
         "MaxNitro": 0.0,
@@ -76390,7 +76390,7 @@
         "VNE": [
             [
                 0,
-                600
+                560
             ]
         ],
         "MNE": [
