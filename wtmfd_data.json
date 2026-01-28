@@ -17093,7 +17093,7 @@
     "loire_130": {
         "PlaneID": "loire_130",
         "Name": {
-            "English": "Loire 130С"
+            "English": "Loire 130C"
         },
         "fmFile": "fm/loire_130.blkx",
         "Type": "bomber",
@@ -57817,7 +57817,7 @@
     "c_3604": {
         "PlaneID": "c_3604",
         "Name": {
-            "English": "◌С-3604"
+            "English": "◌C-3604"
         },
         "fmFile": "fm/c_3604.blkx",
         "Type": "assault",
