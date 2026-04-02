@@ -4158,6 +4158,80 @@
             ]
         ]
     },
+    "nt_a_6e_tram": {
+        "PlaneID": "nt_a_6e_tram",
+        "Name": {
+            "English": "A-6E TRAM Intruder"
+        },
+        "fmFile": "fm/a_6e_tram.blkx",
+        "Type": "assault",
+        "FmID": "a_6e_tram",
+        "Length": 16.688,
+        "WingSpan": [
+            [
+                0,
+                16.1544
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                49.135999999999996
+            ]
+        ],
+        "EmptyMass": 12455,
+        "MaxFuelMass": 7229.0,
+        "VNE": [
+            [
+                0,
+                1322
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                1.07
+            ]
+        ],
+        "VLO": 460.0,
+        "Flaps": {
+            "Takeoff": 70.0
+        },
+        "VFE": [
+            [
+                0.1,
+                650.0
+            ],
+            [
+                1.0,
+                460.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -330000.0,
+                940000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 4600,
+            "RPMMax": 12060,
+            "RPMMaxAllowed": 12410
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                23.0,
+                -21.0,
+                22.5,
+                -19.0
+            ]
+        ]
+    },
     "mosquito_tr_mk33": {
         "PlaneID": "mosquito_tr_mk33",
         "Name": {
@@ -27654,6 +27728,141 @@
             ]
         ]
     },
+    "nt_su_24m": {
+        "PlaneID": "nt_su_24m",
+        "Name": {
+            "English": "Su-24M"
+        },
+        "fmFile": "fm/su_24m.blkx",
+        "Type": "assault",
+        "FmID": "su_24m",
+        "Length": 22.67,
+        "WingSpan": [
+            [
+                0.0,
+                17.64
+            ],
+            [
+                0.5,
+                14.7
+            ],
+            [
+                1.0,
+                10.4
+            ]
+        ],
+        "WingArea": [
+            [
+                0.0,
+                55.0
+            ],
+            [
+                0.5,
+                53.0
+            ],
+            [
+                1.0,
+                51.0
+            ]
+        ],
+        "EmptyMass": 22100,
+        "MaxFuelMass": 16440.0,
+        "VNE": [
+            [
+                0.0,
+                945.0
+            ],
+            [
+                0.5,
+                1155.0
+            ],
+            [
+                1.0,
+                1522.0
+            ]
+        ],
+        "MNE": [
+            [
+                0.0,
+                0.9
+            ],
+            [
+                0.5,
+                1.35
+            ],
+            [
+                1.0,
+                1.68
+            ]
+        ],
+        "VLO": 500.0,
+        "Flaps": {
+            "Combat": 30.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                800.0
+            ],
+            [
+                0.33,
+                600.0
+            ],
+            [
+                1.0,
+                500.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0.0,
+                -600000.0,
+                1000000.0
+            ],
+            [
+                0.5,
+                -700000.0,
+                1250000.0
+            ],
+            [
+                1.0,
+                -820000.0,
+                1450000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 3995,
+            "RPMMax": 8550,
+            "RPMMaxAllowed": 9100
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0.0,
+                20.5,
+                -14.0,
+                17.5,
+                -15.0
+            ],
+            [
+                0.5,
+                21.0,
+                -18.0,
+                21.0,
+                -18.0
+            ],
+            [
+                1.0,
+                25.0,
+                -18.0,
+                25.0,
+                -18.0
+            ]
+        ]
+    },
     "saab_a21a_3": {
         "PlaneID": "saab_a21a_3",
         "Name": {
@@ -30078,6 +30287,81 @@
             ]
         ]
     },
+    "tu_95m": {
+        "PlaneID": "tu_95m",
+        "Name": {
+            "English": "Tu-95M"
+        },
+        "fmFile": "fm/nt_tu_95m.blkx",
+        "Type": "bomber",
+        "FmID": "nt_tu_95m",
+        "Length": 46.17,
+        "WingSpan": [
+            [
+                0,
+                50.04
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                283.70000000000005
+            ]
+        ],
+        "EmptyMass": 83122,
+        "MaxFuelMass": 84960.0,
+        "VNE": [
+            [
+                0,
+                690
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.86
+            ]
+        ],
+        "VLO": 450.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.1,
+                520.0
+            ],
+            [
+                1.0,
+                352.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -1400000.0,
+                3100000.0
+            ]
+        ],
+        "NumEngines": 4,
+        "RPM": {
+            "RPMMin": 6600,
+            "RPMMax": 8350,
+            "RPMMaxAllowed": 15000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                16.0,
+                -13.35,
+                16.5,
+                -15.0
+            ]
+        ]
+    },
     "p-47d_luftwaffe": {
         "PlaneID": "p-47d_luftwaffe",
         "Name": {
@@ -31242,6 +31526,81 @@
                 -14.0,
                 -17.0,
                 17.1
+            ]
+        ]
+    },
+    "nt_b_52h": {
+        "PlaneID": "nt_b_52h",
+        "Name": {
+            "English": "B-52H"
+        },
+        "fmFile": "fm/nt_b_52h.blkx",
+        "Type": "bomber",
+        "FmID": "nt_b_52h",
+        "Length": 48.0,
+        "WingSpan": [
+            [
+                0,
+                56.0
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                366.0
+            ]
+        ],
+        "EmptyMass": 78100,
+        "MaxFuelMass": 141600.0,
+        "VNE": [
+            [
+                0,
+                910
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.95
+            ]
+        ],
+        "VLO": 450.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 50.0
+        },
+        "VFE": [
+            [
+                0.1,
+                482.0
+            ],
+            [
+                1.0,
+                352.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -1400000.0,
+                2800000.0
+            ]
+        ],
+        "NumEngines": 8,
+        "RPM": {
+            "RPMMin": 5000,
+            "RPMMax": 8300,
+            "RPMMaxAllowed": 9000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                18.0,
+                -13.35,
+                17.0,
+                -22.0
             ]
         ]
     },
@@ -40393,6 +40752,140 @@
                 -14.5,
                 15.0,
                 -13.01
+            ]
+        ]
+    },
+    "nt_mig_23mld": {
+        "PlaneID": "nt_mig_23mld",
+        "Name": {
+            "English": "MiG-23MLD"
+        },
+        "fmFile": "fm/mig_23mld.blkx",
+        "Type": "fighter",
+        "FmID": "mig_23mld",
+        "Length": 16.7,
+        "WingSpan": [
+            [
+                0.0,
+                14.0
+            ],
+            [
+                0.5,
+                11.5
+            ],
+            [
+                1.0,
+                7.8
+            ]
+        ],
+        "WingArea": [
+            [
+                0.0,
+                37.0
+            ],
+            [
+                0.5,
+                36.0
+            ],
+            [
+                1.0,
+                34.0
+            ]
+        ],
+        "EmptyMass": 10600,
+        "MaxFuelMass": 4350.0,
+        "VNE": [
+            [
+                0.0,
+                892.0
+            ],
+            [
+                0.5,
+                1312.0
+            ],
+            [
+                1.0,
+                1470.0
+            ]
+        ],
+        "MNE": [
+            [
+                0.0,
+                0.85
+            ],
+            [
+                0.5,
+                2.35
+            ],
+            [
+                1.0,
+                2.4
+            ]
+        ],
+        "VLO": 630.0,
+        "Flaps": {
+            "Takeoff": 50.0
+        },
+        "VFE": [
+            [
+                0.2,
+                700.0
+            ],
+            [
+                0.33,
+                570.0
+            ],
+            [
+                1.0,
+                473.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0.0,
+                -260000.0,
+                700000.0
+            ],
+            [
+                0.5,
+                -300000.0,
+                830000.0
+            ],
+            [
+                1.0,
+                -300000.0,
+                850000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 3995,
+            "RPMMax": 8500,
+            "RPMMaxAllowed": 9100
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0.0,
+                23.5,
+                -18.0,
+                23.5,
+                -18.0
+            ],
+            [
+                0.5,
+                30.5,
+                -22.0,
+                26.5,
+                -18.0
+            ],
+            [
+                1.0,
+                38.0,
+                -21.0,
+                34.0,
+                -11.0
             ]
         ]
     },
@@ -75569,6 +76062,80 @@
             ]
         ]
     },
+    "nt_a_10a_early": {
+        "PlaneID": "nt_a_10a_early",
+        "Name": {
+            "English": "A-10A Thunderbolt II (Early)"
+        },
+        "fmFile": "fm/a-10a_early.blkx",
+        "Type": "assault",
+        "FmID": "a-10a_early",
+        "Length": 10.8,
+        "WingSpan": [
+            [
+                0,
+                17.5
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                46.8
+            ]
+        ],
+        "EmptyMass": 11520,
+        "MaxFuelMass": 4853.0,
+        "VNE": [
+            [
+                0,
+                874
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.8
+            ]
+        ],
+        "VLO": 370.4,
+        "Flaps": {
+            "Takeoff": 24.0
+        },
+        "VFE": [
+            [
+                0.33,
+                740.0
+            ],
+            [
+                1.0,
+                370.4
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -220000.0,
+                750000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 11400,
+            "RPMMax": 17900,
+            "RPMMaxAllowed": 18500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                21.5,
+                -16.0,
+                23.5,
+                -15.0
+            ]
+        ]
+    },
     "mirage_3e": {
         "PlaneID": "mirage_3e",
         "Name": {
@@ -77742,6 +78309,85 @@
                 -24.0,
                 35.0,
                 -22.0
+            ]
+        ]
+    },
+    "nt_a_7e": {
+        "PlaneID": "nt_a_7e",
+        "Name": {
+            "English": "A-7E Corsair II"
+        },
+        "fmFile": "fm/a_7e.blkx",
+        "Type": "assault",
+        "FmID": "a_7e",
+        "Length": 14.06,
+        "WingSpan": [
+            [
+                0,
+                11.8049
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                34.84
+            ]
+        ],
+        "EmptyMass": 9011,
+        "MaxFuelMass": 4552.0,
+        "VNE": [
+            [
+                0,
+                1254
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                1.124
+            ]
+        ],
+        "VLO": 407.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.1,
+                505.0
+            ],
+            [
+                0.33,
+                457.0
+            ],
+            [
+                1.0,
+                407.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -291000.0,
+                670600.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 6896,
+            "RPMMax": 12770,
+            "RPMMaxAllowed": 13408
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                23.5,
+                -22.5,
+                22.0,
+                -21.0
             ]
         ]
     },
@@ -83672,6 +84318,80 @@
             ]
         ]
     },
+    "nt_su_25t": {
+        "PlaneID": "nt_su_25t",
+        "Name": {
+            "English": "Su-25T"
+        },
+        "fmFile": "fm/su_25t.blkx",
+        "Type": "assault",
+        "FmID": "su_25t",
+        "Length": 14.16,
+        "WingSpan": [
+            [
+                0,
+                14.36
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                33.7
+            ]
+        ],
+        "EmptyMass": 10670,
+        "MaxFuelMass": 6512.0,
+        "VNE": [
+            [
+                0,
+                1100
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.87
+            ]
+        ],
+        "VLO": 420.0,
+        "Flaps": {
+            "Combat": 25.0
+        },
+        "VFE": [
+            [
+                0.25,
+                1050.0
+            ],
+            [
+                1.0,
+                420.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -320000.0,
+                640000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 3000,
+            "RPMMax": 9500,
+            "RPMMaxAllowed": 11150
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                21.0,
+                -16.0,
+                23.0,
+                -17.0
+            ]
+        ]
+    },
     "il-2m_mstitel": {
         "PlaneID": "il-2m_mstitel",
         "Name": {
@@ -85869,6 +86589,81 @@
                 -14.0,
                 14.3,
                 -8.0
+            ]
+        ]
+    },
+    "nt_tu_95m": {
+        "PlaneID": "nt_tu_95m",
+        "Name": {
+            "English": "Tu-95M"
+        },
+        "fmFile": "fm/nt_tu_95m.blkx",
+        "Type": "bomber",
+        "FmID": "nt_tu_95m",
+        "Length": 46.17,
+        "WingSpan": [
+            [
+                0,
+                50.04
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                283.70000000000005
+            ]
+        ],
+        "EmptyMass": 83122,
+        "MaxFuelMass": 84960.0,
+        "VNE": [
+            [
+                0,
+                690
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.86
+            ]
+        ],
+        "VLO": 450.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.1,
+                520.0
+            ],
+            [
+                1.0,
+                352.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -1400000.0,
+                3100000.0
+            ]
+        ],
+        "NumEngines": 4,
+        "RPM": {
+            "RPMMin": 6600,
+            "RPMMax": 8350,
+            "RPMMaxAllowed": 15000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                16.0,
+                -13.35,
+                16.5,
+                -15.0
             ]
         ]
     },
@@ -93677,6 +94472,85 @@
                 -17.7,
                 16.0,
                 -15.0
+            ]
+        ]
+    },
+    "nt_f_4e": {
+        "PlaneID": "nt_f_4e",
+        "Name": {
+            "English": "F-4E Phantom II"
+        },
+        "fmFile": "fm/f-4e.blkx",
+        "Type": "fighter",
+        "FmID": "f-4e",
+        "Length": 17.0,
+        "WingSpan": [
+            [
+                0,
+                11.7
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                49.2
+            ]
+        ],
+        "EmptyMass": 13990,
+        "MaxFuelMass": 7714.0,
+        "VNE": [
+            [
+                0,
+                1458
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.45
+            ]
+        ],
+        "VLO": 463.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1500.0
+            ],
+            [
+                0.33,
+                625.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -400000.0,
+                1105000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 3000,
+            "RPMMax": 7650,
+            "RPMMaxAllowed": 10000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                32.0,
+                -24.0,
+                33.0,
+                -25.0
             ]
         ]
     },
@@ -102817,6 +103691,81 @@
                 -32.0,
                 36.0,
                 -31.0
+            ]
+        ]
+    },
+    "b_52h": {
+        "PlaneID": "b_52h",
+        "Name": {
+            "English": "B-52H"
+        },
+        "fmFile": "fm/nt_b_52h.blkx",
+        "Type": "bomber",
+        "FmID": "nt_b_52h",
+        "Length": 48.0,
+        "WingSpan": [
+            [
+                0,
+                56.0
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                366.0
+            ]
+        ],
+        "EmptyMass": 78100,
+        "MaxFuelMass": 141600.0,
+        "VNE": [
+            [
+                0,
+                910
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.95
+            ]
+        ],
+        "VLO": 450.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 50.0
+        },
+        "VFE": [
+            [
+                0.1,
+                482.0
+            ],
+            [
+                1.0,
+                352.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -1400000.0,
+                2800000.0
+            ]
+        ],
+        "NumEngines": 8,
+        "RPM": {
+            "RPMMin": 5000,
+            "RPMMax": 8300,
+            "RPMMaxAllowed": 9000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                18.0,
+                -13.35,
+                17.0,
+                -22.0
             ]
         ]
     },
