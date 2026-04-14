@@ -51619,6 +51619,84 @@
             ]
         ]
     },
+    "f_6c_pakistan": {
+        "PlaneID": "f_6c_pakistan",
+        "Name": {
+            "English": "▄F-6C"
+        },
+        "fmFile": "fm/f_6c_pakistan.blkx",
+        "Type": "fighter",
+        "FmID": "f_6c_pakistan",
+        "Length": 13.02,
+        "WingSpan": [
+            [
+                0,
+                9.0
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                25.159999999999997
+            ]
+        ],
+        "EmptyMass": 5750,
+        "MaxFuelMass": 3910.0,
+        "VNE": [
+            [
+                0,
+                1260
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                1.68
+            ]
+        ],
+        "VLO": 577.0,
+        "Flaps": {
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.2,
+                700.0
+            ],
+            [
+                0.33,
+                500.0
+            ],
+            [
+                1.0,
+                450.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -215000.0,
+                435000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 4100,
+            "RPMMax": 11195,
+            "RPMMaxAllowed": 11600
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                22.0,
+                -21.0,
+                16.0,
+                -17.0
+            ]
+        ]
+    },
     "yak-9t_france": {
         "PlaneID": "yak-9t_france",
         "Name": {
