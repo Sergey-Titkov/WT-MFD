@@ -28370,6 +28370,69 @@
             ]
         ]
     },
+    "mi_28n_killstreak": {
+        "PlaneID": "mi_28n_killstreak",
+        "Name": {
+            "English": "Mi-28N"
+        },
+        "fmFile": "fm/mi_28n.blkx",
+        "Type": "helicopter",
+        "FmID": "mi_28n",
+        "Length": 17.51,
+        "WingSpan": [
+            [
+                0,
+                4.86
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                1.8
+            ]
+        ],
+        "EmptyMass": 8700,
+        "MaxFuelMass": 1520.0,
+        "VNE": [
+            [
+                0,
+                520
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.79
+            ]
+        ],
+        "VLO": 420.0,
+        "Flaps": {},
+        "VFE": [],
+        "CritWingOverload": [
+            [
+                0,
+                -300000.0,
+                500000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 7000,
+            "RPMMax": 15000,
+            "RPMMaxAllowed": 20000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                25.6,
+                -28.0,
+                22.6,
+                -21.0
+            ]
+        ]
+    },
     "re_2000_int": {
         "PlaneID": "re_2000_int",
         "Name": {
