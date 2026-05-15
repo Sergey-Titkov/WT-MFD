@@ -51762,7 +51762,7 @@
         "fmFile": "fm/f_6c_pakistan.blkx",
         "Type": "fighter",
         "FmID": "f_6c_pakistan",
-        "Length": 13.02,
+        "Length": 12.54,
         "WingSpan": [
             [
                 0,
@@ -51775,7 +51775,7 @@
                 25.159999999999997
             ]
         ],
-        "EmptyMass": 5750,
+        "EmptyMass": 5450,
         "MaxFuelMass": 3910.0,
         "VNE": [
             [
