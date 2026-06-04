@@ -103630,6 +103630,81 @@
             ]
         ]
     },
+    "spitfire_mk5b_float": {
+        "PlaneID": "spitfire_mk5b_float",
+        "Name": {
+            "English": "Spitfire Mk Vb (Float)"
+        },
+        "fmFile": "fm/spitfire_mk5b_float.blkx",
+        "Type": "fighter",
+        "FmID": "spitfire_mk5b_float",
+        "Length": 9.12,
+        "WingSpan": [
+            [
+                0,
+                11.23
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                22.476
+            ]
+        ],
+        "EmptyMass": 2950,
+        "MaxFuelMass": 289.0,
+        "VNE": [
+            [
+                0,
+                724
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.82
+            ]
+        ],
+        "VLO": 724.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.5,
+                290.0
+            ],
+            [
+                1.0,
+                260.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -88000.0,
+                160000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 450,
+            "RPMMax": 3000,
+            "RPMMaxAllowed": 3300
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                17.2,
+                -17.0,
+                15.5,
+                -20.0
+            ]
+        ]
+    },
     "spitfire_mk5b_italy": {
         "PlaneID": "spitfire_mk5b_italy",
         "Name": {
