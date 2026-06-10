@@ -30825,7 +30825,7 @@
                 1.8
             ]
         ],
-        "VLO": 375.0,
+        "VLO": 463.0,
         "Flaps": {
             "Combat": 20.0,
             "Takeoff": 33.0
@@ -30858,9 +30858,9 @@
         "CritAoA": [
             [
                 0,
-                25.0,
-                -20.0,
                 23.0,
+                -20.0,
+                21.0,
                 -17.0
             ]
         ]
@@ -51690,8 +51690,8 @@
             "RPMMax": 43000,
             "RPMMaxAllowed": 50000
         },
-        "MaxNitro": 0.0,
-        "NitroConsum": 0.0,
+        "MaxNitro": 16.0,
+        "NitroConsum": 0.05,
         "CritAoA": [
             [
                 0,
