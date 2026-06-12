@@ -51873,7 +51873,7 @@
         "VNE": [
             [
                 0,
-                1155
+                1186
             ]
         ],
         "MNE": [
@@ -55113,7 +55113,7 @@
         "VNE": [
             [
                 0,
-                1155
+                1186
             ]
         ],
         "MNE": [
@@ -57041,6 +57041,86 @@
             "TargetRangeMax": 50000.0
         },
         "FmID": "jh_7a2",
+        "Length": 21.03,
+        "WingSpan": [
+            [
+                0,
+                12.71
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                51.9
+            ]
+        ],
+        "EmptyMass": 14650,
+        "MaxFuelMass": 9912.0,
+        "VNE": [
+            [
+                0,
+                1331
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                1.95
+            ]
+        ],
+        "VLO": 450.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.1,
+                750.0
+            ],
+            [
+                1.0,
+                450.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -540000.0,
+                1240000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 5000,
+            "RPMMax": 12500,
+            "RPMMaxAllowed": 15000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                26.0,
+                -22.0,
+                28.0,
+                -24.0
+            ]
+        ]
+    },
+    "jh_7a_killstreak": {
+        "PlaneID": "jh_7a_killstreak",
+        "Name": {
+            "English": "☢JH-7A Flying Leopard"
+        },
+        "fmFile": "fm/jh_7a.blkx",
+        "Type": "assault",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "jh_7a",
         "Length": 21.03,
         "WingSpan": [
             [
@@ -76390,12 +76470,12 @@
         "Name": {
             "English": "MiG-21 2000"
         },
-        "fmFile": "fm/mig-21_bis.blkx",
+        "fmFile": "fm/mig_21_2000_iaf.blkx",
         "Type": "fighter",
         "RWR": {
             "Range": 50000.0
         },
-        "FmID": "mig-21_bis",
+        "FmID": "mig_21_2000_iaf",
         "Length": 14.1,
         "WingSpan": [
             [
@@ -78375,7 +78455,7 @@
         "VNE": [
             [
                 0,
-                1575
+                1470
             ]
         ],
         "MNE": [
