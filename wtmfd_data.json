@@ -34307,6 +34307,86 @@
             ]
         ]
     },
+    "f_16am_block_20_mlu_netherlands": {
+        "PlaneID": "f_16am_block_20_mlu_netherlands",
+        "Name": {
+            "English": "◘F-16AM Block 20 MLU Fighting Falcon"
+        },
+        "fmFile": "fm/f_16a_block_20_mlu.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16a_block_20_mlu",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 7870,
+        "MaxFuelMass": 6398.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -370000.0,
+                740000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13100,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
     "f_16am_block_20_mlu_norway": {
         "PlaneID": "f_16am_block_20_mlu_norway",
         "Name": {
