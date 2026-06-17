@@ -34227,86 +34227,6 @@
             ]
         ]
     },
-    "f_16am_block_15_mlu_fs_belgium": {
-        "PlaneID": "f_16am_block_15_mlu_fs_belgium",
-        "Name": {
-            "English": "▄F-16AM Block 15 MLU Fighting Falcon"
-        },
-        "fmFile": "fm/f_16am_block_15_mlu_belgium.blkx",
-        "Type": "fighter",
-        "RWR": {
-            "Range": 70000.0,
-            "TargetRangeMin": 5000.0,
-            "TargetRangeMax": 50000.0
-        },
-        "FmID": "f_16am_block_15_mlu_belgium",
-        "Length": 15.1,
-        "WingSpan": [
-            [
-                0,
-                9.44
-            ]
-        ],
-        "WingArea": [
-            [
-                0,
-                27.9
-            ]
-        ],
-        "EmptyMass": 7850,
-        "MaxFuelMass": 6398.0,
-        "VNE": [
-            [
-                0,
-                1555
-            ]
-        ],
-        "MNE": [
-            [
-                0,
-                2.2
-            ]
-        ],
-        "VLO": 482.0,
-        "Flaps": {
-            "Combat": 20.0,
-            "Takeoff": 99.0
-        },
-        "VFE": [
-            [
-                0.2,
-                1018.0
-            ],
-            [
-                1.0,
-                463.0
-            ]
-        ],
-        "CritWingOverload": [
-            [
-                0,
-                -370000.0,
-                740000.0
-            ]
-        ],
-        "NumEngines": 1,
-        "RPM": {
-            "RPMMin": 8500,
-            "RPMMax": 13100,
-            "RPMMaxAllowed": 15500
-        },
-        "MaxNitro": 0.0,
-        "NitroConsum": 0.0,
-        "CritAoA": [
-            [
-                0,
-                29.0,
-                -20.0,
-                29.0,
-                -20.0
-            ]
-        ]
-    },
     "f_16am_block_20_mlu_netherlands": {
         "PlaneID": "f_16am_block_20_mlu_netherlands",
         "Name": {
@@ -66758,7 +66678,7 @@
         "MNE": [
             [
                 0,
-                1.05
+                1.2
             ]
         ],
         "VLO": 370.0,
@@ -78507,7 +78427,7 @@
     "mig_29kr_9_41r": {
         "PlaneID": "mig_29kr_9_41r",
         "Name": {
-            "English": "MiG-29K (9-41R)"
+            "English": "MiG-29KR (9-41R)"
         },
         "fmFile": "fm/mig_29kr_9_41r.blkx",
         "Type": "fighter",
@@ -78563,7 +78483,7 @@
             [
                 0,
                 -500000.0,
-                1100000.0
+                1050000.0
             ]
         ],
         "NumEngines": 2,
@@ -82636,6 +82556,11 @@
         },
         "fmFile": "fm/a_7e.blkx",
         "Type": "assault",
+        "RWR": {
+            "Range": 50000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
         "FmID": "a_7e",
         "Length": 14.06,
         "WingSpan": [
@@ -98705,7 +98630,7 @@
                 30.0
             ]
         ],
-        "EmptyMass": 7120,
+        "EmptyMass": 7770,
         "MaxFuelMass": 6071.0,
         "VNE": [
             [
@@ -109307,7 +109232,7 @@
         "MNE": [
             [
                 0,
-                2.35
+                2.1
             ]
         ],
         "VLO": 700.0,
@@ -109387,7 +109312,7 @@
         "MNE": [
             [
                 0,
-                2.35
+                2.1
             ]
         ],
         "VLO": 700.0,
