@@ -45641,6 +45641,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 600,
+            "RPMMax": 1700,
             "RPMMaxAllowed": 2000
         },
         "MaxNitro": 0.0,
@@ -45715,6 +45716,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 600,
+            "RPMMax": 1700,
             "RPMMaxAllowed": 2000
         },
         "MaxNitro": 0.0,
@@ -45864,6 +45866,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 600,
+            "RPMMax": 1700,
             "RPMMaxAllowed": 2000
         },
         "MaxNitro": 0.0,
@@ -45938,6 +45941,7 @@
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 600,
+            "RPMMax": 1700,
             "RPMMaxAllowed": 2000
         },
         "MaxNitro": 0.0,
