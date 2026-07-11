@@ -10260,9 +10260,9 @@
         "Name": {
             "English": "B-25J-1 Mitchell"
         },
-        "fmFile": "fm/b_25j_20.blkx",
+        "fmFile": "fm/b_25j_1.blkx",
         "Type": "bomber",
-        "FmID": "b_25j_20",
+        "FmID": "b_25j_1",
         "Length": 16.307,
         "WingSpan": [
             [
