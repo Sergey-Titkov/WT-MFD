@@ -33507,6 +33507,246 @@
             ]
         ]
     },
+    "f_16a_block_15_adf_britain_killstreak": {
+        "PlaneID": "f_16a_block_15_adf_britain_killstreak",
+        "Name": {
+            "English": "☢F-16A Block 15 ADF Fighting Falcon"
+        },
+        "fmFile": "fm/f_16a_block_15_adf.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16a_block_15_adf",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 7850,
+        "MaxFuelMass": 6398.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -370000.0,
+                740000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13100,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
+    "f_16a_block_15_adf_france_killstreak": {
+        "PlaneID": "f_16a_block_15_adf_france_killstreak",
+        "Name": {
+            "English": "☢F-16A Block 15 ADF Fighting Falcon"
+        },
+        "fmFile": "fm/f_16a_block_15_adf.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16a_block_15_adf",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 7850,
+        "MaxFuelMass": 6398.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -370000.0,
+                740000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13100,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
+    "f_16a_block_15_adf_germany_killstreak": {
+        "PlaneID": "f_16a_block_15_adf_germany_killstreak",
+        "Name": {
+            "English": "☢F-16A Block 15 ADF Fighting Falcon"
+        },
+        "fmFile": "fm/f_16a_block_15_adf.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16a_block_15_adf",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 7850,
+        "MaxFuelMass": 6398.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -370000.0,
+                740000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13100,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
     "f_16a_block_15_adf_italy": {
         "PlaneID": "f_16a_block_15_adf_italy",
         "Name": {
@@ -33520,6 +33760,246 @@
             "TargetRangeMax": 50000.0
         },
         "FmID": "f_16a_block_15_adf_italy",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 7850,
+        "MaxFuelMass": 6398.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -370000.0,
+                740000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13100,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
+    "f_16a_block_15_adf_italy_killstreak": {
+        "PlaneID": "f_16a_block_15_adf_italy_killstreak",
+        "Name": {
+            "English": "☢F-16A Block 15 ADF Fighting Falcon"
+        },
+        "fmFile": "fm/f_16a_block_15_adf.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16a_block_15_adf",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 7850,
+        "MaxFuelMass": 6398.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -370000.0,
+                740000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13100,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
+    "f_16a_block_15_adf_killstreak": {
+        "PlaneID": "f_16a_block_15_adf_killstreak",
+        "Name": {
+            "English": "☢F-16A Block 15 ADF Fighting Falcon"
+        },
+        "fmFile": "fm/f_16a_block_15_adf.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16a_block_15_adf",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 7850,
+        "MaxFuelMass": 6398.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -370000.0,
+                740000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13100,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
+    "f_16a_block_15_adf_sweden_killstreak": {
+        "PlaneID": "f_16a_block_15_adf_sweden_killstreak",
+        "Name": {
+            "English": "☢F-16A Block 15 ADF Fighting Falcon"
+        },
+        "fmFile": "fm/f_16a_block_15_adf.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16a_block_15_adf",
         "Length": 15.1,
         "WingSpan": [
             [
@@ -33831,6 +34311,86 @@
         "PlaneID": "f_16a_block_20_mlu",
         "Name": {
             "English": "␗F-16A Block 20 MLU Fighting Falcon"
+        },
+        "fmFile": "fm/f_16a_block_20_mlu.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16a_block_20_mlu",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 7870,
+        "MaxFuelMass": 6398.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -370000.0,
+                740000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 8500,
+            "RPMMax": 13100,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
+    "f_16a_block_20_mlu_killstreak": {
+        "PlaneID": "f_16a_block_20_mlu_killstreak",
+        "Name": {
+            "English": "☢F-16A Block 20 MLU Fighting Falcon"
         },
         "fmFile": "fm/f_16a_block_20_mlu.blkx",
         "Type": "fighter",
@@ -34787,6 +35347,86 @@
             ]
         ]
     },
+    "f_16d_block_40_barak_2_killstreak": {
+        "PlaneID": "f_16d_block_40_barak_2_killstreak",
+        "Name": {
+            "English": "☢F-16C Block 40 Barak II"
+        },
+        "fmFile": "fm/f_16d_block_40_barak_2.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "f_16d_block_40_barak_2",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                9.44
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                27.9
+            ]
+        ],
+        "EmptyMass": 9018,
+        "MaxFuelMass": 5936.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.2
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -400000.0,
+                770000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 6500,
+            "RPMMax": 14675,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
     "f_16d_block_40_barak_2_missile_test": {
         "PlaneID": "f_16d_block_40_barak_2_missile_test",
         "Name": {
@@ -35186,6 +35826,86 @@
             "TargetRangeMax": 74000.0
         },
         "FmID": "f_2a_adtw",
+        "Length": 16.0,
+        "WingSpan": [
+            [
+                0,
+                11.0
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                34.8
+            ]
+        ],
+        "EmptyMass": 9530,
+        "MaxFuelMass": 8377.0,
+        "VNE": [
+            [
+                0,
+                1555
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.1
+            ]
+        ],
+        "VLO": 482.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 99.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1018.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -410000.0,
+                800000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 6500,
+            "RPMMax": 15050,
+            "RPMMaxAllowed": 15500
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                29.0,
+                -20.0,
+                29.0,
+                -20.0
+            ]
+        ]
+    },
+    "f_2a_killstreak": {
+        "PlaneID": "f_2a_killstreak",
+        "Name": {
+            "English": "☢F-2A"
+        },
+        "fmFile": "fm/f_2a.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 90000.0,
+            "TargetRangeMin": 9250.0,
+            "TargetRangeMax": 74000.0
+        },
+        "FmID": "f_2a",
         "Length": 16.0,
         "WingSpan": [
             [
@@ -51848,6 +52568,85 @@
                 -12.0,
                 -19.0,
                 17.0
+            ]
+        ]
+    },
+    "iar_81c_db_605": {
+        "PlaneID": "iar_81c_db_605",
+        "Name": {
+            "English": "IAR-81C (DB 605)"
+        },
+        "fmFile": "fm/iar_81c_db_605.blkx",
+        "Type": "fighter",
+        "FmID": "iar_81c_db_605",
+        "Length": 9.0,
+        "WingSpan": [
+            [
+                0,
+                11.0
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                16.5
+            ]
+        ],
+        "EmptyMass": 2700,
+        "MaxFuelMass": 330.0,
+        "VNE": [
+            [
+                0,
+                680
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.72
+            ]
+        ],
+        "VLO": 280.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.1,
+                800.0
+            ],
+            [
+                0.5,
+                780.0
+            ],
+            [
+                1.0,
+                750.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -117232.0,
+                156310.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 500,
+            "RPMMax": 2800,
+            "RPMMaxAllowed": 3150
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                17.0,
+                -12.0,
+                17.0,
+                -19.0
             ]
         ]
     },
@@ -78672,6 +79471,86 @@
         "PlaneID": "mig_29smt_9_19",
         "Name": {
             "English": "MiG-29SMT (9-19)"
+        },
+        "fmFile": "fm/mig_29smt_9_19.blkx",
+        "Type": "fighter",
+        "RWR": {
+            "Range": 70000.0,
+            "TargetRangeMin": 5000.0,
+            "TargetRangeMax": 50000.0
+        },
+        "FmID": "mig_29smt_9_19",
+        "Length": 15.1,
+        "WingSpan": [
+            [
+                0,
+                11.36
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                37.98
+            ]
+        ],
+        "EmptyMass": 11550,
+        "MaxFuelMass": 5900.0,
+        "VNE": [
+            [
+                0,
+                1575
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                2.35
+            ]
+        ],
+        "VLO": 700.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 90.0
+        },
+        "VFE": [
+            [
+                0.2,
+                1218.0
+            ],
+            [
+                1.0,
+                463.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -390000.0,
+                910000.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 5500,
+            "RPMMax": 8350,
+            "RPMMaxAllowed": 8950
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                30.0,
+                -20.0,
+                29.0,
+                -22.0
+            ]
+        ]
+    },
+    "mig_29smt_9_19_killstreak": {
+        "PlaneID": "mig_29smt_9_19_killstreak",
+        "Name": {
+            "English": "☢MiG-29SMT (9-19)"
         },
         "fmFile": "fm/mig_29smt_9_19.blkx",
         "Type": "fighter",
