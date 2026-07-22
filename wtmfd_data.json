@@ -35350,7 +35350,7 @@
     "f_16d_block_40_barak_2_killstreak": {
         "PlaneID": "f_16d_block_40_barak_2_killstreak",
         "Name": {
-            "English": "☢F-16C Block 40 Barak II"
+            "English": "☢F-16D Block 40 Barak II"
         },
         "fmFile": "fm/f_16d_block_40_barak_2.blkx",
         "Type": "fighter",
