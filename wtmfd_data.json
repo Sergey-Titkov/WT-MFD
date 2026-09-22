@@ -37646,34 +37646,34 @@
         "Name": {
             "English": "▄F-86E(M)"
         },
-        "fmFile": "fm/f_86em_greece.blkx",
+        "fmFile": "fm/f-86e.blkx",
         "Type": "fighter",
-        "FmID": "f_86em_greece",
+        "FmID": "f-86e",
         "Length": 11.42,
         "WingSpan": [
             [
                 0,
-                11.32
+                11.97
             ]
         ],
         "WingArea": [
             [
                 0,
-                28.200000000000003
+                26.759999999999998
             ]
         ],
-        "EmptyMass": 5178,
+        "EmptyMass": 4940,
         "MaxFuelMass": 1284.3,
         "VNE": [
             [
                 0,
-                1170
+                1118
             ]
         ],
         "MNE": [
             [
                 0,
-                1.2
+                1.1
             ]
         ],
         "VLO": 350.0,
@@ -37695,13 +37695,13 @@
             [
                 0,
                 -203792.0,
-                390000.0
+                353792.0
             ]
         ],
         "NumEngines": 1,
         "RPM": {
             "RPMMin": 3000,
-            "RPMMax": 7800,
+            "RPMMax": 7950,
             "RPMMaxAllowed": 10000
         },
         "MaxNitro": 0.0,
@@ -37709,9 +37709,9 @@
         "CritAoA": [
             [
                 0,
-                17.1,
+                17.8,
                 -14.0,
-                15.0,
+                16.5,
                 -17.0
             ]
         ]
