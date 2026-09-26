@@ -46484,6 +46484,72 @@
             ]
         ]
     },
+    "h_34_killstreak": {
+        "PlaneID": "h_34_killstreak",
+        "Name": {
+            "English": "H-34"
+        },
+        "fmFile": "fm/h_34.blkx",
+        "Type": "helicopter",
+        "FmID": "h_34",
+        "Length": 17.51,
+        "WingSpan": [
+            [
+                0,
+                3.2
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                1.2
+            ]
+        ],
+        "EmptyMass": 3870,
+        "MaxFuelMass": 757.0,
+        "VNE": [
+            [
+                0,
+                450
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.79
+            ]
+        ],
+        "VLO": 420.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [],
+        "CritWingOverload": [
+            [
+                0,
+                -100000.0,
+                250000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 600,
+            "RPMMax": 2700,
+            "RPMMaxAllowed": 3300
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                28.6,
+                -28.0,
+                22.6,
+                -21.0
+            ]
+        ]
+    },
     "halifax_mk3": {
         "PlaneID": "halifax_mk3",
         "Name": {
@@ -76208,6 +76274,72 @@
     },
     "mi_4av": {
         "PlaneID": "mi_4av",
+        "Name": {
+            "English": "Mi-4AV"
+        },
+        "fmFile": "fm/mi_4av.blkx",
+        "Type": "helicopter",
+        "FmID": "mi_4av",
+        "Length": 17.51,
+        "WingSpan": [
+            [
+                0,
+                3.2
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                1.2
+            ]
+        ],
+        "EmptyMass": 5900,
+        "MaxFuelMass": 825.0,
+        "VNE": [
+            [
+                0,
+                450
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.79
+            ]
+        ],
+        "VLO": 420.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [],
+        "CritWingOverload": [
+            [
+                0,
+                -100000.0,
+                250000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 600,
+            "RPMMax": 2400,
+            "RPMMaxAllowed": 6000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                28.6,
+                -28.0,
+                22.6,
+                -21.0
+            ]
+        ]
+    },
+    "mi_4av_killstreak": {
+        "PlaneID": "mi_4av_killstreak",
         "Name": {
             "English": "Mi-4AV"
         },
