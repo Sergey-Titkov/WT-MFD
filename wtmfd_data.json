@@ -13033,6 +13033,80 @@
             ]
         ]
     },
+    "bf-109e-3_tl": {
+        "PlaneID": "bf-109e-3_tl",
+        "Name": {
+            "English": "Bf 109 E-3 (TL)"
+        },
+        "fmFile": "fm/bf-109e-1.blkx",
+        "Type": "fighter",
+        "FmID": "bf-109e-1",
+        "Length": 8.738,
+        "WingSpan": [
+            [
+                0,
+                9.867
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                16.2
+            ]
+        ],
+        "EmptyMass": 2150,
+        "MaxFuelMass": 303.0,
+        "VNE": [
+            [
+                0,
+                790
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.82
+            ]
+        ],
+        "VLO": 320.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.1,
+                500.0
+            ],
+            [
+                1.0,
+                300.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -66000.0,
+                148000.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 450,
+            "RPMMaxAllowed": 3000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                18.2,
+                -14.0,
+                15.1,
+                -14.0
+            ]
+        ]
+    },
     "bf-109e-4": {
         "PlaneID": "bf-109e-4",
         "Name": {
