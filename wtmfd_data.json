@@ -42989,6 +42989,85 @@
             ]
         ]
     },
+    "fw_190a_8_mistel": {
+        "PlaneID": "fw_190a_8_mistel",
+        "Name": {
+            "English": "Mistel 3C"
+        },
+        "fmFile": "fm/fw-190a-8.blkx",
+        "Type": "bomber",
+        "FmID": "fw-190a-8",
+        "Length": 8.95,
+        "WingSpan": [
+            [
+                0,
+                10.506
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                18.299999999999997
+            ]
+        ],
+        "EmptyMass": 3607,
+        "MaxFuelMass": 410.0,
+        "VNE": [
+            [
+                0,
+                912
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.83
+            ]
+        ],
+        "VLO": 310.0,
+        "Flaps": {
+            "Combat": 5.0,
+            "Takeoff": 13.0
+        },
+        "VFE": [
+            [
+                0.1,
+                900.0
+            ],
+            [
+                0.13,
+                700.0
+            ],
+            [
+                0.58,
+                310.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -132435.0,
+                264870.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 600,
+            "RPMMax": 2700,
+            "RPMMaxAllowed": 3000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                17.5,
+                -12.0,
+                17.0,
+                -12.0
+            ]
+        ]
+    },
     "fw_190f_8_hungary": {
         "PlaneID": "fw_190f_8_hungary",
         "Name": {
@@ -61279,6 +61358,81 @@
             "RPMMin": 500,
             "RPMMax": 2600,
             "RPMMaxAllowed": 3000
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                17.0,
+                -16.0,
+                16.5,
+                -15.3
+            ]
+        ]
+    },
+    "ju_88g_1_mistel": {
+        "PlaneID": "ju_88g_1_mistel",
+        "Name": {
+            "English": "Mistel 3C"
+        },
+        "fmFile": "fm/ju_88g_1_mistel.blkx",
+        "Type": "bomber",
+        "FmID": "ju_88g_1_mistel",
+        "Length": 14.359,
+        "WingSpan": [
+            [
+                0,
+                18.25
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                54.7
+            ]
+        ],
+        "EmptyMass": 9178,
+        "MaxFuelMass": 1267.0,
+        "VNE": [
+            [
+                0,
+                675
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.68
+            ]
+        ],
+        "VLO": 310.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [
+            [
+                0.1,
+                480.0
+            ],
+            [
+                1.0,
+                280.0
+            ]
+        ],
+        "CritWingOverload": [
+            [
+                0,
+                -397725.0,
+                417725.0
+            ]
+        ],
+        "NumEngines": 2,
+        "RPM": {
+            "RPMMin": 800,
+            "RPMMax": 2700,
+            "RPMMaxAllowed": 3100
         },
         "MaxNitro": 0.0,
         "NitroConsum": 0.0,
