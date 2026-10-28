@@ -42992,7 +42992,7 @@
     "fw_190a_8_mistel": {
         "PlaneID": "fw_190a_8_mistel",
         "Name": {
-            "English": "Mistel 3C"
+            "English": "Mistel 2"
         },
         "fmFile": "fm/fw-190a-8.blkx",
         "Type": "bomber",
@@ -61374,7 +61374,7 @@
     "ju_88g_1_mistel": {
         "PlaneID": "ju_88g_1_mistel",
         "Name": {
-            "English": "Mistel 3C"
+            "English": "Mistel 2"
         },
         "fmFile": "fm/ju_88g_1_mistel.blkx",
         "Type": "bomber",
