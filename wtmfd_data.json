@@ -21579,11 +21579,11 @@
             "TargetRangeMax": 74000.0
         },
         "FmID": "ef_2000_aesa",
-        "Length": 19.4,
+        "Length": 15.96,
         "WingSpan": [
             [
                 0,
-                11.0
+                10.95
             ]
         ],
         "WingArea": [
@@ -21659,11 +21659,11 @@
             "TargetRangeMax": 74000.0
         },
         "FmID": "ef_2000_block_10",
-        "Length": 19.4,
+        "Length": 15.96,
         "WingSpan": [
             [
                 0,
-                11.0
+                10.95
             ]
         ],
         "WingArea": [
@@ -21739,11 +21739,11 @@
             "TargetRangeMax": 74000.0
         },
         "FmID": "typhoon_fgr4",
-        "Length": 19.4,
+        "Length": 15.96,
         "WingSpan": [
             [
                 0,
-                11.0
+                10.95
             ]
         ],
         "WingArea": [
@@ -21819,11 +21819,11 @@
             "TargetRangeMax": 74000.0
         },
         "FmID": "ef_2000_typhoon_aesa",
-        "Length": 19.4,
+        "Length": 15.96,
         "WingSpan": [
             [
                 0,
-                11.0
+                10.95
             ]
         ],
         "WingArea": [
@@ -21899,11 +21899,11 @@
             "TargetRangeMax": 74000.0
         },
         "FmID": "f_2000a",
-        "Length": 19.4,
+        "Length": 15.96,
         "WingSpan": [
             [
                 0,
-                11.0
+                10.95
             ]
         ],
         "WingArea": [
@@ -21979,11 +21979,11 @@
             "TargetRangeMax": 74000.0
         },
         "FmID": "ef_2000a_aesa",
-        "Length": 19.4,
+        "Length": 15.96,
         "WingSpan": [
             [
                 0,
-                11.0
+                10.95
             ]
         ],
         "WingArea": [
@@ -97871,11 +97871,11 @@
             "TargetRangeMax": 50000.0
         },
         "FmID": "rafale_c_f3",
-        "Length": 19.4,
+        "Length": 15.3,
         "WingSpan": [
             [
                 0,
-                10.0
+                10.9
             ]
         ],
         "WingArea": [
@@ -97951,11 +97951,11 @@
             "TargetRangeMax": 50000.0
         },
         "FmID": "rafale_c_f3",
-        "Length": 19.4,
+        "Length": 15.3,
         "WingSpan": [
             [
                 0,
-                10.0
+                10.9
             ]
         ],
         "WingArea": [
@@ -98031,11 +98031,11 @@
             "TargetRangeMax": 50000.0
         },
         "FmID": "rafale_m_f3r",
-        "Length": 19.4,
+        "Length": 15.3,
         "WingSpan": [
             [
                 0,
-                10.0
+                10.9
             ]
         ],
         "WingArea": [
