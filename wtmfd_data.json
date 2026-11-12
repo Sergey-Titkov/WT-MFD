@@ -57931,11 +57931,11 @@
             "TargetRangeMax": 50000.0
         },
         "FmID": "j_10a",
-        "Length": 16.91,
+        "Length": 14.6,
         "WingSpan": [
             [
                 0,
-                9.75
+                9.2
             ]
         ],
         "WingArea": [
@@ -58002,11 +58002,11 @@
             "TargetRangeMax": 50000.0
         },
         "FmID": "j_10a",
-        "Length": 16.91,
+        "Length": 14.6,
         "WingSpan": [
             [
                 0,
-                9.75
+                9.2
             ]
         ],
         "WingArea": [
@@ -58073,11 +58073,11 @@
             "TargetRangeMax": 50000.0
         },
         "FmID": "j_10c",
-        "Length": 16.91,
+        "Length": 14.6,
         "WingSpan": [
             [
                 0,
-                9.75
+                9.2
             ]
         ],
         "WingArea": [
@@ -97875,7 +97875,7 @@
         "WingSpan": [
             [
                 0,
-                10.9
+                10.1
             ]
         ],
         "WingArea": [
@@ -97955,7 +97955,7 @@
         "WingSpan": [
             [
                 0,
-                10.9
+                10.1
             ]
         ],
         "WingArea": [
@@ -98035,7 +98035,7 @@
         "WingSpan": [
             [
                 0,
-                10.9
+                10.1
             ]
         ],
         "WingArea": [
