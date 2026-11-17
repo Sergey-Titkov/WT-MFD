@@ -107873,6 +107873,72 @@
             ]
         ]
     },
+    "spad_13_event": {
+        "PlaneID": "spad_13_event",
+        "Name": {
+            "English": "SPAD S.XIII"
+        },
+        "fmFile": "fm/spad_13.blkx",
+        "Type": "fighter",
+        "FmID": "spad_13",
+        "Length": 6.25,
+        "WingSpan": [
+            [
+                0,
+                12.25
+            ]
+        ],
+        "WingArea": [
+            [
+                0,
+                21.0
+            ]
+        ],
+        "EmptyMass": 670,
+        "MaxFuelMass": 64.8,
+        "VNE": [
+            [
+                0,
+                500
+            ]
+        ],
+        "MNE": [
+            [
+                0,
+                0.7
+            ]
+        ],
+        "VLO": 500.0,
+        "Flaps": {
+            "Combat": 20.0,
+            "Takeoff": 33.0
+        },
+        "VFE": [],
+        "CritWingOverload": [
+            [
+                0,
+                -46107.0,
+                101435.0
+            ]
+        ],
+        "NumEngines": 1,
+        "RPM": {
+            "RPMMin": 450,
+            "RPMMax": 2300,
+            "RPMMaxAllowed": 2800
+        },
+        "MaxNitro": 0.0,
+        "NitroConsum": 0.0,
+        "CritAoA": [
+            [
+                0,
+                20.0,
+                -18.0,
+                17.0,
+                -15.0
+            ]
+        ]
+    },
     "spitfire_f22": {
         "PlaneID": "spitfire_f22",
         "Name": {
@@ -111616,7 +111682,7 @@
             ]
         ],
         "EmptyMass": 10760,
-        "MaxFuelMass": 5620.0,
+        "MaxFuelMass": 7570.0,
         "VNE": [
             [
                 0,
